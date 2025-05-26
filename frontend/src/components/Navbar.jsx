@@ -44,13 +44,13 @@ const Navbar = () => {
                     </li>
                   </NavLink>
 
-                  <NavLink to="/berita">
+                  <NavLink to="/artikel">
                     <li>
                       <a
                         className="text-primary transition hover:text-gray-300/75 "
                         href="#"
                       >
-                        Berita
+                        Artikel
                       </a>
                     </li>
                   </NavLink>
@@ -160,8 +160,8 @@ const Navbar = () => {
                   <NavLink onClick={() => setShowMenu(false)} to="/">
                     <p className="px-96 py-4 rounded inline-block">Beranda</p>
                   </NavLink>
-                  <NavLink onClick={() => setShowMenu(false)} to="/berita">
-                    <p className="px-96 py-4 rounded inline-block">Berita</p>
+                  <NavLink onClick={() => setShowMenu(false)} to="/artikel">
+                    <p className="px-96 py-4 rounded inline-block">Artikel</p>
                   </NavLink>
                   <NavLink onClick={() => setShowMenu(false)} to="/scanTrash">
                     <p className="px-96 py-4 rounded inline-block">Deteksi</p>

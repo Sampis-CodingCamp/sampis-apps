@@ -51,7 +51,7 @@ const SellTrash = () => {
         <span className="inline-flex items-center justify-center rounded-full bg-green-apple px-3 py-1 font-semibold mb-2 text-emerald-700">
           <p className="text-sm whitespace-nowrap">Form</p>
         </span>
-        <p className="mb-2 text-5xl sm:text-3xl text-hitam-manja font-bold">
+        <p className="mb-2 text-5xl sm:text-3xl text-ink font-bold">
           Formulir Sampah
         </p>
       </div>
@@ -60,7 +60,9 @@ const SellTrash = () => {
         <div className="relative pb-20 w-full h-full bg-[#F9FAFB] p-6 rounded-lg shadow-md">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label className="block mb-1 font-medium text-gray-700">Nama</label>
+              <label className="block mb-1 font-medium text-gray-700">
+                Nama
+              </label>
               <input
                 type="text"
                 name="nama"
@@ -72,7 +74,9 @@ const SellTrash = () => {
             </div>
 
             <div>
-              <label className="block mb-1 font-medium text-gray-700">Jenis Sampah</label>
+              <label className="block mb-1 font-medium text-gray-700">
+                Jenis Sampah
+              </label>
               <input
                 type="text"
                 name="jenisSampah"
@@ -83,7 +87,9 @@ const SellTrash = () => {
             </div>
 
             <div>
-              <label className="block mb-1 font-medium text-gray-700">Jumlah (pcs)</label>
+              <label className="block mb-1 font-medium text-gray-700">
+                Jumlah (pcs)
+              </label>
               <input
                 type="number"
                 name="jumlah"

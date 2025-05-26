@@ -50,7 +50,7 @@ const Visi = () => {
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               <div className="max-w-sm rounded-lg bg-orange-50 p-6">
                 <svg
-                  className="mb-3 h-7 w-7 text-ginger"
+                  className="mb-3 h-7 w-7 text-orange"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="currentColor"
@@ -67,7 +67,7 @@ const Visi = () => {
               </div>
               <div className="max-w-sm rounded-lg bg-orange-50 p-6">
                 <svg
-                  className="mb-3 h-7 w-7 text-ginger"
+                  className="mb-3 h-7 w-7 text-orange"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="currentColor"
@@ -85,7 +85,7 @@ const Visi = () => {
               </div>
               <div className="max-w-sm rounded-lg bg-orange-50 p-6">
                 <svg
-                  className="mb-3 h-7 w-7 text-ginger"
+                  className="mb-3 h-7 w-7 text-orange"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="currentColor"
@@ -106,7 +106,7 @@ const Visi = () => {
               </div>
               <div className="max-w-sm rounded-lg bg-orange-50 p-6">
                 <svg
-                  className="mb-3 h-7 w-7 text-ginger"
+                  className="mb-3 h-7 w-7 text-orange"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="currentColor"

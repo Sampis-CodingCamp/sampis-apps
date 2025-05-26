@@ -140,7 +140,7 @@ const ImageUpload = () => {
   };
 
   return (
-    <div className="w-full max-w-5xl mx-auto px-4 py-10">
+    <div className="w-full max-w-5xl container p-10">
       <h2 className="text-left text-sm font-semibold mb-2">Tambah foto</h2>
 
       <div className="border-2 border-dashed border-[#8F8F8F] rounded-md p-8 space-y-4">
