@@ -11,8 +11,7 @@ const ScanTrash = () => {
         style={{ backgroundImage: `url(${assets.header_img})` }}
       >
         <div className="absolute inset-0 bg-gray-700 opacity-50"></div>
-
-        <div className="relative z-10 mx-4 sm:mx-[8%]">
+        <div className="relative z- container pt-16 lg:pt-24">
           <Navbar />
         </div>
       </div>
