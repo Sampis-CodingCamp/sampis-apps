@@ -134,7 +134,7 @@ const SellTrash = () => {
         <span className="inline-flex items-center justify-center rounded-full bg-green-apple px-3 py-1 font-semibold mb-2 text-emerald-700">
           <p className="text-sm whitespace-nowrap">Form</p>
         </span>
-        <p className="mb-2 text-5xl sm:text-3xl text-hitam-manja font-bold">
+        <p className="mb-2 text-5xl sm:text-3xl text-ink font-bold">
           Formulir Sampah
         </p>
       </div>

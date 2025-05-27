@@ -11,22 +11,21 @@ const ScanTrash = () => {
         style={{ backgroundImage: `url(${assets.header_img})` }}
       >
         <div className="absolute inset-0 bg-gray-700 opacity-50"></div>
-
-        <div className="relative z-10 mx-4 sm:mx-[8%]">
+        <div className="relative z- container pt-16 lg:pt-24">
           <Navbar />
         </div>
       </div>
 
       <div className=" text-center py-20">
-        <span className="inline-flex items-center justify-center rounded-full bg-green-apple px-3 py-1 font-semibold mb-2 text-emerald-700">
-          <p className="text-sm whitespace-nowrap">Deteksi</p>
-        </span>
-        <p className="mb-2 text-5xl sm:text-3xl text-hitam-manja font-bold">
+        <div className="mb-4 inline-block rounded-md bg-green-100 p-2">
+          <p className="text-xs font-bold text-green-900">DETEKSI</p>
+        </div>
+        <p className="mb-2 text-5xl sm:text-3xl text-ink font-bold">
           Deteksi Sampahmu
         </p>
       </div>
 
-      <div className="relative z-10 mx-4 sm:mx-[8%]">
+      <div className="relative z-10 container">
         <div className="relative pb-20 w-full h-full bg-[#F9FAFB]">
           <ImageUpload />
         </div>

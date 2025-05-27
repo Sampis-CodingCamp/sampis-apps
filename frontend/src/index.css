@@ -13,7 +13,9 @@
 @theme {
   --color-primary: #fff7e9;
   --color-green-apple: #bbd8a3;
-  --color-hitam-manja: #2a4759;
+  --color-ink: #2a4759;
+  --color-wolf: #6b7280;
+  --color-orange: #f97316;
 }
 
 .container {
