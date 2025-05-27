@@ -3,10 +3,12 @@ const routes = require('./routes');
 const plugins = require('./plugins');
 const config = require('./config');
 const connectDB = require('./config/database');
+const connectCloudinary = require('./config/cloudinary')
 
 const init = async () => {
   // Connect to MongoDB
   await connectDB();
+  connectCloudinary()
 
   const server = Hapi.server({
     port: config.port,
@@ -15,7 +17,8 @@ const init = async () => {
       cors: {
         origin: ['*'],
         headers: ['Accept', 'Content-Type'],
-        additionalHeaders: ['X-Requested-With']
+        additionalHeaders: ['X-Requested-With'],
+        credentials: true
       }
     }
   });

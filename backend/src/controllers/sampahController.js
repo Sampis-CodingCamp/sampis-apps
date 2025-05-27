@@ -1,26 +1,61 @@
 const Sampah = require('../models/Sampah');
 const User = require('../models/User');
 const Boom = require('@hapi/boom');
+const { v2: cloudinary } = require('cloudinary');
 
 const createSampah = async (request, h) => {
   try {
-    const { jenis, foto, jumlah, estimasiPoin, metode, lokasi, tanggal } = request.payload;
-    const sampah = new Sampah({
-      user: request.auth.user.id,
-      jenis,
-      foto,
-      jumlah,
-      estimasiPoin,
-      metode,
-      lokasi,
-      tanggal
-    });
-    await sampah.save();
-    return h.response({ status: 'success', data: sampah }).code(201);
+    const { jenis, jumlah, estimasiPoin, metode, lokasi } = request.payload;
+    const tanggal = new Date(); // auto-generate tanggal server side
+
+    let fotoUrl = '';
+    const fotoFile = request.payload.foto;
+
+    if (fotoFile && fotoFile._data) {
+      const uploadResult = await cloudinary.uploader.upload_stream(
+        {
+          folder: 'sampah',
+          resource_type: 'image',
+        },
+        async (error, result) => {
+          if (error) {
+            throw Boom.badRequest('Gagal upload gambar');
+          }
+
+          fotoUrl = result.secure_url;
+
+          const newSampah = new Sampah({
+            user: request.auth.user.id, // ganti dari .credentials ke .user
+            jenis,
+            foto: fotoUrl,
+            jumlah,
+            estimasiPoin,
+            metode,
+            lokasi,
+            tanggal,
+          });
+
+          await newSampah.save();
+
+          return h.response({
+            status: 'success',
+            message: 'Sampah berhasil dikirim',
+            data: newSampah,
+          }).code(201);
+        }
+      );
+
+      // Pipe file ke Cloudinary
+      fotoFile.pipe(uploadResult);
+    } else {
+      throw Boom.badRequest('Foto tidak ditemukan');
+    }
   } catch (err) {
-    throw Boom.badImplementation(err);
+    console.error(err);
+    throw Boom.badImplementation('Gagal membuat data sampah');
   }
 };
+
 
 const listUserSampah = async (request, h) => {
   try {

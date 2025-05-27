@@ -11,7 +11,7 @@ const DetectedResult = ({ image, result }) => {
   const handleSellClick = () => {
 
     if (token) {
-      navigate("/sellTrash", { state: { jenisSampah: result.type } });
+      navigate("/sellTrash", { state: { jenisSampah: result.type, points:result.points } });
     } else {
       navigate("/login");
     }

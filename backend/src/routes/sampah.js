@@ -17,7 +17,8 @@ module.exports = [
           estimasiPoin: Joi.number().required(),
           metode: Joi.string().valid('diantar', 'dijemput').required(),
           lokasi: Joi.string().required(),
-          tanggal: Joi.date().required()
+          tanggal: Joi.date().required(),
+          allow: 'multipart/form-data',
         })
       },
       description: 'Create jual sampah',

@@ -257,7 +257,7 @@ const ImageUpload = () => {
       </div>
 
       {showResult && (
-        <DetectedResult image={image.url} result={detectedTrash} />
+        <DetectedResult image={image.url} result={detectedTrash}/>
       )}
     </div>
   );

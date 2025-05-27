@@ -1,27 +1,77 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useState, useEffect, useContext } from "react";
+import TrashForm from "../components/Form/TrashForm";
+import TrashUpload from "../components/Form/TrashUpload";
+import DeliveryMap from "../components/Form/DeliveryMap";
+import { useLocation } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import { assets } from "../assets/assets";
-import { AppContext } from '../context/AppContex';
-import axios from 'axios';
+import { AppContext } from "../context/AppContex";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 const SellTrash = () => {
   const location = useLocation();
-  const jenisSampahDariDeteksi = location.state?.jenisSampah || '';
+  const jenisSampahDariDeteksi = location.state?.jenisSampah || "";
+  const pointsDariDeteksi = location.state?.points || "";
+  const [delivery, setDelivery] = useState("Diantar");
+  const [trashImg, setTrashImg] = useState("");
+  const [userLocation, setUserLocation] = useState(null);
+  const [address, setAddress] = useState("");
 
-  const {backendUrl} = useContext(AppContext)
+  const { backendUrl, token } = useContext(AppContext);
 
   const [formData, setFormData] = useState({
-    jenisSampah: '',
-    jumlah: ''
+    jenisSampah: "",
+    jumlah: "",
+    points: "",
   });
 
   useEffect(() => {
     setFormData((prev) => ({
       ...prev,
       jenisSampah: jenisSampahDariDeteksi,
+      points: pointsDariDeteksi,
     }));
-  }, [jenisSampahDariDeteksi]);
+  }, [jenisSampahDariDeteksi, pointsDariDeteksi]);
+
+  useEffect(() => {
+    if (delivery === "Dijemput") {
+      getUserLocation();
+    }
+  }, [delivery]);
+
+  const estimasiPoints =
+    formData.jumlah && formData.points
+      ? Number(formData.jumlah) * Number(formData.points)
+      : 0;
+
+  const getUserLocation = () => {
+    if (!navigator.geolocation) {
+      toast.error("Geolocation tidak didukung browser ini.");
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        const { latitude, longitude } = position.coords;
+        setUserLocation({ lat: latitude, lng: longitude });
+
+        // Optional: Reverse Geocoding pakai Nominatim API
+        try {
+          const res = await axios.get(
+            `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
+          );
+          setAddress(res.data.display_name || "Alamat tidak ditemukan");
+        } catch (err) {
+          setAddress("Gagal mengambil alamat");
+        }
+      },
+      (error) => {
+        toast.error("Gagal mengambil lokasi");
+        console.error(error);
+      }
+    );
+  };
 
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -30,9 +80,42 @@ const SellTrash = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Data Terkirim:', formData);
+
+    try {
+      const form = new FormData();
+      form.append("jenis", formData.jenisSampah);
+      form.append("jumlah", formData.jumlah);
+      form.append("estimasiPoin", estimasiPoints);
+      form.append("metode", delivery);
+
+      if (delivery === "Dijemput" && userLocation) {
+        form.append('lokasi', JSON.stringify({line1:userLocation, line2:address}))
+      }
+
+      if (trashImg) {
+        form.append("foto", trashImg); // ⬅️ Upload file ke form
+      }
+
+      const {data} = await axios.post(`${backendUrl}/sampah`, form, {
+        headers: {
+  'Authorization': `Bearer ${token}`,
+},
+      });
+
+      
+
+      toast.success("Data berhasil dikirim!");
+      
+
+      // Opsional: Reset form
+      setFormData({ jenisSampah: "", jumlah: "", points: "" });
+      setTrashImg("");
+    } catch (error) {
+      toast.error("Gagal mengirim data");
+      console.error(error);
+    }
   };
 
   return (
@@ -59,40 +142,43 @@ const SellTrash = () => {
       <div className="relative z-10 mx-4 mb-8 sm:mx-[8%]">
         <div className="relative pb-20 w-full h-full bg-[#F9FAFB] p-6 rounded-lg shadow-md">
           <form onSubmit={handleSubmit} className="space-y-6">
-            <div>
-              <label className="block mb-1 font-medium text-gray-700">Nama</label>
-              <input
-                type="text"
-                name="nama"
-                value={formData.nama}
-                onChange={handleChange}
-                className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-green-500"
-                required
-              />
-            </div>
+            <TrashForm formData={formData} handleChange={handleChange} />
+            <TrashUpload trashImg={trashImg} setTrashImg={setTrashImg} />
 
             <div>
-              <label className="block mb-1 font-medium text-gray-700">Jenis Sampah</label>
-              <input
-                type="text"
-                name="jenisSampah"
-                value={formData.jenisSampah}
-                disabled
-                className="w-full bg-gray-100 border border-gray-300 rounded-lg p-2 text-gray-600 cursor-not-allowed"
-              />
-            </div>
-
-            <div>
-              <label className="block mb-1 font-medium text-gray-700">Jumlah (pcs)</label>
+              <label className="block my-1 font-medium text-gray-700">
+                Total
+              </label>
               <input
                 type="number"
-                name="jumlah"
-                value={formData.jumlah}
-                onChange={handleChange}
-                className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-amber-300"
-                required
+                value={estimasiPoints}
+                disabled
+                className="w-full mb-1 border border-gray-300 rounded-lg p-2 bg-gray-100 text-gray-600"
               />
             </div>
+
+            <div>
+              <label className="block mb-1 font-medium text-gray-700">
+                Metode pengiriman
+              </label>
+              <select
+                onChange={(e) => setDelivery(e.target.value)}
+                value={delivery}
+                className="border rounded px-3 py-2 w-full"
+              >
+                <option value="Diantar">Diantar</option>
+                {estimasiPoints >= 500 && (
+                  <option value="Dijemput">Dijemput</option>
+                )}
+              </select>
+            </div>
+
+            <DeliveryMap
+              delivery={delivery}
+              userLocation={userLocation}
+              address={address}
+              
+            />
 
             <button
               type="submit"

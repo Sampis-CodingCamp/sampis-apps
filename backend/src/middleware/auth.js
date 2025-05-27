@@ -3,6 +3,10 @@ const config = require('../config');
 const Boom = require('@hapi/boom');
 
 const verifyToken = async (request, h) => {
+    if (request.method === 'options') {
+    return h.continue;
+  }
+
   const authHeader = request.headers.authorization;
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
     throw Boom.unauthorized('Token tidak ditemukan');
