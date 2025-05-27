@@ -4,6 +4,7 @@ const plugins = require('./plugins');
 const config = require('./config');
 const connectDB = require('./config/database');
 const connectCloudinary = require('./config/cloudinary')
+const cors = require('hapi-cors')
 
 const init = async () => {
   // Connect to MongoDB
@@ -15,10 +16,10 @@ const init = async () => {
     host: 'localhost',
     routes: {
       cors: {
-        origin: ['*'],
-        headers: ['Accept', 'Content-Type'],
+        origin: ['http://localhost:5173'],
+        headers: ['Accept', 'Content-Type', 'Authorization'],
         additionalHeaders: ['X-Requested-With'],
-        credentials: true
+        credentials: true,
       }
     }
   });

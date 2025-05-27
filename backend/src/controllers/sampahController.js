@@ -1,60 +1,65 @@
 const Sampah = require('../models/Sampah');
 const User = require('../models/User');
 const Boom = require('@hapi/boom');
+const streamifier = require('streamifier');
 const { v2: cloudinary } = require('cloudinary');
 
 const createSampah = async (request, h) => {
   try {
     const { jenis, jumlah, estimasiPoin, metode, lokasi } = request.payload;
-    const tanggal = new Date(); // auto-generate tanggal server side
-
-    let fotoUrl = '';
+    const tanggal = new Date(); 
     const fotoFile = request.payload.foto;
 
-    if (fotoFile && fotoFile._data) {
-      const uploadResult = await cloudinary.uploader.upload_stream(
-        {
-          folder: 'sampah',
-          resource_type: 'image',
-        },
-        async (error, result) => {
-          if (error) {
-            throw Boom.badRequest('Gagal upload gambar');
-          }
-
-          fotoUrl = result.secure_url;
-
-          const newSampah = new Sampah({
-            user: request.auth.user.id, // ganti dari .credentials ke .user
-            jenis,
-            foto: fotoUrl,
-            jumlah,
-            estimasiPoin,
-            metode,
-            lokasi,
-            tanggal,
-          });
-
-          await newSampah.save();
-
-          return h.response({
-            status: 'success',
-            message: 'Sampah berhasil dikirim',
-            data: newSampah,
-          }).code(201);
-        }
-      );
-
-      // Pipe file ke Cloudinary
-      fotoFile.pipe(uploadResult);
-    } else {
+    if (!fotoFile || !fotoFile._data) {
       throw Boom.badRequest('Foto tidak ditemukan');
     }
+
+    // Bungkus upload_stream dalam Promise
+    const uploadToCloudinary = () => {
+      return new Promise((resolve, reject) => {
+        const stream = cloudinary.uploader.upload_stream(
+          {
+            folder: 'sampah',
+            resource_type: 'image',
+          },
+          (error, result) => {
+            if (error) return reject(Boom.badRequest('Gagal upload gambar'));
+            resolve(result);
+          }
+        );
+
+        streamifier.createReadStream(fotoFile._data).pipe(stream);
+      });
+    };
+
+    const uploadResult = await uploadToCloudinary();
+
+    const newSampah = new Sampah({
+      user: request.auth.user.id,
+      jenis,
+      foto: uploadResult.secure_url,
+      jumlah,
+      estimasiPoin,
+      metode,
+      lokasi,
+      tanggal,
+    });
+
+    await newSampah.save();
+
+    return h.response({
+      status: 'success',
+      message: 'Sampah berhasil dikirim',
+      data: newSampah,
+    }).code(201);
+
   } catch (err) {
     console.error(err);
+    if (Boom.isBoom(err)) throw err;
     throw Boom.badImplementation('Gagal membuat data sampah');
   }
 };
+
 
 
 const listUserSampah = async (request, h) => {

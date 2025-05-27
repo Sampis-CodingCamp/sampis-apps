@@ -206,7 +206,7 @@ const Navbar = () => {
                     <ul class="py-2" aria-labelledby="user-menu-button">
                       <li>
                         <a
-                          onClick={() => navigate("my-profile")}
+                          onClick={() => navigate("/my-profile")}
                           className="cursor-pointer block px-4 py-2 text-sm hover:bg-gray-200"
                         >
                           Info Akun
@@ -214,7 +214,7 @@ const Navbar = () => {
                       </li>
                       <li>
                         <a
-                          onClick={() => navigate("points")}
+                          onClick={() => navigate("/points")}
                           className="cursor-pointer block px-4 py-2 text-sm hover:bg-gray-200"
                         >
                           Points

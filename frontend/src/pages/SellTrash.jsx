@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import TrashForm from "../components/Form/TrashForm";
 import TrashUpload from "../components/Form/TrashUpload";
 import DeliveryMap from "../components/Form/DeliveryMap";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import { assets } from "../assets/assets";
 import { AppContext } from "../context/AppContex";
@@ -17,6 +17,8 @@ const SellTrash = () => {
   const [trashImg, setTrashImg] = useState("");
   const [userLocation, setUserLocation] = useState(null);
   const [address, setAddress] = useState("");
+
+  const navigate = useNavigate();
 
   const { backendUrl, token } = useContext(AppContext);
 
@@ -90,28 +92,45 @@ const SellTrash = () => {
       form.append("estimasiPoin", estimasiPoints);
       form.append("metode", delivery);
 
+      const baseCampLoc = { lat: -6.322195, lng: 106.979335 };
+      const baseCampAddress = "TPST Bantar Gebang, Bekasi, Jawa Barat";
+
+
       if (delivery === "Dijemput" && userLocation) {
-        form.append('lokasi', JSON.stringify({line1:userLocation, line2:address}))
+        form.append(
+          "lokasi",
+          JSON.stringify({ line1: userLocation, line2: address })
+        );
       }
+
+      if (delivery === "Diantar") {
+      form.append(
+        "lokasi",
+        JSON.stringify({
+          line1: baseCampLoc,
+          line2: baseCampAddress,
+        })
+      );
+    }
 
       if (trashImg) {
         form.append("foto", trashImg); // ⬅️ Upload file ke form
       }
 
-      const {data} = await axios.post(`${backendUrl}/sampah`, form, {
+      const { data } = await axios.post(`${backendUrl}/sampah`, form, {
         headers: {
-  'Authorization': `Bearer ${token}`,
-},
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
       });
 
-      
-
       toast.success("Data berhasil dikirim!");
-      
 
       // Opsional: Reset form
       setFormData({ jenisSampah: "", jumlah: "", points: "" });
       setTrashImg("");
+
+      navigate("/points");
     } catch (error) {
       toast.error("Gagal mengirim data");
       console.error(error);
@@ -139,7 +158,7 @@ const SellTrash = () => {
         </p>
       </div>
 
-      <div className="relative z-10 mx-4 mb-8 sm:mx-[8%]">
+      <div className="relative  mx-4 mb-8 sm:mx-[8%]">
         <div className="relative pb-20 w-full h-full bg-[#F9FAFB] p-6 rounded-lg shadow-md">
           <form onSubmit={handleSubmit} className="space-y-6">
             <TrashForm formData={formData} handleChange={handleChange} />
@@ -177,7 +196,6 @@ const SellTrash = () => {
               delivery={delivery}
               userLocation={userLocation}
               address={address}
-              
             />
 
             <button

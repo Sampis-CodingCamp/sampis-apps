@@ -6,7 +6,7 @@ const sampahSchema = new mongoose.Schema({
   foto: { type: String, required: true }, // URL atau base64
   jumlah: { type: Number, required: true },
   estimasiPoin: { type: Number, required: true },
-  metode: { type: String, enum: ['diantar', 'dijemput'], required: true },
+  metode: { type: String, enum: ['Diantar', 'Dijemput'], required: true },
   lokasi: { type: String, required: true },
   tanggal: { type: Date, required: true },
   status: { type: String, enum: ['pending', 'approved', 'cancel'], default: 'pending' },

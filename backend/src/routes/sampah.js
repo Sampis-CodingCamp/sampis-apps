@@ -3,24 +3,19 @@ const { createSampah, listUserSampah, listAllSampah, updateStatusSampah } = requ
 const { verifyToken, requireRole } = require('../middleware/auth');
 
 module.exports = [
-  {
+    {
     method: 'POST',
     path: '/sampah',
     options: {
       pre: [verifyToken],
-      handler: createSampah,
-      validate: {
-        payload: Joi.object({
-          jenis: Joi.string().required(),
-          foto: Joi.string().required(),
-          jumlah: Joi.number().required(),
-          estimasiPoin: Joi.number().required(),
-          metode: Joi.string().valid('diantar', 'dijemput').required(),
-          lokasi: Joi.string().required(),
-          tanggal: Joi.date().required(),
-          allow: 'multipart/form-data',
-        })
+      payload: {
+        output: 'stream',
+        parse: true,
+        allow: 'multipart/form-data',
+        multipart: true,
+        maxBytes: 10 * 1024 * 1024, // 10MB
       },
+      handler: createSampah,
       description: 'Create jual sampah',
       tags: ['api', 'sampah']
     }
