@@ -1,12 +1,43 @@
 const Artikel = require('../models/Artikel');
 const Boom = require('@hapi/boom');
+const streamifier = require('streamifier');
+const { v2: cloudinary} = require('cloudinary')
 
 const createArtikel = async (request, h) => {
   try {
-    const { judul, isi, tanggal } = request.payload;
+    const { judul, isi, sumber } = request.payload;
+    const tanggal = new Date();
+    const fotoFile = request.payload.foto;
+
+    if (!fotoFile || !fotoFile._data) {
+          throw Boom.badRequest('Foto tidak ditemukan');
+        }
+    
+        // Bungkus upload_stream dalam Promise
+        const uploadToCloudinary = () => {
+          return new Promise((resolve, reject) => {
+            const stream = cloudinary.uploader.upload_stream(
+              {
+                folder: 'sampah',
+                resource_type: 'image',
+              },
+              (error, result) => {
+                if (error) return reject(Boom.badRequest('Gagal upload gambar'));
+                resolve(result);
+              }
+            );
+    
+            streamifier.createReadStream(fotoFile._data).pipe(stream);
+          });
+        };
+    
+        const uploadResult = await uploadToCloudinary();
+
     const artikel = new Artikel({
       judul,
       isi,
+      sumber,
+      foto: uploadResult.secure_url,
       author: request.auth.user.id,
       tanggal
     });

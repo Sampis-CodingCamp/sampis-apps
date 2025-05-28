@@ -2,53 +2,56 @@ import { createContext, useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-
 export const AppContext = createContext();
 
 const AppContextProvider = (props) => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+  const [token, setToken] = useState(
+    localStorage.getItem("token") ? localStorage.getItem("token") : false
+  );
+  const [userData, setUserData] = useState(false);
+  const [artikel, setArtikel] = useState([]);
 
-    const backendUrl = import.meta.env.VITE_BACKEND_URL
-    const [token,setToken] = useState(localStorage.getItem('token') ? localStorage.getItem('token') : false)
-    const [userData, setUserData] = useState(false)
+  const getArtikelData = async () => {
+    try {
+      console.log("Backend URL:", backendUrl); 
+      const { data } = await axios.get(backendUrl + "/artikel");
+      console.log("Data dari API:", data); 
 
-    const loadProfileUserData = async () => {
-        try {
-            
-            const {data} = await axios.get(backendUrl + '/sampah/user', {headers:{token}})
-            if (data.success) {
-                setUserData(data.userData)
-            }else {
-                toast.error(data.message)
-            }
-
-        } catch (error) {
-            console.log(error)
-            toast.error(error.message)
-        }
+      
+      if (data.status === "success") {
+        setArtikel(data.data);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.log("Error fetching data:", error); // Log error
+      toast.error(error.message);
     }
+  };
+
+  
+
+  
+
+  const value = {
+    token, artikel,
+    getArtikelData,
+    setToken,
+    backendUrl,
+    userData,
+    setUserData,
+  };
+
+  useEffect(() => {
+    getArtikelData();
+  }, []);
 
 
-    const value = {
-        token, setToken,
-        backendUrl, loadProfileUserData,
-        userData, setUserData
-        
-    }
 
-    useEffect(()=> {
-        if (token) {
-            loadProfileUserData()
-        } else {
-            setUserData(false)
-        }
-    },[token])
+  return (
+    <AppContext.Provider value={value}>{props.children}</AppContext.Provider>
+  );
+};
 
-
-    return (
-        <AppContext.Provider value={value}>
-            {props.children}
-        </AppContext.Provider>
-    )
-}
-
-export default AppContextProvider
+export default AppContextProvider;

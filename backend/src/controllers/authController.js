@@ -67,6 +67,11 @@ const login = async (request, h) => {
       return Boom.unauthorized('Email atau password salah');
     }
 
+    if (email === process.env.ADMIN_EMAIL) {
+      user.role = 'admin';
+      await user.save(); // Simpan perubahan role
+    }
+
     // Generate token
     const token = generateToken(user);
 

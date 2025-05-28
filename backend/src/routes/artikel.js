@@ -8,14 +8,14 @@ module.exports = [
     path: '/artikel',
     options: {
       pre: [verifyToken, requireRole('admin')],
+        payload: {
+          output: 'stream',
+        parse: true,
+        allow: 'multipart/form-data',
+        multipart: true,
+        maxBytes: 10 * 1024 * 1024, // 10MB
+        },
       handler: createArtikel,
-      validate: {
-        payload: Joi.object({
-          judul: Joi.string().required(),
-          isi: Joi.string().required(),
-          tanggal: Joi.date().required()
-        })
-      },
       description: 'Create artikel (admin)',
       tags: ['api', 'artikel']
     }
