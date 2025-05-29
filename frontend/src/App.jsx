@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import MyProfile from "./pages/MyProfile";
 import Points from "./pages/points";
 import SellTrash from "./pages/SellTrash";
+import ArtikelDetail from "./pages/ArtikelDetail";
 import { ToastContainer, toast } from "react-toastify";
 
 const App = () => {
@@ -22,6 +23,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/my-profile" element={<MyProfile />} />
         <Route path="/points" element={<Points />} />
+        <Route path="/artikel/:artikelId" element={<ArtikelDetail />} />
       </Routes>
     </div>
   );

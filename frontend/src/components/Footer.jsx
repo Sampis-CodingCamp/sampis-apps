@@ -1,4 +1,5 @@
 import React from "react";
+import { assets } from "../assets/assets";
 
 const Footer = () => {
   return (
@@ -8,7 +9,7 @@ const Footer = () => {
           <div className="md:flex md:justify-between">
             <div className="mb-6 md:mb-0">
               <a href="index.html" className="flex items-center">
-                <img src="" className="mb-5 mr-3 h-[70px]" alt="Logo" />
+                <img src={assets.logo} className="mb-5 mr-3 h-[70px]" alt="Logo" />
               </a>
             </div>
             <div className="grid grid-cols-2 gap-8 sm:grid-cols-2 sm:gap-6">

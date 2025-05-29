@@ -14,11 +14,10 @@ const AppContextProvider = (props) => {
 
   const getArtikelData = async () => {
     try {
-      console.log("Backend URL:", backendUrl); 
+      console.log("Backend URL:", backendUrl);
       const { data } = await axios.get(backendUrl + "/artikel");
-      console.log("Data dari API:", data); 
+      console.log("Data dari API:", data);
 
-      
       if (data.status === "success") {
         setArtikel(data.data);
       } else {
@@ -30,23 +29,110 @@ const AppContextProvider = (props) => {
     }
   };
 
-  
+  const formatTanggal = (tanggalStr) => {
+    const today = new Date();
+    const date = new Date(tanggalStr);
 
-  
+    // Ambil hanya tanggal (tanpa jam)
+    const todayDateOnly = new Date(
+      today.getFullYear(),
+      today.getMonth(),
+      today.getDate()
+    );
+    const dateOnly = new Date(
+      date.getFullYear(),
+      date.getMonth(),
+      date.getDate()
+    );
+
+    const diffTime = todayDateOnly - dateOnly;
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+    if (diffDays === 0) return "Hari ini";
+    if (diffDays === 1) return "1 hari lalu";
+    if (diffDays === 2) return "2 hari lalu";
+    if (diffDays === 3) return "3 hari lalu";
+
+    // format tanggal biasa kalau > 3 hari
+    return date.toLocaleDateString("id-ID", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    });
+  };
+
+  const loadProfileUserData = async () => {
+  try {
+    const { data } = await axios.get(backendUrl + '/users/profile', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      withCredentials: true,
+    });
+
+    console.log("Respon dari /users/profile:", data);
+
+    // Ganti ini:
+    // if (data.success === "success")
+    // Jadi:
+    if (data.status === "success") {
+      setUserData(data.data);
+      console.log("User Data:", data.data);
+    } else {
+      toast.error(data.message);
+    }
+  } catch (error) {
+    console.log(error);
+
+    if (
+      error.response &&
+      error.response.data &&
+      error.response.data.message === "Invalid token"
+    ) {
+      toast.error("Sesi login habis, silakan login ulang.");
+      setToken(false);
+      localStorage.removeItem("token");
+    } else {
+      toast.error(error.message);
+    }
+  }
+}
+
 
   const value = {
-    token, artikel,
+    token,
+    artikel,
     getArtikelData,
     setToken,
     backendUrl,
     userData,
     setUserData,
+    formatTanggal,
+    loadProfileUserData
   };
 
   useEffect(() => {
     getArtikelData();
   }, []);
 
+  useEffect(() => {
+  console.log("Token:", token);
+}, [token]);
+
+
+    useEffect(() => {
+    if (token) {
+      loadProfileUserData();
+    } else {
+      setUserData(false);
+    }
+  }, [token]);
+
+
+
+    useEffect(() => {
+    console.log("userData updated:", userData);
+  }, [userData]);
 
 
   return (

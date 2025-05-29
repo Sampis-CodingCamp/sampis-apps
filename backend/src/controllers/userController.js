@@ -1,5 +1,7 @@
 const User = require('../models/User');
 const Boom = require('@hapi/boom');
+const streamifier = require('streamifier');
+const { v2: cloudinary } = require('cloudinary');
 
 const getProfile = async (request, h) => {
   try {
@@ -13,15 +15,52 @@ const getProfile = async (request, h) => {
 
 const updateProfile = async (request, h) => {
   try {
-    const { username, email } = request.payload;
+    const { username, email, phone, address } = request.payload;
+    const updateData = { username, email, phone };
+
+    if (address) {
+      try {
+        updateData.address = JSON.parse(address);
+      } catch (err) {
+        throw Boom.badRequest('Format address tidak valid');
+      }
+    }
+
+    const fotoFile = request.payload.foto;
+
+    if (fotoFile && fotoFile._data) {
+      // Upload foto ke Cloudinary
+      const uploadToCloudinary = () => {
+        return new Promise((resolve, reject) => {
+          const stream = cloudinary.uploader.upload_stream(
+            {
+              folder: 'user_profile',
+              resource_type: 'image',
+            },
+            (error, result) => {
+              if (error) return reject(Boom.badRequest('Gagal upload gambar'));
+              resolve(result);
+            }
+          );
+          streamifier.createReadStream(fotoFile._data).pipe(stream);
+        });
+      };
+
+      const uploadResult = await uploadToCloudinary();
+      updateData.foto = uploadResult.secure_url; // Simpan URL foto dari Cloudinary
+    }
+
     const user = await User.findByIdAndUpdate(
       request.auth.user.id,
-      { username, email },
+      updateData,
       { new: true, runValidators: true, context: 'query' }
     ).select('-password');
+
     if (!user) throw Boom.notFound('User tidak ditemukan');
-    return h.response({ status: 'success', data: user });
+
+    return h.response({ success: true, message: 'Profil berhasil diperbarui', data: user });
   } catch (err) {
+    console.error(err);
     throw Boom.badImplementation(err);
   }
 };

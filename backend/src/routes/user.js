@@ -14,21 +14,23 @@ module.exports = [
     }
   },
   {
-    method: 'PUT',
-    path: '/users/profile',
-    options: {
-      pre: [verifyToken],
-      handler: updateProfile,
-      validate: {
-        payload: Joi.object({
-          username: Joi.string().min(3).max(30),
-          email: Joi.string().email()
-        })
-      },
-      description: 'Update user profile',
-      tags: ['api', 'user']
-    }
-  },
+  method: 'PUT',
+  path: '/users/profile',
+  options: {
+    pre: [verifyToken],
+    payload: {
+      multipart: true,
+      parse: true,
+      output: 'data',
+      allow: 'multipart/form-data',
+      maxBytes: 10 * 1024 * 1024, // 10MB
+    },
+    handler: updateProfile,
+    description: 'Update user profile',
+    tags: ['api', 'user']
+  }
+}
+,
   {
     method: 'GET',
     path: '/users',

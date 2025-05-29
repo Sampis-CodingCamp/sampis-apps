@@ -7,6 +7,8 @@ import profile_pic from './profile_pic.png'
 import cross_icon from './cross_icon.png'
 import logo from './logo.svg'
 import logoNiga from './logo_niga.svg'
+import upload from './upload_area.png'
+import upload_icon from './upload_icon.png'
 
 import artikel_1_img from './artikel1.png'
 import artikel_2_img from './artikel2.png'
@@ -20,7 +22,8 @@ export const assets = {
     dropdown_icon,
     profile_pic,
     cross_icon,
-    logo, logoNiga
+    logo, logoNiga,
+    upload, upload_icon
 }
 
 export const artikel = [

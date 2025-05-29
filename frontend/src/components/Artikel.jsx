@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
-import { artikel } from "../assets/assets";
+import { AppContext } from "../context/AppContex";
+import { useNavigate } from "react-router-dom";
 
 const Artikel = () => {
+
+  const { artikel, formatTanggal } = useContext(AppContext)
+  const navigate = useNavigate();
+
   return (
     <section id="artikel" className="bg-gray-50 py-16 lg:py-32">
       <div className="container">
@@ -28,17 +33,17 @@ const Artikel = () => {
             1024: { slidesPerView: 3 },
           }}
         >
-          {artikel.map((item) => (
+          {artikel.map((item, index) => (
             <div className="swiper eventsSwiper">
-              <SwiperSlide key={item._id}>
+              <SwiperSlide key={index}>
                 <div className="swiper-wrapper">
                   <div className="zoom swiper-slide rounded-md border border-solid border-slate-200 bg-white transition duration-300 hover:shadow-sm">
-                    <a href="acara-detail.html" className="block h-full">
+                    <a onClick={()=> navigate(`/artikel/${item._id}`)} className="block h-full">
                       <div className="pb-6">
                         <div className="relative overflow-hidden bg-cover bg-no-repeat">
                           <img
                             className="h-60 w-full rounded-t-sm align-middle transition duration-300 ease-linear sm:h-56"
-                            src={item.image}
+                            src={item.foto}
                             alt={item.title}
                           />
                         </div>
@@ -60,8 +65,8 @@ const Artikel = () => {
                                     clip-rule="evenodd"
                                   />
                                 </svg>
-                                <span className="ml-2 text-sm text-wolf">
-                                  Kota Depok
+                                <span className="ml-2 text-sm text-orange">
+                                  {item.sumber}
                                 </span>
                               </div>
                             </div>
@@ -84,14 +89,7 @@ const Artikel = () => {
                                   dateTime={item.date}
                                   className="ml-2 text-sm text-wolf"
                                 >
-                                  {new Date(item.date).toLocaleDateString(
-                                    "id-ID",
-                                    {
-                                      day: "numeric",
-                                      month: "long",
-                                      year: "numeric",
-                                    }
-                                  )}
+                                  {formatTanggal(item.tanggal)}
                                 </time>
                               </div>
                             </div>
@@ -99,7 +97,7 @@ const Artikel = () => {
                         </div>
                       </div>
                       <div className="flex-1 px-6 py-6">
-                        <p className="mb-3 text-lg font-medium">{item.title}</p>
+                        <p className="mb-3 text-lg font-medium">{item.judul}</p>
                       </div>
                     </a>
                   </div>
@@ -109,7 +107,7 @@ const Artikel = () => {
             </div>
           ))}
         </Swiper>
-        <a href="acara.html" className="mt-4 lg:mb-0">
+        <a onClick={() => navigate("/artikel")} className="mt-4 lg:mb-0 underline text-orange cursor-pointer">
           <p className="text-end text-ginger">Lihat semua</p>
         </a>
       </div>

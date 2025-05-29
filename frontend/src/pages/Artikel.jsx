@@ -2,29 +2,12 @@ import React, { useContext } from "react";
 import Navbar from "../components/Navbar";
 import { assets } from "../assets/assets";
 import { AppContext } from "../context/AppContex";
+import { useNavigate } from "react-router-dom";
 
-// Fungsi format tanggal
-const formatTanggal = (tanggalStr) => {
-  const now = new Date();
-  const tanggal = new Date(tanggalStr);
-  const diffTime = now - tanggal; // dalam milidetik
-  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-
-  if (diffDays === 0) return "Hari ini";
-  if (diffDays === 1) return "1 hari lalu";
-  if (diffDays === 2) return "2 hari lalu";
-  if (diffDays === 3) return "3 hari lalu";
-
-  // format tanggal biasa kalau > 3 hari
-  return tanggal.toLocaleDateString("id-ID", {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-  });
-};
 
 const Artikel = () => {
-  const { artikel } = useContext(AppContext);
+  const { artikel, formatTanggal } = useContext(AppContext);
+  const navigate = useNavigate()
 
   return (
     <div>
@@ -44,6 +27,7 @@ const Artikel = () => {
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {artikel.map((item, index) => (
               <a
+                onClick={()=> navigate(`/artikel/${item._id}`)}
                 href=""
                 key={index}
                 className="group block rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300"
