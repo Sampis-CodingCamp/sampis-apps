@@ -9,6 +9,7 @@ import MyProfile from "./pages/MyProfile";
 import Points from "./pages/points";
 import SellTrash from "./pages/SellTrash";
 import ArtikelDetail from "./pages/ArtikelDetail";
+import Dashboard from "./pages/AdminPage/Dashboard";
 import { ToastContainer, toast } from "react-toastify";
 
 const App = () => {
@@ -24,6 +25,9 @@ const App = () => {
         <Route path="/my-profile" element={<MyProfile />} />
         <Route path="/points" element={<Points />} />
         <Route path="/artikel/:artikelId" element={<ArtikelDetail />} />
+
+        {/* psikolog Route */}
+        <Route path="/Dashboard"element={<Dashboard/>}/>
       </Routes>
     </div>
   );

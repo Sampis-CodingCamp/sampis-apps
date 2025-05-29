@@ -47,6 +47,13 @@ const Login = () => {
           localStorage.setItem("token", data.token);
           setToken(data.token);
           toast.success("Login berhasil!");
+
+          // Arahkan sesuai role
+          if (data.user?.role === "admin") {
+            navigate("/dashboard");
+          } else {
+            navigate("/");
+          }
         } else {
           toast.error(data.message || "Login gagal");
         }
@@ -59,11 +66,11 @@ const Login = () => {
     }
   };
 
-  useEffect(() => {
-    if (token) {
-      navigate("/");
-    }
-  }, [token, navigate]);
+  // useEffect(() => {
+  //   if (token) {
+  //     navigate("/");
+  //   }
+  // }, [token, navigate]);
 
   return (
     <div
@@ -72,7 +79,7 @@ const Login = () => {
     >
       <div className="absolute inset-0 bg-black/45"></div>
 
-      <div className="absolute  w-full z-20 ">
+      <div className="absolute w-full z-20">
         <Navbar />
       </div>
 
