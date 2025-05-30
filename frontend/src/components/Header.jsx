@@ -19,7 +19,7 @@ const Header = () => {
             <p className="text-3xl md:text-4xl lg:text-5xl  text-primary font-semibold leading-tight md:leading-tight lg:leading-tight">
               Sampahmu Tanggung Jawabmu
             </p>
-            <div className="flex flex-col md:flex-row items-center gap-3 text-primary text-sm font-light">
+            <div className="flex flex-col md:flex-row items-center gap-3 text-primary font-light">
               <p>
                 Selamat datang di Sampis! Bergabunglah bersama{" "}
                 <br className="hidden sm:block" />
@@ -27,7 +27,7 @@ const Header = () => {
               </p>
             </div>
             <button
-              className="rounded-lg hover:bg-[#BF9264] bg-orange-400 px-16 py-5 text-sm font-medium text-primary hover:scale-105 transition-all duration-300"
+              className="rounded-lg hover:bg-[#BF9264] bg-orange-400 px-16 py-5 text-xl font-medium text-primary  hover:scale-105 transition-all duration-300 cursor-pointer"
               onClick={() => navigate("/scanTrash")}
             >
               Deteksi <img className="w-3" alt="" />

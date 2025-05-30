@@ -5,9 +5,9 @@ import { AppContext } from "../context/AppContex";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-
 const MyProfile = () => {
-  const { userData, setUserData, backendUrl, token, loadProfileUserData } = useContext(AppContext);
+  const { userData, setUserData, backendUrl, token, loadProfileUserData } =
+    useContext(AppContext);
 
   const [isEdit, setIsEdit] = useState(false);
   const [image, setImage] = useState(null);
@@ -98,7 +98,11 @@ const MyProfile = () => {
                         <div className="inline-block relative cursor-pointer">
                           <img
                             className="h-full w-full rounded-full object-cover"
-                            src={image ? URL.createObjectURL(image) : userData?.foto || assets.upload}
+                            src={
+                              image
+                                ? URL.createObjectURL(image)
+                                : userData?.foto || assets.upload
+                            }
                             alt="Profile"
                           />
                           <img
@@ -128,7 +132,7 @@ const MyProfile = () => {
                     <div className="rounded-md bg-blue-50 p-6">
                       {/* Username */}
                       <div className="mb-4">
-                        <p className="text-gray-500">Username</p>
+                        <p className="text-gray-500">Nama</p>
                         {isEdit ? (
                           <input
                             className="bg-gray-50 text-xl font-medium w-full"
@@ -151,7 +155,7 @@ const MyProfile = () => {
                       {/* Phone */}
                       <hr className="my-5 h-px border-0 bg-gray-300" />
                       <div className="mb-4">
-                        <p className="text-gray-500">Phone</p>
+                        <p className="text-gray-500">Nomor telepon</p>
                         {isEdit ? (
                           <input
                             className="bg-gray-100 w-full"
@@ -183,7 +187,7 @@ const MyProfile = () => {
                       {/* Address */}
                       <hr className="my-5 h-px border-0 bg-gray-300" />
                       <div>
-                        <p className="text-gray-500">Address</p>
+                        <p className="text-gray-500">Alamat</p>
                         {isEdit ? (
                           <>
                             <input
@@ -265,26 +269,21 @@ const MyProfile = () => {
                   <div className="px-4 py-5">
                     <div className="rounded-md p-4">
                       <p className="text-sm font-light italic text-gray-500">
-                        Points
+                        Poin
                       </p>
                       <p className="mb-4 text-2xl font-semibold text-ginger">
                         {userData?.points || 0}
                       </p>
                       <hr className="my-5 h-px border-0 bg-gray-300" />
-                      <div className="text-sm text-gray-700 flex items-center">
+                      <div className="text-sm text-ink flex items-center">
                         <svg
                           className="mr-2 h-5 w-5"
+                          aria-hidden="true"
                           xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
+                          fill="currentColor"
                           viewBox="0 0 24 24"
-                          stroke="currentColor"
                         >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                          />
+                          <path d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
                         </svg>
                         Poin didapatkan dari berbagai aktivitas
                       </div>

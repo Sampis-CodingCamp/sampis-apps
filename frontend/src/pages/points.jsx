@@ -66,18 +66,16 @@ const Points = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
       <div
-        className="relative w-full h-36 bg-cover bg-center"
+        className="relative w-full h-28 bg-cover bg-top"
         style={{ backgroundImage: `url(${assets.header_img})` }}
       >
-        <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-        <div className="relative z-10 px-4 sm:px-[8%]">
+        <div className="absolute inset-0 bg-gray-700 opacity-50"></div>
+        <div className="relative z-10 container pt-16 lg:pt-24">
           <Navbar />
         </div>
       </div>
 
-      {/* Title */}
       <div className="px-4 sm:px-[8%] mt-10">
         <h2 className="text-lg font-semibold text-zinc-700 border-b pb-2">
           Sampah Saya
