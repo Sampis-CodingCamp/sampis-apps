@@ -11,6 +11,10 @@ import SellTrash from "./pages/SellTrash";
 import ArtikelDetail from "./pages/ArtikelDetail";
 import Dashboard from "./pages/AdminPage/Dashboard";
 import { ToastContainer, toast } from "react-toastify";
+import AddArtikel from "./pages/AdminPage/AddArtikel";
+import AllConvert from "./pages/AdminPage/AllConvert";
+import TrashList from "./pages/AdminPage/TrashList";
+import AdminLayout from "./components/AdminComponent/AdminLayout";
 
 const App = () => {
   return (
@@ -27,7 +31,12 @@ const App = () => {
         <Route path="/artikel/:artikelId" element={<ArtikelDetail />} />
 
         {/* psikolog Route */}
-        <Route path="/Dashboard"element={<Dashboard/>}/>
+        <Route path="/" element={<AdminLayout/>}>
+        <Route path="dashboard"element={<Dashboard/>}/>
+        <Route path="add-artikel"element={<AddArtikel/>}/>
+        <Route path="all-convert"element={<AllConvert/>}/>
+        <Route path="artikel-list"element={<TrashList/>}/>
+        </Route>
       </Routes>
     </div>
   );

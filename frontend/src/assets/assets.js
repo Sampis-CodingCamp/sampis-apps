@@ -9,6 +9,8 @@ import logo from './logo.svg'
 import logoNiga from './logo_niga.svg'
 import upload from './upload_area.png'
 import upload_icon from './upload_icon.png'
+import tick_icon from './tick_icon.svg'
+import cancel_icon from './cancel_icon.svg'
 
 import artikel_1_img from './artikel1.png'
 import artikel_2_img from './artikel2.png'
@@ -23,7 +25,9 @@ export const assets = {
     profile_pic,
     cross_icon,
     logo, logoNiga,
-    upload, upload_icon
+    upload, upload_icon,
+    cancel_icon,
+    tick_icon
 }
 
 export const artikel = [

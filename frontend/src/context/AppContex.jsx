@@ -11,6 +11,7 @@ const AppContextProvider = (props) => {
   );
   const [userData, setUserData] = useState(false);
   const [artikel, setArtikel] = useState([]);
+  const [convert, setConvert] = useState([]);
 
   const getArtikelData = async () => {
     try {
@@ -98,6 +99,29 @@ const AppContextProvider = (props) => {
   }
 }
 
+const getAllConvert = async () => {
+  try {
+    const res = await axios.get(backendUrl + "/sampah", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      withCredentials: true,
+    });
+
+    const data = res.data;
+
+    if (data.status === "success") {
+      setConvert(data.data); // Ambil dari 'data.data'
+      console.log("All convert data:", data.data);
+    } else {
+      toast.error(data.message);
+    }
+  } catch (error) {
+    console.log("Error fetching data:", error);
+    toast.error(error.message);
+  }
+};
+
 
   const value = {
     token,
@@ -108,7 +132,8 @@ const AppContextProvider = (props) => {
     userData,
     setUserData,
     formatTanggal,
-    loadProfileUserData
+    loadProfileUserData, getAllConvert,
+    convert,
   };
 
   useEffect(() => {
