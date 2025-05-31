@@ -3,7 +3,7 @@ import { AppContext } from "../../context/AppContex";
 import { assets } from "../../assets/assets";
 
 const AllConvert = () => {
-  const { convert, getAllConvert } = useContext(AppContext);
+  const { convert, getAllConvert, updateStatus } = useContext(AppContext);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalImg, setModalImg] = useState("");
   const [modalLokasiOpen, setModalLokasiOpen] = useState(false);
@@ -15,7 +15,7 @@ const AllConvert = () => {
         typeof lokasiStr === "string" ? JSON.parse(lokasiStr) : lokasiStr;
 
       const lat = lokasi.line1?.lat ?? "-";
-      const lng = lokasi.line1?.lng ?? "-";
+      const lng = lokasi.line1?.lng ?? "-";    
       const alamat = lokasi.line2 ?? "-";
 
       return { lat, lng, alamat };
@@ -62,13 +62,11 @@ const AllConvert = () => {
   };
 
   const handleApprove = (id) => {
-    alert(`Approve item dengan id: ${id}`);
-    // TODO: API call approve
+    updateStatus(id, "approved");
   };
 
   const handleReject = (id) => {
-    alert(`Reject item dengan id: ${id}`);
-    // TODO: API call reject
+    updateStatus(id, "cancel");
   };
 
   return (
@@ -79,7 +77,7 @@ const AllConvert = () => {
 
       <div className="bg-white border border-gray-100 rounded text-sm max-h-[80vh] min-h-[60vh] overflow-y-scroll shadow-sm">
         {/* Header */}
-        <div className="hidden sm:grid grid-cols-[0.5fr_3fr_1fr_1fr_1fr_3fr_1.5fr_1fr_2fr_2fr] grid-flow-col py-3 px-6 border-b border-gray-200 text-gray-600 font-semibold select-none">
+        <div className="hidden sm:grid grid-cols-[0.5fr_2fr_1fr_1fr_1.2fr_3fr_1.2fr_1.2fr_1fr] py-3 px-6 border-b border-gray-200 text-gray-600 font-semibold select-none">
           <p>#</p>
           <p>User</p>
           <p>Jenis</p>
@@ -87,7 +85,6 @@ const AllConvert = () => {
           <p>Metode</p>
           <p>Lokasi</p>
           <p>Tanggal</p>
-          <p>Status</p>
           <p>Bukti Foto</p>
           <p>Aksi</p>
         </div>
@@ -100,13 +97,15 @@ const AllConvert = () => {
             return (
               <div
                 key={item._id}
-                className="flex flex-wrap justify-between max-sm:gap-2 sm:grid sm:grid-cols-[0.5fr_3fr_1fr_1fr_1fr_3fr_1.5fr_1fr_2fr_2fr] items-center text-gray-600 py-3 border-b border-gray-100 px-6 hover:bg-gray-50 transition"
+                className="flex flex-wrap justify-between max-sm:gap-2 sm:grid sm:grid-cols-[0.5fr_2fr_1fr_1fr_1.2fr_3fr_1.2fr_1.2fr_1fr] items-center text-gray-600 py-3 border-b border-gray-100 px-6 hover:bg-gray-50 transition"
               >
                 <p className="max-sm:hidden">{index + 1}</p>
                 <p className="truncate">{item.user?.username || "Unknown"}</p>
                 <p className="capitalize max-sm:hidden">{item.jenis}</p>
                 <p className="max-sm:hidden text-center">{item.jumlah} Kg</p>
-                <p className="capitalize max-sm:hidden text-xs">{item.metode}</p>
+                <p className="capitalize max-sm:hidden text-xs">
+                  {item.metode}
+                </p>
                 <p
                   onClick={() => openModalLokasi(item.lokasi)}
                   className="text-xs max-w-xs truncate cursor-pointer text-blue-600 hover:underline"
@@ -114,23 +113,12 @@ const AllConvert = () => {
                 >
                   {renderLokasi(item.lokasi).alamat}
                 </p>
-                <p className="max-sm:hidden text-xs text-center">{formatTanggal(item.tanggal)}</p>
-                <p
-                  className={`max-sm:hidden font-semibold text-xs ${
-                    item.status === "pending"
-                      ? "text-yellow-500"
-                      : item.status === "approved"
-                      ? "text-green-600"
-                      : item.status === "rejected"
-                      ? "text-red-500"
-                      : "text-gray-500"
-                  } capitalize`}
-                >
-                  {item.status || "Belum diproses"}
+                <p className="max-sm:hidden text-xs text-center">
+                  {formatTanggal(item.tanggal)}
                 </p>
 
                 {/* Bukti Foto */}
-                <div className="flex justify-center max-sm:mt-2">
+                <div className="flex justify-start max-sm:mt-2">
                   {item.foto ? (
                     <img
                       src={item.foto}
@@ -144,26 +132,40 @@ const AllConvert = () => {
                     </span>
                   )}
                 </div>
-                
 
                 {/* Aksi */}
-                <div className="flex gap-2 justify-center">
-                  <img
-                    src={assets.cancel_icon}
-                    alt="Reject"
-                    className="w-10"
-                    onClick={() => handleReject(item._id)}
-                  />
-
-                  <img
-                    src={assets.tick_icon}
-                    alt="Approve"
-                    className="w-10"
-                    onClick={() => handleApprove(item._id)}
-                  />
+                <div className="flex flex-col items-center gap-1">
+                  {item.status === "pending" ? (
+                    <div className="flex gap-2">
+                      <img
+                        src={assets.cancel_icon}
+                        alt="Reject"
+                        className="w-8 cursor-pointer"
+                        onClick={() => handleReject(item._id)}
+                        title="Tolak"
+                      />
+                      <img
+                        src={assets.tick_icon}
+                        alt="Approve"
+                        className="w-8 cursor-pointer"
+                        onClick={() => handleApprove(item._id)}
+                        title="Setujui"
+                      />
+                    </div>
+                  ) : (
+                    <span
+                      className={`font-semibold text-xs capitalize ${
+                        item.status === "approved"
+                          ? "text-green-600"
+                          : item.status === "cancel"
+                          ? "text-red-500"
+                          : "text-gray-500"
+                      }`}
+                    >
+                      {item.status}
+                    </span>
+                  )}
                 </div>
-
-                
               </div>
             );
           })}

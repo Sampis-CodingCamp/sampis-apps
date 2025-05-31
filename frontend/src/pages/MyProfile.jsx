@@ -50,7 +50,10 @@ const MyProfile = () => {
         }
       );
 
-      if (data.success) {
+      console.log(data);
+      
+
+      if (data.success || data.status === "success") {
         toast.success(data.message);
         await loadProfileUserData();
         setIsEdit(false);
@@ -272,7 +275,7 @@ const MyProfile = () => {
                         Poin
                       </p>
                       <p className="mb-4 text-2xl font-semibold text-ginger">
-                        {userData?.points || 0}
+                        {userData?.poin || 0}
                       </p>
                       <hr className="my-5 h-px border-0 bg-gray-300" />
                       <div className="text-sm text-ink flex items-center">

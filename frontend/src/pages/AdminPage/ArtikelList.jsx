@@ -1,24 +1,17 @@
-import React, { useContext } from "react";
-import Navbar from "../components/Navbar";
-import { assets } from "../assets/assets";
-import { AppContext } from "../context/AppContex";
-import { useNavigate } from "react-router-dom";
+import React, { useContext } from 'react'
+import { AppContext } from '../../context/AppContex'
+import { useNavigate } from 'react-router-dom';
 
-const Artikel = () => {
+const ArtikelList = () => {
   const { artikel, formatTanggal } = useContext(AppContext);
-  const navigate = useNavigate();
+  const navigate = useNavigate()
+
 
   return (
-    <div>
-      <div
-        className="relative w-full h-28 bg-cover bg-top"
-        style={{ backgroundImage: `url(${assets.header_img})` }}
-      >
-        <div className="absolute inset-0 bg-gray-700 opacity-50"></div>
-        <div className="relative z-10 container pt-16 lg:pt-24">
-          <Navbar />
-        </div>
-      </div>
+    <div className="w-full max-w-6xl m-5">
+      <p className="mb-3 text-lg font-medium text-gray-800">
+        Semua Artikel
+      </p>
 
       <section className="pb-8 pt-16">
         <div className="container">
@@ -26,9 +19,10 @@ const Artikel = () => {
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {artikel.map((item, index) => (
               <div
+                onClick={()=> navigate(`/artikel-admin/${item._id}`)}
+                href=""
                 key={index}
-                onClick={() => navigate(`/artikel/${item._id}`)}
-                className="cursor-pointer group block rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300"
+                className="group block rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300"
               >
                 <div className="overflow-hidden">
                   <img
@@ -54,7 +48,8 @@ const Artikel = () => {
         </div>
       </section>
     </div>
-  );
-};
+  )
+}
 
-export default Artikel;
+export default ArtikelList
+

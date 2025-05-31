@@ -63,62 +63,87 @@ const AppContextProvider = (props) => {
   };
 
   const loadProfileUserData = async () => {
-  try {
-    const { data } = await axios.get(backendUrl + '/users/profile', {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      withCredentials: true,
-    });
+    try {
+      const { data } = await axios.get(backendUrl + "/users/profile", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      });
 
-    console.log("Respon dari /users/profile:", data);
+      console.log("Respon dari /users/profile:", data);
 
-    // Ganti ini:
-    // if (data.success === "success")
-    // Jadi:
-    if (data.status === "success") {
-      setUserData(data.data);
-      console.log("User Data:", data.data);
-    } else {
-      toast.error(data.message);
+      // Ganti ini:
+      // if (data.success === "success")
+      // Jadi:
+      if (data.status === "success") {
+        setUserData(data.data);
+        console.log("User Data:", data.data);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.log(error);
+
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message === "Invalid token"
+      ) {
+        toast.error("Sesi login habis, silakan login ulang.");
+        setToken(false);
+        localStorage.removeItem("token");
+      } else {
+        toast.error(error.message);
+      }
     }
-  } catch (error) {
-    console.log(error);
+  };
 
-    if (
-      error.response &&
-      error.response.data &&
-      error.response.data.message === "Invalid token"
-    ) {
-      toast.error("Sesi login habis, silakan login ulang.");
-      setToken(false);
-      localStorage.removeItem("token");
-    } else {
+  const getAllConvert = async () => {
+    try {
+      const res = await axios.get(backendUrl + "/sampah", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      });
+
+      const data = res.data;
+
+      if (data.status === "success") {
+        setConvert(data.data); // Ambil dari 'data.data'
+        console.log("All convert data:", data.data);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.log("Error fetching data:", error);
       toast.error(error.message);
     }
-  }
-}
+  };
 
-const getAllConvert = async () => {
+const updateStatus = async (trashId, status) => {
   try {
-    const res = await axios.get(backendUrl + "/sampah", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      withCredentials: true,
-    });
-
-    const data = res.data;
+    const { data } = await axios.put(
+      backendUrl + `/sampah/${trashId}/status`,
+      { status },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      }
+    );
 
     if (data.status === "success") {
-      setConvert(data.data); // Ambil dari 'data.data'
-      console.log("All convert data:", data.data);
+      toast.success("Status berhasil diperbarui!");
+      getAllConvert(); // refresh data
     } else {
-      toast.error(data.message);
+      toast.error("Gagal memperbarui status.");
     }
   } catch (error) {
-    console.log("Error fetching data:", error);
-    toast.error(error.message);
+    console.error("Error updating status:", error);
+    toast.error(error?.response?.data?.message || error.message);
   }
 };
 
@@ -132,8 +157,9 @@ const getAllConvert = async () => {
     userData,
     setUserData,
     formatTanggal,
-    loadProfileUserData, getAllConvert,
-    convert,
+    loadProfileUserData,
+    getAllConvert,
+    convert, updateStatus
   };
 
   useEffect(() => {
@@ -141,11 +167,10 @@ const getAllConvert = async () => {
   }, []);
 
   useEffect(() => {
-  console.log("Token:", token);
-}, [token]);
+    console.log("Token:", token);
+  }, [token]);
 
-
-    useEffect(() => {
+  useEffect(() => {
     if (token) {
       loadProfileUserData();
     } else {
@@ -153,12 +178,9 @@ const getAllConvert = async () => {
     }
   }, [token]);
 
-
-
-    useEffect(() => {
+  useEffect(() => {
     console.log("userData updated:", userData);
   }, [userData]);
-
 
   return (
     <AppContext.Provider value={value}>{props.children}</AppContext.Provider>

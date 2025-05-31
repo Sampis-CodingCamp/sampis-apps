@@ -13,8 +13,9 @@ import Dashboard from "./pages/AdminPage/Dashboard";
 import { ToastContainer, toast } from "react-toastify";
 import AddArtikel from "./pages/AdminPage/AddArtikel";
 import AllConvert from "./pages/AdminPage/AllConvert";
-import TrashList from "./pages/AdminPage/TrashList";
+import TrashList from "./pages/AdminPage/ArtikelList";
 import AdminLayout from "./components/AdminComponent/AdminLayout";
+import ArtikelDetailAdmin from "./pages/AdminPage/ArtikelDetailAdmin";
 
 const App = () => {
   return (
@@ -36,6 +37,7 @@ const App = () => {
         <Route path="add-artikel"element={<AddArtikel/>}/>
         <Route path="all-convert"element={<AllConvert/>}/>
         <Route path="artikel-list"element={<TrashList/>}/>
+        <Route path="artikel-admin/:artikelId"element={<ArtikelDetailAdmin/>}/>
         </Route>
       </Routes>
     </div>
