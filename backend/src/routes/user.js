@@ -1,5 +1,5 @@
 const Joi = require('@hapi/joi');
-const { getProfile, updateProfile, getAllUsers } = require('../controllers/userController');
+const { getProfile, updateProfile, getAllUsers, adminDashboard } = require('../controllers/userController');
 const { verifyToken, requireRole } = require('../middleware/auth');
 
 module.exports = [
@@ -40,5 +40,15 @@ module.exports = [
       description: 'Get all users (admin)',
       tags: ['api', 'user']
     }
-  }
+  },
+  {
+    method: 'GET',
+    path: '/dashboard',
+    options: {
+      pre: [verifyToken, requireRole('admin')],
+      handler: adminDashboard,
+      description: 'Get all users (admin)',
+      tags: ['api', 'user']
+    }
+  },
 ]; 

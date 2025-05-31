@@ -2,6 +2,8 @@ const User = require('../models/User');
 const Boom = require('@hapi/boom');
 const streamifier = require('streamifier');
 const { v2: cloudinary } = require('cloudinary');
+const Sampah = require('../models/Sampah');
+const Artikel = require('../models/Artikel');
 
 const getProfile = async (request, h) => {
   try {
@@ -74,4 +76,24 @@ const getAllUsers = async (request, h) => {
   }
 };
 
-module.exports = { getProfile, updateProfile, getAllUsers }; 
+const adminDashboard = async (request, h) => {
+  try {
+    const trash = await Sampah.find({});
+    const user = await User.find({});
+    const artikel = await Artikel.find({});
+
+    const dashData = {
+      sampah: trash.length,
+      user: user.length,
+      artikel: artikel.length,
+    };
+
+    return h.response({ status: "success", dashData }).code(200);
+  } catch (error) {
+    console.error("Error in adminDashboard:", error);
+    return h.response({ status: "error", message: error.message }).code(500);
+  }
+};
+
+
+module.exports = { getProfile, updateProfile, getAllUsers, adminDashboard }; 

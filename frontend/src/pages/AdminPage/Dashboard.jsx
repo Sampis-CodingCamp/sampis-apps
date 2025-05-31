@@ -1,6 +1,5 @@
 import React from 'react'
 import { assets } from '../../assets/assets'
-import Sidebar from '../../components/AdminComponent/Sidebar'
 import Header from '../../components/AdminComponent/Header'
 import Stats from '../../components/AdminComponent/Stats'
 import PendingPenukaran from '../../components/AdminComponent/PendingPenukaran'

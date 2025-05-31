@@ -12,6 +12,7 @@ const AppContextProvider = (props) => {
   const [userData, setUserData] = useState(false);
   const [artikel, setArtikel] = useState([]);
   const [convert, setConvert] = useState([]);
+  const [dashData, setDashData] = useState(false)
 
   const getArtikelData = async () => {
     try {
@@ -147,6 +148,26 @@ const updateStatus = async (trashId, status) => {
   }
 };
 
+const getDashData = async () => {
+  try {
+    const { data } = await axios.get(backendUrl + "/dashboard", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      });
+
+      if (data.status === "success") {
+        setDashData(data.dashData)
+        console.log(dashData)
+      }else {
+        toast.error(data.message)
+      }
+  } catch (error) {
+    toast.error(error.message);
+  }
+}
+
 
   const value = {
     token,
@@ -159,7 +180,8 @@ const updateStatus = async (trashId, status) => {
     formatTanggal,
     loadProfileUserData,
     getAllConvert,
-    convert, updateStatus
+    convert, updateStatus,
+    dashData, getDashData
   };
 
   useEffect(() => {
