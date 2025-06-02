@@ -6,14 +6,6 @@ import PendingPenukaran from "../../components/AdminComponent/PendingPenukaran";
 
 const Dashboard = () => {
   return (
-    //  <div className="flex w-full min-h-screen bg-white">
-    //   {/* Konten utama */}
-    //   <div className="flex-1 flex flex-col p-6 gap-6 overflow-y-auto">
-    //     <Header />
-    //     <Stats />
-    //     <PendingPenukaran />
-    //   </div>
-    // </div>
     <div className="grow p-8">
       <h2 className="text-2xl mb-4">Dashboard</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6"></div>

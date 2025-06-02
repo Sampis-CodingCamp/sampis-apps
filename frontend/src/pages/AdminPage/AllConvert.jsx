@@ -70,12 +70,10 @@ const AllConvert = () => {
   };
 
   return (
-    <div>
-      <div className="w-full max-w-6xl m-5">
-        <p className="mb-3 text-lg font-medium text-gray-800">
-          Semua Data Sampah
-        </p>
-
+    <div className="grow p-8">
+      <h2 className="text-2xl mb-4">Semua Data Sampah</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6"></div>
+      <div className="w-full">
         <div className="bg-white border border-gray-100 rounded text-sm max-h-[80vh] min-h-[60vh] overflow-y-scroll shadow-sm">
           {/* Header */}
           <div className="hidden sm:grid grid-cols-[0.5fr_2fr_1fr_1fr_1.2fr_3fr_1.2fr_1.2fr_1fr] py-3 px-6 border-b border-gray-200 text-gray-600 font-semibold select-none">
@@ -220,39 +218,6 @@ const AllConvert = () => {
           </div>
         )}
       </div>
-
-      {/* <div className="grow p-8">
-        <h2 className="text-2xl mb-4">Dashboard</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6"></div>
-        <div class="table w-full ...">
-          <div class="table-header-group bg-gray-800 text-white text-sm font-semibold py-3 px-4">
-            <div class="table-row">
-              <div class="table-cell text-left ...">Song</div>
-              <div class="table-cell text-left ...">Artist</div>
-              <div class="table-cell text-left ...">Year</div>
-            </div>
-          </div>
-          <div class="table-row-group">
-            <div class="table-row">
-              <div class="table-cell ...">
-                The Sliding Mr. Bones (Next Stop, Pottersville)
-              </div>
-              <div class="table-cell ...">Malcolm Lockyer</div>
-              <div class="table-cell ...">1961</div>
-            </div>
-            <div class="table-row">
-              <div class="table-cell ...">Witchy Woman</div>
-              <div class="table-cell ...">The Eagles</div>
-              <div class="table-cell ...">1972</div>
-            </div>
-            <div class="table-row">
-              <div class="table-cell ...">Shining Star</div>
-              <div class="table-cell ...">Earth, Wind, and Fire</div>
-              <div class="table-cell ...">1975</div>
-            </div>
-          </div>
-        </div>
-      </div> */}
     </div>
   );
 };
