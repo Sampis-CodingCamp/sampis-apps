@@ -12,7 +12,9 @@ const AppContextProvider = (props) => {
   const [userData, setUserData] = useState(false);
   const [artikel, setArtikel] = useState([]);
   const [convert, setConvert] = useState([]);
-  const [dashData, setDashData] = useState(false)
+  const [dashData, setDashData] = useState(false);
+  const [item, setItem] = useState([]);
+  const [poin, setPoin] = useState([])
 
   const getArtikelData = async () => {
     try {
@@ -123,34 +125,34 @@ const AppContextProvider = (props) => {
     }
   };
 
-const updateStatus = async (trashId, status) => {
-  try {
-    const { data } = await axios.put(
-      backendUrl + `/sampah/${trashId}/status`,
-      { status },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        withCredentials: true,
+  const updateStatus = async (trashId, status) => {
+    try {
+      const { data } = await axios.put(
+        backendUrl + `/sampah/${trashId}/status`,
+        { status },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          withCredentials: true,
+        }
+      );
+
+      if (data.status === "success") {
+        toast.success("Status berhasil diperbarui!");
+        getAllConvert(); // refresh data
+      } else {
+        toast.error("Gagal memperbarui status.");
       }
-    );
-
-    if (data.status === "success") {
-      toast.success("Status berhasil diperbarui!");
-      getAllConvert(); // refresh data
-    } else {
-      toast.error("Gagal memperbarui status.");
+    } catch (error) {
+      console.error("Error updating status:", error);
+      toast.error(error?.response?.data?.message || error.message);
     }
-  } catch (error) {
-    console.error("Error updating status:", error);
-    toast.error(error?.response?.data?.message || error.message);
-  }
-};
+  };
 
-const getDashData = async () => {
-  try {
-    const { data } = await axios.get(backendUrl + "/dashboard", {
+  const getDashData = async () => {
+    try {
+      const { data } = await axios.get(backendUrl + "/dashboard", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -158,16 +160,85 @@ const getDashData = async () => {
       });
 
       if (data.status === "success") {
-        setDashData(data.dashData)
-        console.log(dashData)
-      }else {
-        toast.error(data.message)
+        setDashData(data.dashData);
+        console.log(dashData);
+      } else {
+        toast.error(data.message);
       }
-  } catch (error) {
-    toast.error(error.message);
-  }
-}
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
 
+  const getItem = async () => {
+    try {
+      const { data } = await axios.get(backendUrl + "/item");
+      console.log("Data dari API:", data);
+
+      if (data.status === "success") {
+        setItem(data.data); // ✅ Perbaiki di sini
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.log("Error fetching data:", error);
+      toast.error(error.message);
+    }
+  };
+
+  const getAllPoin = async () => {
+  if (!token || !userData) return;
+
+  const endpoint =
+    userData.role === 'admin' ? '/poin' : '/poin/user';
+
+  try {
+    const res = await axios.get(backendUrl + endpoint, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      withCredentials: true,
+    });
+
+    const data = res.data;
+
+    if (data.status === "success") {
+      setPoin(data.data);
+      console.log("Poin data:", data.data);
+    } else {
+      toast.error(data.message);
+    }
+  } catch (error) {
+    console.log("Error fetching data:", error);
+    toast.error(error?.response?.data?.message || error.message);
+  }
+};
+
+
+  const updateStatusPoin = async (poinId, status) => {
+    try {
+      const { data } = await axios.put(
+        backendUrl + `/poin/${poinId}/approve`,
+        { status },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          withCredentials: true,
+        }
+      );
+
+      if (data.status === "success") {
+        toast.success("Status berhasil diperbarui!");
+        getAllPoin(); // refresh data
+      } else {
+        toast.error("Gagal memperbarui status.");
+      }
+    } catch (error) {
+      console.error("Error updating status:", error);
+      toast.error(error?.response?.data?.message || error.message);
+    }
+  }
 
   const value = {
     token,
@@ -180,8 +251,15 @@ const getDashData = async () => {
     formatTanggal,
     loadProfileUserData,
     getAllConvert,
-    convert, updateStatus,
-    dashData, getDashData
+    convert,
+    updateStatus,
+    dashData,
+    getDashData,
+    getItem,
+    item,
+    getAllPoin,
+    poin,
+    updateStatusPoin
   };
 
   useEffect(() => {
@@ -199,6 +277,19 @@ const getDashData = async () => {
       setUserData(false);
     }
   }, [token]);
+
+  useEffect(() => {
+    if (token) {
+      getItem();
+    }
+  }, [token]);
+
+useEffect(() => {
+  if (token && userData) {
+    getAllPoin();
+  }
+}, [token, userData]);
+
 
   useEffect(() => {
     console.log("userData updated:", userData);

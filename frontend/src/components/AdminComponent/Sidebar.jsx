@@ -58,6 +58,52 @@ const Sidebar = () => {
             <span className="hidden md:inline">Penukaran</span>
           </NavLink>
           <NavLink
+            to="/add-item"
+            className={({ isActive }) =>
+              `flex items-center justify-center md:justify-start py-3 px-2 space-x-0 md:space-x-4 mb-2 rounded hover:cursor-pointer hover:bg-blue-600 hover:text-white ${
+                isActive ? "bg-blue-600 text-white" : ""
+              }`
+            }
+          >
+            <div className="flex-shrink-0">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="currentColor"
+                  d="m7.625 6.4l2.8-3.625q.3-.4.713-.587T12 2t.863.188t.712.587l2.8 3.625l4.25 1.425q.65.2 1.025.738t.375 1.187q0 .3-.088.6t-.287.575l-2.75 3.9l.1 4.1q.025.875-.575 1.475t-1.4.6q-.05 0-.55-.075L12 19.675l-4.475 1.25q-.125.05-.275.063T6.975 21q-.8 0-1.4-.6T5 18.925l.1-4.125l-2.725-3.875q-.2-.275-.288-.575T2 9.75q0-.625.363-1.162t1.012-.763z"
+                />
+              </svg>
+            </div>
+            <span className="hidden md:inline">Tambah Barang</span>
+          </NavLink>
+          <NavLink
+            to="/all-item"
+            className={({ isActive }) =>
+              `flex items-center justify-center md:justify-start py-3 px-2 space-x-0 md:space-x-4 mb-2 rounded hover:cursor-pointer hover:bg-blue-600 hover:text-white ${
+                isActive ? "bg-blue-600 text-white" : ""
+              }`
+            }
+          >
+            <div className="flex-shrink-0">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="currentColor"
+                  d="M5 21q-.825 0-1.412-.587T3 19V5q0-.825.588-1.412T5 3h14q.825 0 1.413.588T21 5v14q0 .825-.587 1.413T19 21zm2-4h7v-2H7zm0-4h10v-2H7zm0-4h10V7H7z"
+                />
+              </svg>
+            </div>
+            <span className="hidden md:inline">Daftar Barang</span>
+          </NavLink>
+          <NavLink
             to="/artikel-list"
             className={({ isActive }) =>
               `flex items-center justify-center md:justify-start py-3 px-2 space-x-0 md:space-x-4 mb-2 rounded hover:cursor-pointer hover:bg-blue-600 hover:text-white ${

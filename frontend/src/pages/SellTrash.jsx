@@ -130,7 +130,7 @@ const SellTrash = () => {
       setFormData({ jenisSampah: "", jumlah: "", points: "" });
       setTrashImg("");
 
-      navigate("/points");
+      navigate("/my-profile");
     } catch (error) {
       toast.error("Gagal mengirim data");
       console.error(error);

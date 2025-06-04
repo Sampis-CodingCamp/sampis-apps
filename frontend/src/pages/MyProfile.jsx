@@ -1,33 +1,49 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import { assets } from "../assets/assets";
 import { AppContext } from "../context/AppContex";
 import axios from "axios";
 import { toast } from "react-toastify";
+import Points from "./points";
+import { useNavigate } from "react-router-dom";
 
 const MyProfile = () => {
   const { userData, setUserData, backendUrl, token, loadProfileUserData } =
     useContext(AppContext);
+
+  const navigate = useNavigate();
 
   const [isEdit, setIsEdit] = useState(false);
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
   const [tempData, setTempData] = useState(null);
 
+  // Log userData setiap kali berubah
+  useEffect(() => {
+    console.log("userData updated:", userData);
+  }, [userData]);
+
   const handleCancelEdit = () => {
-    if (tempData) setUserData(tempData); // restore
+    console.log("Cancel edit clicked");
+    if (tempData) {
+      console.log("Restoring tempData:", tempData);
+      setUserData(tempData); // restore
+    }
     setIsEdit(false);
     setImage(null);
   };
 
   const updateUserProfileData = async () => {
+    console.log("Save profile clicked");
     if (!userData.username || !userData.phone) {
       toast.error("Username dan nomor telepon wajib diisi");
+      console.log("Validation failed: username or phone missing");
       return;
     }
 
     try {
       setLoading(true);
+      console.log("Uploading profile data...", userData, image);
 
       const formData = new FormData();
       formData.append("username", userData.username);
@@ -37,6 +53,7 @@ const MyProfile = () => {
 
       if (image) {
         formData.append("foto", image);
+        console.log("Image appended:", image);
       }
 
       const { data } = await axios.put(
@@ -50,23 +67,34 @@ const MyProfile = () => {
         }
       );
 
-      console.log(data);
-      
+      console.log("Response from backend:", data);
 
       if (data.success || data.status === "success") {
         toast.success(data.message);
         await loadProfileUserData();
         setIsEdit(false);
         setImage(null);
+        console.log("Profile updated successfully");
       } else {
         toast.error(data.message);
+        console.log("Update failed:", data.message);
       }
     } catch (error) {
-      console.error(error);
+      console.error("Error updating profile:", error);
       toast.error(error.message || "Terjadi kesalahan");
     } finally {
       setLoading(false);
+      console.log("Update profile process finished");
     }
+  };
+
+  // Helper function untuk mendapatkan profile image URL
+  const getProfileImageUrl = () => {
+    if (image) {
+      return URL.createObjectURL(image);
+    }
+    // Gunakan 'foto' sesuai dengan schema dan backend
+    return userData?.foto || assets.upload;
   };
 
   return (
@@ -101,12 +129,12 @@ const MyProfile = () => {
                         <div className="inline-block relative cursor-pointer">
                           <img
                             className="h-full w-full rounded-full object-cover"
-                            src={
-                              image
-                                ? URL.createObjectURL(image)
-                                : userData?.foto || assets.upload
-                            }
+                            src={getProfileImageUrl()}
                             alt="Profile"
+                            onError={(e) => {
+                              console.log("Image failed to load, using default");
+                              e.target.src = assets.upload;
+                            }}
                           />
                           <img
                             className="w-10 absolute bottom-2 right-2"
@@ -115,7 +143,10 @@ const MyProfile = () => {
                           />
                         </div>
                         <input
-                          onChange={(e) => setImage(e.target.files[0])}
+                          onChange={(e) => {
+                            console.log("Image selected:", e.target.files[0]);
+                            setImage(e.target.files[0]);
+                          }}
                           type="file"
                           id="image"
                           hidden
@@ -124,9 +155,13 @@ const MyProfile = () => {
                       </label>
                     ) : (
                       <img
-                        className="h-full w-full object-cover"
-                        src={userData?.foto || assets.upload}
+                        className="h-full w-full object-cover rounded-full"
+                        src={getProfileImageUrl()}
                         alt="Profile"
+                        onError={(e) => {
+                          console.log("Image failed to load, using default");
+                          e.target.src = assets.upload;
+                        }}
                       />
                     )}
                   </div>
@@ -138,15 +173,16 @@ const MyProfile = () => {
                         <p className="text-gray-500">Nama</p>
                         {isEdit ? (
                           <input
-                            className="bg-gray-50 text-xl font-medium w-full"
+                            className="bg-gray-50 text-xl font-medium w-full p-2 border rounded"
                             type="text"
-                            value={userData.username}
-                            onChange={(e) =>
+                            value={userData.username || ""}
+                            onChange={(e) => {
+                              console.log("Username changed:", e.target.value);
                               setUserData((prev) => ({
                                 ...prev,
                                 username: e.target.value,
-                              }))
-                            }
+                              }));
+                            }}
                           />
                         ) : (
                           <p className="text-2xl font-semibold text-ink">
@@ -161,15 +197,16 @@ const MyProfile = () => {
                         <p className="text-gray-500">Nomor telepon</p>
                         {isEdit ? (
                           <input
-                            className="bg-gray-100 w-full"
+                            className="bg-gray-100 w-full p-2 border rounded"
                             type="text"
-                            value={userData.phone}
-                            onChange={(e) =>
+                            value={userData.phone || ""}
+                            onChange={(e) => {
+                              console.log("Phone changed:", e.target.value);
                               setUserData((prev) => ({
                                 ...prev,
                                 phone: e.target.value,
-                              }))
-                            }
+                              }));
+                            }}
                           />
                         ) : (
                           <p className="text-base font-semibold text-ink">
@@ -194,32 +231,36 @@ const MyProfile = () => {
                         {isEdit ? (
                           <>
                             <input
-                              className="bg-gray-50 mb-2 w-full"
+                              className="bg-gray-50 mb-2 w-full p-2 border rounded"
                               type="text"
+                              placeholder="Alamat Line 1"
                               value={userData.address?.line1 || ""}
-                              onChange={(e) =>
+                              onChange={(e) => {
+                                console.log("Address line1 changed:", e.target.value);
                                 setUserData((prev) => ({
                                   ...prev,
                                   address: {
                                     ...prev.address,
                                     line1: e.target.value,
                                   },
-                                }))
-                              }
+                                }));
+                              }}
                             />
                             <input
-                              className="bg-gray-50 w-full"
+                              className="bg-gray-50 w-full p-2 border rounded"
                               type="text"
+                              placeholder="Alamat Line 2"
                               value={userData.address?.line2 || ""}
-                              onChange={(e) =>
+                              onChange={(e) => {
+                                console.log("Address line2 changed:", e.target.value);
                                 setUserData((prev) => ({
                                   ...prev,
                                   address: {
                                     ...prev.address,
                                     line2: e.target.value,
                                   },
-                                }))
-                              }
+                                }));
+                              }}
                             />
                           </>
                         ) : (
@@ -254,6 +295,7 @@ const MyProfile = () => {
                         <button
                           className="border border-second px-8 py-2 rounded-full hover:bg-second hover:text-white transition-all"
                           onClick={() => {
+                            console.log("Edit mode enabled, saving tempData");
                             setTempData({ ...userData }); // simpan sebelum edit
                             setIsEdit(true);
                           }}
@@ -288,7 +330,17 @@ const MyProfile = () => {
                         >
                           <path d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
                         </svg>
-                        Poin didapatkan dari berbagai aktivitas
+                        Poin didapatkan dari berbagai{" "}
+                        <span
+                          onClick={() => {
+                            document
+                              .getElementById("point")
+                              ?.scrollIntoView({ behavior: "smooth" });
+                          }}
+                          className="text-blue-500 cursor-pointer underline hover:text-blue-700 ml-1"
+                        >
+                          aktivitas
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -297,6 +349,7 @@ const MyProfile = () => {
               {/* END POINT */}
             </div>
           </div>
+          <Points />
         </section>
       </div>
     )

@@ -12,6 +12,11 @@ import upload_icon from './upload_icon.png'
 import tick_icon from './tick_icon.svg'
 import cancel_icon from './cancel_icon.svg'
 
+import item1 from './item1.png'
+import item2 from './item2.jpg'
+import item3 from './item3.png'
+import item4 from './item4.jpg'
+
 import artikel_1_img from './artikel1.png'
 import artikel_2_img from './artikel2.png'
 import artikel_3_img from './artikel3.png'
@@ -27,8 +32,35 @@ export const assets = {
     logo, logoNiga,
     upload, upload_icon,
     cancel_icon,
-    tick_icon
+    tick_icon,
 }
+
+export const items = [
+  {
+    _id: 'item1',
+    nama: 'Aesthetic Wooden Table M',
+    foto: item1,
+    poin: 350
+  },
+  {
+    _id: 'item2',
+    nama: 'Simplus Juicer Portable',
+    foto: item2,
+    poin: 1500
+  },
+  {
+    _id: 'item3',
+    nama: 'Premium Silicone Lunch Box',
+    foto: item3,
+    poin: 800
+  },
+  {
+    _id: 'item4',
+    nama: 'KiiP Fan',
+    foto: item4,
+    poin: 570
+  },
+]
 
 export const artikel = [
   {

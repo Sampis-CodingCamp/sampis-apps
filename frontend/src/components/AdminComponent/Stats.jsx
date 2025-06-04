@@ -10,45 +10,56 @@ const Stats = () => {
     }
   }, [token]);
 
+  const stats = [
+    {
+      title: 'Penukaran Sampah',
+      value: dashData?.sampah ?? 0,
+      icon: 'fas fa-recycle',
+      color: 'bg-green-100 text-green-600'
+    },
+    {
+      title: 'Pengguna',
+      value: dashData?.user ?? 0,
+      icon: 'fas fa-users',
+      color: 'bg-yellow-100 text-yellow-600'
+    },
+    {
+      title: 'Artikel',
+      value: dashData?.artikel ?? 0,
+      icon: 'fas fa-newspaper',
+      color: 'bg-purple-100 text-purple-600'
+    },
+    {
+      title: 'Barang',
+      value: dashData?.item ?? 0,
+      icon: 'fas fa-newspaper',
+      color: 'bg-red-100 text-purple-600'
+    },
+    {
+      title: 'Penukaran Poin',
+      value: dashData?.penukaranItem ?? 0,
+      icon: 'fas fa-gift',
+      color: 'bg-blue-100 text-blue-600'
+    }
+  ];
+
   return (
-    <div>
-      <section className="flex flex-wrap gap-4 md:gap-6 text-gray-700 text-xs font-semibold">
-        <div className="flex items-center gap-2 bg-[#f9f9fc] rounded-lg px-4 py-3 min-w-[90px]">
-          <i className="fas fa-recycle text-green-600 text-base"></i>
-          <div>
-            <div className="text-gray-900 text-sm font-semibold leading-none">
-              {dashData?.sampah ?? 0}
-            </div>
-            <div>Penukaran</div>
-          </div>
-        </div>
-        <div className="flex items-center gap-2 bg-[#f9f9fc] rounded-lg px-4 py-3 min-w-[90px]">
-          <i className="fas fa-users text-yellow-500 text-base"></i>
-          <div>
-            <div className="text-gray-900 text-sm font-semibold leading-none">
-              {dashData?.user ?? 0}
-            </div>
-            <div>Pengguna</div>
-          </div>
-        </div>
-        <div className="flex items-center gap-2 bg-[#f9f9fc] rounded-lg px-4 py-3 min-w-[90px]">
-          <i className="fas fa-newspaper text-purple-600 text-base"></i>
-          <div>
-            <div className="text-gray-900 text-sm font-semibold leading-none">
-              {dashData?.artikel ?? 0}
-            </div>
-            <div>Artikel</div>
-          </div>
-        </div>
-        <button
-          className="flex items-center gap-2 bg-[#f9f9fc] rounded-lg px-4 py-3 min-w-[90px] text-gray-400 cursor-not-allowed"
-          disabled
+    <section className="flex sn:flex-wrap gap-5 mt-4">
+      {stats.map((stat, index) => (
+        <div
+          key={index}
+          className={`flex-1 min-w-[200px] shadow-lg rounded-xl p-6 flex items-center gap-4 transition-transform transform hover:scale-105 ${stat.color}`}
         >
-          <i className="fas fa-plus text-sm"></i>
-          <span>Add widget</span>
-        </button>
-      </section>
-    </div>
+          <div className={`text-3xl ${stat.color}`}>
+            <i className={stat.icon}></i>
+          </div>
+          <div>
+            <div className="text-2xl font-bold text-gray-800">{stat.value}</div>
+            <div className="text-sm text-gray-600">{stat.title}</div>
+          </div>
+        </div>
+      ))}
+    </section>
   );
 };
 

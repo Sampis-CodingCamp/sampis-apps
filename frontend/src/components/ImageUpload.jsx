@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import Webcam from "react-webcam";
 import DetectedResult from "./DetectResult";
 import * as tf from "@tensorflow/tfjs";
+import trashInfo from "./TrashHandleInfo";
 
 const Spinner = () => (
   <svg
@@ -97,7 +98,6 @@ const ImageUpload = () => {
         const labels = [
           "elektronik",
           "kaca",
-          "kardus",
           "kayu",
           "kertas",
           "logam",
@@ -109,7 +109,6 @@ const ImageUpload = () => {
         const pointsMap = {
           elektronik: 100,
           kaca: 5,
-          kardus: 20,
           kayu: 7,
           kertas: 10,
           logam: 300,
@@ -125,7 +124,9 @@ const ImageUpload = () => {
 
         setDetectedTrash({
           type: label,
-          usage: `Jenis sampah: ${label} dapat ditangani dengan cara yang sesuai.`,
+          usage:
+            trashInfo[label]?.usage || "Informasi penanganan tidak tersedia.",
+          links: trashInfo[label]?.links || [],
           points: points,
         });
 
@@ -257,7 +258,7 @@ const ImageUpload = () => {
       </div>
 
       {showResult && (
-        <DetectedResult image={image.url} result={detectedTrash}/>
+        <DetectedResult image={image.url} result={detectedTrash} />
       )}
     </div>
   );

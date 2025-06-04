@@ -4,21 +4,20 @@ const { verifyToken, requireRole } = require('../middleware/auth');
 
 module.exports = [
   {
-    method: 'POST',
-    path: '/poin/tukar',
-    options: {
-      pre: [verifyToken],
-      handler: createPenukaran,
-      validate: {
-        payload: Joi.object({
-          jumlah: Joi.number().required(),
-          tanggal: Joi.date().required()
-        })
-      },
-      description: 'Tukar poin',
-      tags: ['api', 'poin']
-    }
-  },
+  method: 'POST',
+  path: '/poin/tukar',
+  options: {
+    pre: [verifyToken],
+    payload: {
+      parse: true,
+      allow: 'application/json',
+    },
+    handler: createPenukaran,
+    description: 'Create tukar',
+    tags: ['api', 'poin']
+  }
+},
+
   {
     method: 'GET',
     path: '/poin/user',

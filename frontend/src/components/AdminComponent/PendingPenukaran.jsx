@@ -1,59 +1,106 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react';
+import { AppContext } from '../../context/AppContex';
 
 const PendingPenukaran = () => {
-     const pendingHomeworkData = [
-      {
-        id: 1,
-        name: 'Alex Johnson',
-        grade: '8th Grade',
-        subject: 'Algebra',
-        topic: 'Fractional Indices',
-        score: '92%',
-        type: 'Test',
-        img: 'https://storage.googleapis.com/a1aa/image/f8ab2e8f-7569-450d-66e1-f96d27762839.jpg',
-        alt: 'Profile picture of Alex Johnson, a man with light skin tone and short hair',
-      },
-    ];
+  const { poin, getAllPoin, updateStatusPoin } = useContext(AppContext);
+
+  useEffect(() => {
+    getAllPoin();
+  }, []);
+
+  const handleApprove = (id) => {
+    updateStatusPoin(id, 'approved');
+  };
+
+  const handleReject = (id) => {
+    updateStatusPoin(id, 'cancel');
+  };
+
+  const statusOrder = { pending: 1, approved: 2, cancel: 3 };
+
+  const sortedData = poin
+    .filter((item) => ['pending', 'approved', 'cancel'].includes(item.status))
+    .sort((a, b) => {
+      const statusCompare = statusOrder[a.status] - statusOrder[b.status];
+      if (statusCompare !== 0) return statusCompare;
+      return new Date(b.tanggal) - new Date(a.tanggal);
+    });
+
   return (
     <div>
       <section className="bg-[#f9f9fc] rounded-lg p-4 text-gray-700 text-xs">
-          <div className="flex justify-between items-center mb-3">
-            <h2 className="font-semibold text-sm">Pending homework</h2>
-            <button className="text-indigo-600 font-semibold hover:underline focus:outline-none">
-              View all
-            </button>
-          </div>
-          <ul className="flex flex-col gap-3">
-            {pendingHomeworkData.map((item) => (
-              <li
-                key={item.id}
-                className="flex items-center gap-3 bg-white rounded-lg p-3 shadow-sm select-none"
-              >
-                <img
-                  alt={item.alt}
-                  className="w-8 h-8 rounded-full object-cover"
-                  height="32"
-                  src={item.img}
-                  width="32"
-                />
-                <div className="flex-1 grid grid-cols-[110px_110px_1fr_50px_50px] gap-2 items-center">
-                  <span className="font-semibold text-gray-900 truncate">
-                    {item.name}
-                  </span>
-                  <span>{item.grade}</span>
-                  <span>{item.subject}</span>
-                  <span>{item.topic}</span>
-                  <span className="text-right font-semibold">{item.score}</span>
-                  <button className="text-xs text-indigo-600 font-semibold border border-indigo-600 rounded px-2 py-0.5 hover:bg-indigo-50">
-                    {item.type}
-                  </button>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </section>
-    </div>
-  )
-}
+        <div className="flex justify-between items-center mb-3">
+          <h2 className="font-semibold text-sm">Penukaran Point</h2>
+          
+        </div>
 
-export default PendingPenukaran
+        <ul className="flex flex-col gap-3">
+          {sortedData.map((item) => (
+            <li
+              key={item._id}
+              className="flex items-center gap-3 bg-white rounded-lg p-3 shadow-sm select-none"
+            >
+              <img
+                alt={item.namaItem}
+                className="w-30 h-30 rounded object-cover"
+                src={item.foto}
+              />
+              <div className="flex-1">
+                <div className="text-sm font-bold text-gray-900 truncate">{item.namaItem}</div>
+                <div className="text-gray-700 text-xs mt-0.5 truncate">
+                  {item.namaPenerima}
+                </div>
+                <div className="text-gray-600 text-xs truncate">+62 {item.telp}</div>
+                <div className="text-gray-600 text-xs truncate">{item.alamat}</div>
+
+                <div className="mt-2">
+                  {item.status === 'pending' ? (
+                    <div className="flex gap-2">
+                      <button
+                        className="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded text-xs"
+                        onClick={() => handleReject(item._id)}
+                      >
+                        Tolak
+                      </button>
+                      <button
+                        className="bg-green-500 hover:bg-green-600 text-white px-2 py-1 rounded text-xs"
+                        onClick={() => handleApprove(item._id)}
+                      >
+                        Setujui
+                      </button>
+                    </div>
+                  ) : (
+                    <span
+                      className={`font-semibold text-xs capitalize ${
+                        item.status === 'approved'
+                          ? 'text-green-600'
+                          : item.status === 'cancel'
+                          ? 'text-red-500'
+                          : 'text-gray-500'
+                      }`}
+                    >
+                      {item.status}
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              <div className="text-right">
+                <div className="font-semibold">{item.jumlah} poin</div>
+                <div className="text-gray-500">
+                  {new Date(item.tanggal).toLocaleDateString('id-ID', {
+                    day: '2-digit',
+                    month: 'short',
+                    year: 'numeric',
+                  })}
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </div>
+  );
+};
+
+export default PendingPenukaran;

@@ -2,8 +2,6 @@ import React, { useContext, useState, useEffect } from "react";
 import { AppContext } from "../context/AppContex";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { assets } from "../assets/assets";
-import Navbar from "../components/Navbar";
 
 const Points = () => {
   const { backendUrl, token } = useContext(AppContext);
@@ -65,16 +63,7 @@ const Points = () => {
   }, [token]);
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div
-        className="relative w-full h-28 bg-cover bg-top"
-        style={{ backgroundImage: `url(${assets.header_img})` }}
-      >
-        <div className="absolute inset-0 bg-gray-700 opacity-50"></div>
-        <div className="relative z-10 container pt-16 lg:pt-24">
-          <Navbar />
-        </div>
-      </div>
+    <div className="min-h-screen" id="/point">
 
       <div className="px-4 sm:px-[8%] mt-10">
         <h2 className="text-lg font-semibold text-zinc-700 border-b pb-2">
@@ -83,7 +72,15 @@ const Points = () => {
 
         {/* Sampah Card List */}
         <div className="my-6 space-y-6">
-          {conversion.slice(0, 5).map((item, index) => (
+          {conversion.sort((a, b) => {
+    const priority = {
+      approved: 2,
+      pending: 1,
+      cancel: 3,
+    };
+    const getPriority = (status) => priority[status] || 4;
+    return getPriority(a.status) - getPriority(b.status);
+  }).map((item, index) => (
             <div
               key={index}
               className="bg-white rounded-2xl shadow-md p-4 sm:p-6 grid grid-cols-1 sm:grid-cols-[auto_1fr_auto] gap-4 items-start"

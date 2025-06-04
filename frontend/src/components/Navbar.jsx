@@ -6,7 +6,7 @@ import { AppContext } from "../context/AppContex";
 const Navbar = () => {
   const navigate = useNavigate();
   // const [showMenu, setShowMenu] = useState(false);
-  const { token, setToken } = useContext(AppContext);
+  const { token, setToken, userData } = useContext(AppContext);
   const logout = () => {
     setToken(false);
     localStorage.removeItem("token");
@@ -184,7 +184,7 @@ const Navbar = () => {
                     <div className="h-[50px] w-[50px] overflow-hidden rounded-full">
                       <img
                         className="w-full h-auto"
-                        src={assets.profile_pic}
+                        src={userData?.foto || assets.upload}
                         alt="User"
                       />
                     </div>
@@ -197,10 +197,10 @@ const Navbar = () => {
                   >
                     <div className="mx-3 px-4 py-3">
                       <span className="block text-sm text-ink">
-                        Boni Yudistira
+                        {userData.username}
                       </span>
                       <span className="block truncate text-sm text-ink">
-                        boni@email.com
+                        {userData?.email || "-"}
                       </span>
                     </div>
                     <ul className="py-2" aria-labelledby="user-menu-button">
@@ -240,19 +240,20 @@ const Navbar = () => {
                       </li>
                       <li>
                         <a
-                          onClick={() => navigate("/points")}
+                          onClick={() => navigate("/sampoint")}
                           className="mx-4 flex rounded-md p-3 text-sm text-ink hover:bg-gray-200 cursor-pointer"
                         >
                           <svg
-                            class="h-4"
+                            className="h-4"
                             aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg"
                             fill="currentColor"
                             viewBox="0 0 24 24"
                           >
-                            <path d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
+                            <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2Zm10 0c-1.1 0-1.99.9-1.99 2S15.9 22 17 22s2-.9 2-2-.9-2-2-2ZM7.16 14h9.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49a1 1 0 0 0-.88-1.48H5.21L4.27 2H1v2h2l3.6 7.59-1.35 2.44C4.52 14.37 5.48 16 7 16h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.96-1.63Z" />
                           </svg>
-                          <span className="ml-3">Poin</span>
+
+                          <span className="ml-3">Sampoint</span>
                         </a>
                       </li>
                       <li>
