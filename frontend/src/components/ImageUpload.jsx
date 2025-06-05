@@ -141,8 +141,8 @@ const ImageUpload = () => {
   };
 
   return (
-    <div className="w-full max-w-5xl container p-10">
-      <h2 className="text-left text-sm font-semibold mb-2">Tambah foto</h2>
+    <div className="w-full p-10 mb-10">
+      <h2 className="text-left text-sm font-semibold mb-2 ">Tambah foto</h2>
 
       <div className="border-2 border-dashed border-[#8F8F8F] rounded-md p-8 space-y-4">
         <div className="flex flex-col md:flex-row gap-4">
@@ -242,7 +242,7 @@ const ImageUpload = () => {
         <button
           onClick={handleDetect}
           disabled={isLoading}
-          className={`bg-orange-400 text-white font-medium px-6 py-2 rounded hover:scale-105 transition flex items-center justify-center ${
+          className={`bg-orange-400 text-white font-medium px-6 py-2 rounded hover:scale-105 transition flex items-center justify-center cursor-pointer ${
             isLoading ? "opacity-50 cursor-not-allowed" : "hover:bg-[#BF9264]"
           }`}
         >

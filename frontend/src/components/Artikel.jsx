@@ -7,8 +7,7 @@ import { AppContext } from "../context/AppContex";
 import { useNavigate } from "react-router-dom";
 
 const Artikel = () => {
-
-  const { artikel, formatTanggal } = useContext(AppContext)
+  const { artikel, formatTanggal } = useContext(AppContext);
   const navigate = useNavigate();
 
   return (
@@ -38,7 +37,10 @@ const Artikel = () => {
               <SwiperSlide key={index}>
                 <div className="swiper-wrapper">
                   <div className="zoom swiper-slide rounded-md border border-solid border-slate-200 bg-white transition duration-300 hover:shadow-sm">
-                    <a onClick={()=> navigate(`/artikel/${item._id}`)} className="block h-full">
+                    <a
+                      onClick={() => navigate(`/artikel/${item._id}`)}
+                      className="block h-full"
+                    >
                       <div className="pb-6">
                         <div className="relative overflow-hidden bg-cover bg-no-repeat">
                           <img
@@ -107,7 +109,10 @@ const Artikel = () => {
             </div>
           ))}
         </Swiper>
-        <a onClick={() => navigate("/artikel")} className="mt-4 lg:mb-0 underline text-orange cursor-pointer">
+        <a
+          onClick={() => navigate("/artikel")}
+          className="mt-4 lg:mb-0 text-orange cursor-pointer"
+        >
           <p className="text-end text-ginger">Lihat semua</p>
         </a>
       </div>

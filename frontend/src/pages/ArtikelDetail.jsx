@@ -36,11 +36,11 @@ const ArtikelDetail = () => {
   return (
     <div>
       <div
-        className="relative w-full h-28 bg-cover bg-top"
+        className="relative w-full h-18 md:h-20 lg:h-24 bg-cover bg-top"
         style={{ backgroundImage: `url(${assets.header_img})` }}
       >
         <div className="absolute inset-0 bg-gray-700 opacity-50"></div>
-        <div className="relative z-10 container pt-16 lg:pt-24">
+        <div className="relative container pt-16 lg:pt-24">
           <Navbar />
         </div>
       </div>
@@ -48,14 +48,18 @@ const ArtikelDetail = () => {
       <section className="pb-32 pt-16">
         <div className="container">
           <div>
-            <p className="mb-3 text-3xl font-bold text-ink">{artikelInfo.judul}</p>
+            <p className="mb-3 text-3xl font-bold text-ink">
+              {artikelInfo.judul}
+            </p>
             <hr className="my-5 h-px border-0 bg-gray-300" />
             <div className="mb-5 items-center">
               <div className="flex flex-wrap">
                 <div className="w-1/2">
                   <div className="flex space-x-4">
                     <div className="min-w-0 flex-1">
-                      <p className="text-xl font-semibold text-ink">{artikelInfo.sumber}</p>
+                      <p className="text-xl font-semibold text-ink">
+                        {artikelInfo.sumber}
+                      </p>
                       <p className="truncate text-sm text-gray-500">Penulis</p>
                     </div>
                   </div>
@@ -93,7 +97,9 @@ const ArtikelDetail = () => {
                 {showShare && (
                   <div className="absolute top-10 left-0 z-10 flex gap-3 bg-white shadow-md p-3 rounded-xl">
                     <a
-                      href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`}
+                      href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+                        currentUrl
+                      )}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-blue-600"
@@ -102,7 +108,9 @@ const ArtikelDetail = () => {
                       <FaFacebookF size={20} />
                     </a>
                     <a
-                      href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(currentUrl)}`}
+                      href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(
+                        currentUrl
+                      )}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-sky-500"
@@ -111,7 +119,9 @@ const ArtikelDetail = () => {
                       <FaTwitter size={20} />
                     </a>
                     <a
-                      href={`https://api.whatsapp.com/send?text=${encodeURIComponent(currentUrl)}`}
+                      href={`https://api.whatsapp.com/send?text=${encodeURIComponent(
+                        currentUrl
+                      )}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-green-500"
@@ -119,7 +129,11 @@ const ArtikelDetail = () => {
                     >
                       <FaWhatsapp size={20} />
                     </a>
-                    <button onClick={handleCopyLink} title="Salin Link" className="text-gray-700">
+                    <button
+                      onClick={handleCopyLink}
+                      title="Salin Link"
+                      className="text-gray-700"
+                    >
                       <FaLink size={20} />
                     </button>
                   </div>

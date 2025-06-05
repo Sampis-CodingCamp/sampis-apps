@@ -11,18 +11,26 @@ const Artikel = () => {
   return (
     <div>
       <div
-        className="relative w-full h-28 bg-cover bg-top"
+        className="relative w-full h-18 md:h-20 lg:h-24 bg-cover bg-top"
         style={{ backgroundImage: `url(${assets.header_img})` }}
       >
         <div className="absolute inset-0 bg-gray-700 opacity-50"></div>
-        <div className="relative z-10 container pt-16 lg:pt-24">
+        <div className="relative container pt-16 lg:pt-24">
           <Navbar />
         </div>
       </div>
 
+      <div className=" text-center py-20">
+        <div className="mb-4 inline-block rounded-md bg-green-100 p-2">
+          <p className="text-xs font-bold text-green-900">ARTIKEL</p>
+        </div>
+        <p className="mb-2 text-5xl sm:text-3xl text-ink font-bold">
+          Artikel Terkini
+        </p>
+      </div>
+
       <section className="pb-8 pt-16">
         <div className="container">
-          <p className="mb-4 text-2xl font-bold text-ink">Artikel</p>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {artikel.map((item, index) => (
               <div

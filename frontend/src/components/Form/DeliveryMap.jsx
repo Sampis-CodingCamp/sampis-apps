@@ -45,7 +45,7 @@ const DeliveryMap = ({ delivery, userLocation, address }) => {
   if (delivery === "Diantar") {
     return (
       <div className="mt-4">
-        <p className="font-medium mb-2">Lokasi Tempat Pengumpulan Sampah:</p>
+        <p className="font-medium mb-2">Lokasi tempat pengumpulan sampah</p>
         <MapContainer center={targetLocation} zoom={15} scrollWheelZoom={true} dragging={true} style={{ height: "300px", width: "100%" }}>
           <ResizeMap />
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />

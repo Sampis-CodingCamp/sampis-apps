@@ -19,11 +19,11 @@ const Sampoint = () => {
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <div
-        className="relative w-full h-28 bg-cover bg-top"
+        className="relative w-full h-18 md:h-20 lg:h-24 bg-cover bg-top"
         style={{ backgroundImage: `url(${assets.header_img})` }}
       >
         <div className="absolute inset-0 bg-gray-700 opacity-50"></div>
-        <div className="relative z-10 container pt-16 lg:pt-24">
+        <div className="relative container pt-16 lg:pt-24">
           <Navbar />
         </div>
       </div>
@@ -33,8 +33,13 @@ const Sampoint = () => {
         <div className="container">
           <div className="flex justify-between">
             <div>
-            <p className="mb-4 text-2xl font-bold text-ink">Sampoint 🪙</p>
-            <button onClick={() => navigate('/penukaran')} className="text-sm font-medium text-center w-full px-4 py-2 rounded-lg bg-green-500 text-white border-green-500 hover:bg-green-600 transition-all cursor-pointer">Lihat Penukaran</button>
+              <p className="mb-4 text-2xl font-bold text-ink">Sampoint 🪙</p>
+              <button
+                onClick={() => navigate("/penukaran")}
+                className="text-sm font-medium text-center w-full px-4 py-2 rounded-lg bg-green-500 text-white border-green-500 hover:bg-green-600 transition-all cursor-pointer"
+              >
+                Lihat Penukaran
+              </button>
             </div>
             <div>
               <p className="text-sm font-light italic text-gray-500">Poin</p>
@@ -158,11 +163,11 @@ const Sampoint = () => {
                           className="block w-full rounded-sm bg-gray-900 px-4 py-2 text-sm font-medium text-white transition hover:scale-105"
                           onClick={() => {
                             if (userData?.poin < itm.poin) {
-                              toast.error('Poin anda tidak cukup')
+                              toast.error("Poin anda tidak cukup");
                               return;
                             }
                             console.log("Selected item ID:", itm._id);
-                            setSelectedItemId(itm._id)
+                            setSelectedItemId(itm._id);
                           }}
                         >
                           Tukar Sekarang
@@ -180,9 +185,11 @@ const Sampoint = () => {
         </div>
       </section>
       {selectedItemId && (
-  <PopUpForm itemId={selectedItemId} onClose={() => setSelectedItemId(null)} />
-)}
-
+        <PopUpForm
+          itemId={selectedItemId}
+          onClose={() => setSelectedItemId(null)}
+        />
+      )}
     </div>
   );
 };

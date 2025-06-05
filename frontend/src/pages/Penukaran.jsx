@@ -79,11 +79,11 @@ const Penukaran = () => {
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <div
-        className="relative w-full h-28 bg-cover bg-top"
+        className="relative w-full h-18 md:h-20 lg:h-24 bg-cover bg-top"
         style={{ backgroundImage: `url(${assets.header_img})` }}
       >
         <div className="absolute inset-0 bg-gray-700 opacity-50"></div>
-        <div className="relative z-10 container pt-16 lg:pt-24">
+        <div className="relative container pt-16 lg:pt-24">
           <Navbar />
         </div>
       </div>

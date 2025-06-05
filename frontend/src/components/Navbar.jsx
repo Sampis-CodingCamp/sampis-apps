@@ -54,7 +54,7 @@ const Navbar = () => {
               <a href="/" className="block py-6 text-lg font-bold">
                 <img
                   className="h-[20px] sm:h-[30px]"
-                  src={assets.logoNiga}
+                  src={assets.logo}
                   alt="Logo"
                 />
               </a>

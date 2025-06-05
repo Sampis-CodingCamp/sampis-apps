@@ -9,7 +9,9 @@ const DetectedResult = ({ image, result }) => {
 
   const handleSellClick = () => {
     if (token) {
-      navigate("/sellTrash", { state: { jenisSampah: result.type, points: result.points } });
+      navigate("/sellTrash", {
+        state: { jenisSampah: result.type, points: result.points },
+      });
     } else {
       navigate("/login");
     }
@@ -22,50 +24,55 @@ const DetectedResult = ({ image, result }) => {
   };
 
   return (
-    <div className="border-2 border-dashed border-[#8F8F8F] rounded-md p-6 mt-6">
-      <p className="font-semibold mb-2">
-        Jenis sampah: <span className="font-normal">{result.type}</span>
-      </p>
-      <p className="mb-2 font-semibold">
-        Pemanfaatan sampah:{" "}
-        <span className="font-normal text-gray-700">{info.usage}</span>
-      </p>
-      <p className="mb-4">
-        <strong>Poin yang didapat:</strong>{" "}
-        <span className="text-green-600 font-semibold">{result.points} poin /Kg</span>
-      </p>
+    <div>
+      <div className="border-2 border-dashed border-[#8F8F8F] rounded-md p-6 mt-6">
+        <p className="font-semibold mb-2">
+          Jenis sampah: <span className="font-normal">{result.type}</span>
+        </p>
+        <p className="mb-2 font-semibold">
+          Pemanfaatan sampah:{" "}
+          <span className="font-normal text-gray-700">{info.usage}</span>
+        </p>
+        <p className="mb-4">
+          <strong>Poin yang didapat:</strong>{" "}
+          <span className="text-green-600 font-semibold">
+            {result.points} poin /Kg
+          </span>
+        </p>
 
-      <img
-        src={image}
-        alt="Hasil Deteksi"
-        className="w-full max-h-[300px] object-contain rounded"
-      />
+        <img
+          src={image}
+          alt="Hasil Deteksi"
+          className="w-full max-h-[300px] object-contain rounded"
+        />
 
-      {/* Tampilkan link sumber jika ada */}
-      {info.links.length > 0 && (
-        <div className="mt-4">
-          <p className="font-semibold mb-1">Referensi & Bacaan Lebih Lanjut:</p>
-          <ul className="list-disc list-inside text-sm text-blue-600 space-y-1">
-            {info.links.map((link, idx) => (
-              <li key={idx}>
-                <a
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:underline"
-                >
-                  {link.title}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-
+        {/* Tampilkan link sumber jika ada */}
+        {info.links.length > 0 && (
+          <div className="mt-4">
+            <p className="font-semibold mb-1">
+              Referensi & Bacaan Lebih Lanjut:
+            </p>
+            <ul className="list-disc list-inside text-sm text-blue-600 space-y-1">
+              {info.links.map((link, idx) => (
+                <li key={idx}>
+                  <a
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:underline"
+                  >
+                    {link.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
       <div className="flex justify-end mt-6">
         <button
           onClick={handleSellClick}
-          className="hover:bg-[#BF9264] bg-orange-400 text-white font-medium px-6 py-2 rounded hover:scale-105 transition"
+          className="hover:bg-[#BF9264] bg-orange-400 text-white font-medium px-6 py-2 rounded hover:scale-105 transition cursor-pointer"
         >
           Jual Sampah
         </button>
