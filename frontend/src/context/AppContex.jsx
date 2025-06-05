@@ -285,10 +285,13 @@ const AppContextProvider = (props) => {
   }, [token]);
 
 useEffect(() => {
-  if (token && userData) {
-    getAllPoin();
+  if (token) {
+    loadProfileUserData().then(() => {
+      getAllPoin(); // dipanggil setelah userData dijamin ke-load
+    });
   }
-}, [token, userData]);
+}, [token]);
+
 
 
   useEffect(() => {

@@ -11,6 +11,7 @@ import upload from './upload_area.png'
 import upload_icon from './upload_icon.png'
 import tick_icon from './tick_icon.svg'
 import cancel_icon from './cancel_icon.svg'
+import profilee from './profile_rill.jpg'
 
 import item1 from './item1.png'
 import item2 from './item2.jpg'
@@ -33,6 +34,7 @@ export const assets = {
     upload, upload_icon,
     cancel_icon,
     tick_icon,
+    profilee
 }
 
 export const items = [
@@ -44,7 +46,7 @@ export const items = [
   },
   {
     _id: 'item2',
-    nama: 'Simplus Juicer Portable',
+    nama: 'Itel SmartWatch',
     foto: item2,
     poin: 1500
   },

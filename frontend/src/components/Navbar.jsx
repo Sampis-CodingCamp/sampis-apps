@@ -184,7 +184,7 @@ const Navbar = () => {
                     <div className="h-[50px] w-[50px] overflow-hidden rounded-full">
                       <img
                         className="w-full h-auto"
-                        src={userData?.foto || assets.upload}
+                        src={userData?.foto || assets.profilee}
                         alt="User"
                       />
                     </div>

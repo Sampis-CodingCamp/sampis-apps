@@ -1,8 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+import L from "leaflet";
+
+// Atur ulang ikon bawaan Leaflet
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png",
+  iconRetinaUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon-2x.png",
+  shadowUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png",
+});
+
+// Komponen untuk mengatasi masalah resize map dalam container dinamis
+const ResizeMap = () => {
+  const map = useMap();
+  useEffect(() => {
+    setTimeout(() => {
+      map.invalidateSize();
+    }, 200);
+  }, [map]);
+  return null;
+};
 
 const Maps = () => {
+  const bantarGebang = { lat: -6.329383, lng: 106.9768 };
+
   return (
-    <section id="about" className="py-16 lg:py-32">
+    <section id="about" className="py-16  lg:py-32">
       <div className="container">
         <div className="mb-20 text-center">
           <div className="mb-4 inline-block rounded-md bg-green-100 p-2">
@@ -13,15 +37,20 @@ const Maps = () => {
             Lokasi Sampis di Indonesia
           </p>
         </div>
-        <div className="aspect-video h-[500px] w-full rounded-lg overflow-hidden shadow-md">
-          <iframe
-            title="Lokasi Bantar Gebang"
-            className="w-full h-full"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.7991001370815!2d106.9768!3d-6.329383!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6992e8e2895c37%3A0x1b57c0e2c1e0a72b!2sTPST%20Bantar%20Gebang!5e1!3m2!1sid!2sid!4v1715524123456!5m2!1sid!2sid"
-            allowFullScreen
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          ></iframe>
+        <div className="aspect-video h-[500px] w-full rounded-lg overflow-hidden shadow-md relative z-0">
+          <MapContainer
+            center={bantarGebang}
+            zoom={15}
+            scrollWheelZoom={true}
+            dragging={true}
+            style={{ height: "100%", width: "100%" }}
+          >
+            <ResizeMap />
+            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+            <Marker position={bantarGebang}>
+              <Popup>Markas Sampis</Popup>
+            </Marker>
+          </MapContainer>
         </div>
       </div>
     </section>

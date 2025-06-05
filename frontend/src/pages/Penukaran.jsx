@@ -143,6 +143,13 @@ const Penukaran = () => {
                       <div className="mt-3 flex flex-wrap items-center gap-2 text-xs text-gray-400">
                         <p>{formatTanggal(item.tanggal)}</p>
                       </div>
+
+                      {item.status === "approved" && (
+                        <p className="mt-3 text-sm text-blue-800 bg-blue-50 px-3 py-2 rounded">
+                          📦 Informasi pengiriman akan dikirimkan melalui email
+                          Anda.
+                        </p>
+                      )}
                     </div>
                   </div>
 

@@ -94,7 +94,7 @@ const MyProfile = () => {
       return URL.createObjectURL(image);
     }
     // Gunakan 'foto' sesuai dengan schema dan backend
-    return userData?.foto || assets.upload;
+    return userData?.foto || assets.profilee;
   };
 
   return (
@@ -124,48 +124,15 @@ const MyProfile = () => {
                   </div>
 
                   <div className="relative -mt-14 ml-4 h-[100px] w-[100px] overflow-hidden rounded-full border-4 border-white">
-                    {isEdit ? (
-                      <label htmlFor="image">
-                        <div className="inline-block relative cursor-pointer">
-                          <img
-                            className="h-full w-full rounded-full object-cover"
-                            src={getProfileImageUrl()}
-                            alt="Profile"
-                            onError={(e) => {
-                              console.log(
-                                "Image failed to load, using default"
-                              );
-                              e.target.src = assets.upload;
-                            }}
-                          />
-                          <img
-                            className="w-10 absolute bottom-2 right-2"
-                            src={assets.upload_icon}
-                            alt="Upload Icon"
-                          />
-                        </div>
-                        <input
-                          onChange={(e) => {
-                            console.log("Image selected:", e.target.files[0]);
-                            setImage(e.target.files[0]);
-                          }}
-                          type="file"
-                          id="image"
-                          hidden
-                          accept="image/*"
-                        />
-                      </label>
-                    ) : (
-                      <img
-                        className="h-full w-full object-cover rounded-full"
-                        src={getProfileImageUrl()}
-                        alt="Profile"
-                        onError={(e) => {
-                          console.log("Image failed to load, using default");
-                          e.target.src = assets.upload;
-                        }}
-                      />
-                    )}
+                    <img
+                      className="h-full w-full object-cover rounded-full"
+                      src={getProfileImageUrl()}
+                      alt="Profile"
+                      onError={(e) => {
+                        console.log("Image failed to load, using default");
+                        e.target.src = assets.upload;
+                      }}
+                    />
                   </div>
 
                   <div className="px-4 py-5">
@@ -338,14 +305,14 @@ const MyProfile = () => {
                         >
                           <path d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
                         </svg>
-                        Poin didapatkan dari berbagai{" "}
+                        Poin didapatkan dari berbagai
                         <span
                           onClick={() => {
                             document
                               .getElementById("point")
                               ?.scrollIntoView({ behavior: "smooth" });
                           }}
-                          className="text-blue-500 cursor-pointer underline hover:text-blue-700 ml-1"
+                          className="text-blue-500 cursor-pointer underline hover:text-blue-700 "
                         >
                           aktivitas
                         </span>

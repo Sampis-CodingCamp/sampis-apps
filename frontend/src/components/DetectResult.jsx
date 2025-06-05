@@ -29,9 +29,9 @@ const DetectedResult = ({ image, result }) => {
         <p className="font-semibold mb-2">
           Jenis sampah: <span className="font-normal">{result.type}</span>
         </p>
-        <p className="mb-2 font-semibold">
+        <p className="mb-4 font-semibold ">
           Pemanfaatan sampah:{" "}
-          <span className="font-normal text-gray-700">{info.usage}</span>
+          <span className="font-normal text-gray-700 text-justify">{info.usage}</span>
         </p>
         <p className="mb-4">
           <strong>Poin yang didapat:</strong>{" "}
@@ -52,7 +52,7 @@ const DetectedResult = ({ image, result }) => {
             <p className="font-semibold mb-1">
               Referensi & Bacaan Lebih Lanjut:
             </p>
-            <ul className="list-disc list-inside text-sm text-blue-600 space-y-1">
+            <ul className="list-disc list-inside  text-sm text-blue-600 space-y-1">
               {info.links.map((link, idx) => (
                 <li key={idx}>
                   <a

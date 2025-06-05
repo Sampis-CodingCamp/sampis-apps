@@ -91,9 +91,10 @@ const updateStatusSampah = async (request, h) => {
     console.log("👤 User ID:", sampah.user);
     console.log("💰 Estimasi Poin:", sampah.estimasiPoin);
     if (status === 'approved') {
-      await User.findByIdAndUpdate(sampah.user, { $inc: { poin: sampah.estimasiPoin } }, { new: true });
-            console.log("✅ User updated:", updatedUser);
-      console.log("🎯 New user points:", updatedUser?.poin);
+      const updatedUser = await User.findByIdAndUpdate(sampah.user, { $inc: { poin: sampah.estimasiPoin } }, { new: true });
+console.log("✅ User updated:", updatedUser);
+console.log("🎯 New user points:", updatedUser?.poin);
+
     }
     return h.response({ status: 'success', data: sampah });
   } catch (err) {

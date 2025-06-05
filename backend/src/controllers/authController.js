@@ -16,6 +16,10 @@ const register = async (request, h) => {
   try {
     const { username, email, password } = request.payload;
 
+    if (!username || !email || !password) {
+      return Boom.badRequest('Semua field wajib diisi');
+    }
+
     // Cek apakah user sudah ada
     const existingUser = await User.findOne({ $or: [{ email }, { username }] });
     if (existingUser) {
@@ -35,9 +39,10 @@ const register = async (request, h) => {
 
     return h.response({
       status: 'success',
+      success: true,
       message: 'Registrasi berhasil',
+      token,
       data: {
-        token,
         user: {
           id: user._id,
           username: user.username,
@@ -47,7 +52,12 @@ const register = async (request, h) => {
       }
     }).code(201);
   } catch (error) {
-    throw Boom.badImplementation(error);
+    console.error("Register Error:", error);
+    // Kirim error asli kalau Boom, atau buat Internal Error jika bukan
+    if (Boom.isBoom(error)) {
+      return error;
+    }
+    return Boom.internal('Terjadi kesalahan saat proses registrasi.');
   }
 };
 

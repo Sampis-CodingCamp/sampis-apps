@@ -154,7 +154,7 @@ const ArtikelDetail = () => {
             </p>
           </div>
           <div>
-            <p className="mb-4">{artikelInfo.isi}</p>
+            <p className="mb-4 text-justify">{artikelInfo.isi}</p>
           </div>
         </div>
       </section>

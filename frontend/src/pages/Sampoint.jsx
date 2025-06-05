@@ -55,7 +55,7 @@ const Sampoint = () => {
               <h2 className="text-xl font-bold text-gray-900 sm:text-3xl">
                 Tukarkan Poin, Dapatkan Hadiah! 🛒
               </h2>
-              <p className="mt-4 max-w-2xl text-gray-500">
+              <p className="mt-4 max-w-2xl text-gray-500 text-justify">
                 Poin yang kamu kumpulkan bisa ditukar dengan produk Rycele
                 eksklusif dan elektronik keren. Jangan biarkan poinmu
                 menganggur—tukarkan sekarang!
@@ -70,7 +70,7 @@ const Sampoint = () => {
                 <h2 className="text-xl font-bold text-gray-900 sm:text-3xl">
                   Poin Jadi Barang Keren, Semua Bisa Kamu Miliki! 💚
                 </h2>
-                <p className="mt-4 max-w-2xl text-gray-500">
+                <p className="mt-4 max-w-2xl text-gray-500 text-justify">
                   Simpan dan kumpulkan poin dari setiap kontribusimu. Tukarkan
                   dengan barang favorit atau barang eco-friendly yang mendukung
                   hidup sehat dan bumi lebih baik!
@@ -102,7 +102,7 @@ const Sampoint = () => {
           </div>
 
           {/* Item Grid */}
-          <div className="mx-auto grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          <div className="mx-auto grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4" id="item">
             {item?.length > 0 ? (
               item
                 .slice()
