@@ -5,25 +5,9 @@ import * as tf from "@tensorflow/tfjs";
 import trashInfo from "./TrashHandleInfo";
 
 const Spinner = () => (
-  <svg
-    className="animate-spin h-6 w-6 text-orange-400 mx-auto"
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-  >
-    <circle
-      className="opacity-25"
-      cx="12"
-      cy="12"
-      r="10"
-      stroke="currentColor"
-      strokeWidth="4"
-    />
-    <path
-      className="opacity-75"
-      fill="currentColor"
-      d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
-    />
+  <svg className="animate-spin h-6 w-6 text-orange-400 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
   </svg>
 );
 
@@ -31,11 +15,9 @@ const ImageUpload = () => {
   const [image, setImage] = useState(null);
   const [showCamera, setShowCamera] = useState(false);
   const [showResult, setShowResult] = useState(false);
-  const [detectedTrash, setDetectedTrash] = useState({
-    type: "",
-    usage: "",
-  });
+  const [detectedTrash, setDetectedTrash] = useState({ type: "", usage: "" });
   const [isLoading, setIsLoading] = useState(false);
+  const [facingMode, setFacingMode] = useState("environment"); // default: kamera belakang
 
   const webcamRef = useRef(null);
   const fileInputRef = useRef();
@@ -44,21 +26,14 @@ const ImageUpload = () => {
     const file = e.target.files[0];
     if (file && file.type.startsWith("image/")) {
       setShowResult(false);
-      setImage({
-        file,
-        url: URL.createObjectURL(file),
-      });
+      setImage({ file, url: URL.createObjectURL(file) });
     }
   };
 
   const capturePhoto = () => {
     const imageSrc = webcamRef.current.getScreenshot();
-    setImage({
-      file: null,
-      url: imageSrc,
-    });
+    setImage({ file: null, url: imageSrc });
     setShowResult(false);
-
     setTimeout(() => {
       setShowCamera(false);
     }, 500);
@@ -91,9 +66,8 @@ const ImageUpload = () => {
           .div(255.0)
           .expandDims(0);
 
-        const output = await model.predict(input); // Tensor
-        const data = await output.data(); // Float32Array
-        
+        const output = await model.predict(input);
+        const data = await output.data();
 
         const labels = [
           "elektronik",
@@ -124,8 +98,7 @@ const ImageUpload = () => {
 
         setDetectedTrash({
           type: label,
-          usage:
-            trashInfo[label]?.usage || "Informasi penanganan tidak tersedia.",
+          usage: trashInfo[label]?.usage || "Informasi penanganan tidak tersedia.",
           links: trashInfo[label]?.links || [],
           points: points,
         });
@@ -134,7 +107,6 @@ const ImageUpload = () => {
         setIsLoading(false);
       };
     } catch (error) {
-      
       alert("Terjadi kesalahan saat mendeteksi gambar: " + error.message);
       setIsLoading(false);
     }
@@ -142,7 +114,7 @@ const ImageUpload = () => {
 
   return (
     <div className="w-full p-10 mb-10">
-      <h2 className="text-left text-sm font-semibold mb-2 ">Tambah foto</h2>
+      <h2 className="text-left text-sm font-semibold mb-2">Tambah foto</h2>
 
       <div className="border-2 border-dashed border-[#8F8F8F] rounded-md p-8 space-y-4">
         <div className="flex flex-col md:flex-row gap-4">
@@ -165,11 +137,7 @@ const ImageUpload = () => {
               stroke="currentColor"
               strokeWidth={2}
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M3 16l4-4m0 0l4 4m-4-4v12"
-              />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M3 16l4-4m0 0l4 4m-4-4v12" />
             </svg>
             <p className="font-medium text-sm text-[#8F8F8F]">Pilih Foto</p>
           </div>
@@ -193,13 +161,7 @@ const ImageUpload = () => {
                     strokeLinejoin="round"
                     d="M3 7h2l2-3h10l2 3h2a2 2 0 012 2v9a2 2 0 01-2 2H3a2 2 0 01-2-2V9a2 2 0 012-2z"
                   />
-                  <circle
-                    cx="12"
-                    cy="13"
-                    r="4"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                  />
+                  <circle cx="12" cy="13" r="4" stroke="currentColor" strokeWidth={2} />
                 </svg>
                 Buka Kamera
               </button>
@@ -210,13 +172,28 @@ const ImageUpload = () => {
                   ref={webcamRef}
                   screenshotFormat="image/jpeg"
                   className="rounded mb-5 px-5"
+                  videoConstraints={{
+                    facingMode: facingMode,
+                  }}
                 />
-                <button
-                  onClick={capturePhoto}
-                  className="bg-[#27667B] text-white px-4 py-1 rounded hover:scale-105 transition"
-                >
-                  Ambil Foto
-                </button>
+                <div className="flex flex-col items-center gap-2">
+                  <button
+                    onClick={capturePhoto}
+                    className="bg-[#27667B] text-white px-4 py-1 rounded hover:scale-105 transition"
+                  >
+                    Ambil Foto
+                  </button>
+                  <button
+                    onClick={() =>
+                      setFacingMode((prev) =>
+                        prev === "user" ? "environment" : "user"
+                      )
+                    }
+                    className="text-sm underline text-[#27667B]"
+                  >
+                    Ganti Kamera
+                  </button>
+                </div>
               </>
             )}
           </div>
@@ -230,9 +207,7 @@ const ImageUpload = () => {
               className="w-full max-h-[300px] object-contain rounded"
             />
             {image.file && (
-              <p className="text-sm mt-2 text-left text-gray-600">
-                {image.file.name}
-              </p>
+              <p className="text-sm mt-2 text-left text-gray-600">{image.file.name}</p>
             )}
           </div>
         )}
@@ -257,9 +232,7 @@ const ImageUpload = () => {
         </button>
       </div>
 
-      {showResult && (
-        <DetectedResult image={image.url} result={detectedTrash} />
-      )}
+      {showResult && <DetectedResult image={image.url} result={detectedTrash} />}
     </div>
   );
 };
