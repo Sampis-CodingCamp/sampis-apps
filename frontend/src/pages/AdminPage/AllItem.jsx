@@ -29,7 +29,7 @@ const AllItem = () => {
         },
         withCredentials: true,
       });
-      toast.success("Artikel berhasil dihapus!");
+      toast.success("Barang berhasil dihapus!");
       getItem();
     } catch (error) {
       toast.error(error.message);
