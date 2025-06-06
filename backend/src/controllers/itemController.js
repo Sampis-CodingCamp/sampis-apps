@@ -4,7 +4,7 @@ const streamifier = require("streamifier");
 const { v2: cloudinary } = require("cloudinary");
 
 const createItem = async (request, h) => {
-  console.log("CreateItem Called");
+  
 
   try {
     const { nama, stok, jenis, poin, tanggal, deskripsi } = request.payload;

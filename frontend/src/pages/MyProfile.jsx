@@ -19,9 +19,7 @@ const MyProfile = () => {
   const [tempData, setTempData] = useState(null);
 
   // Log userData setiap kali berubah
-  useEffect(() => {
-    console.log("userData updated:", userData);
-  }, [userData]);
+  
 
   const handleCancelEdit = () => {
     console.log("Cancel edit clicked");
@@ -34,16 +32,15 @@ const MyProfile = () => {
   };
 
   const updateUserProfileData = async () => {
-    console.log("Save profile clicked");
     if (!userData.username || !userData.phone) {
       toast.error("Username dan nomor telepon wajib diisi");
-      console.log("Validation failed: username or phone missing");
+      
       return;
     }
 
     try {
       setLoading(true);
-      console.log("Uploading profile data...", userData, image);
+      
 
       const formData = new FormData();
       formData.append("username", userData.username);
@@ -53,7 +50,7 @@ const MyProfile = () => {
 
       if (image) {
         formData.append("foto", image);
-        console.log("Image appended:", image);
+        
       }
 
       const { data } = await axios.put(
@@ -67,14 +64,14 @@ const MyProfile = () => {
         }
       );
 
-      console.log("Response from backend:", data);
+      
 
       if (data.success || data.status === "success") {
         toast.success(data.message);
         await loadProfileUserData();
         setIsEdit(false);
         setImage(null);
-        console.log("Profile updated successfully");
+        
       } else {
         toast.error(data.message);
         console.log("Update failed:", data.message);
@@ -84,7 +81,7 @@ const MyProfile = () => {
       toast.error(error.message || "Terjadi kesalahan");
     } finally {
       setLoading(false);
-      console.log("Update profile process finished");
+      
     }
   };
 
@@ -129,7 +126,7 @@ const MyProfile = () => {
                       src={getProfileImageUrl()}
                       alt="Profile"
                       onError={(e) => {
-                        console.log("Image failed to load, using default");
+                        
                         e.target.src = assets.upload;
                       }}
                     />
@@ -146,7 +143,7 @@ const MyProfile = () => {
                             type="text"
                             value={userData.username || ""}
                             onChange={(e) => {
-                              console.log("Username changed:", e.target.value);
+                              
                               setUserData((prev) => ({
                                 ...prev,
                                 username: e.target.value,
@@ -170,7 +167,7 @@ const MyProfile = () => {
                             type="text"
                             value={userData.phone || ""}
                             onChange={(e) => {
-                              console.log("Phone changed:", e.target.value);
+                              
                               setUserData((prev) => ({
                                 ...prev,
                                 phone: e.target.value,
@@ -205,10 +202,7 @@ const MyProfile = () => {
                               placeholder="Alamat Line 1"
                               value={userData.address?.line1 || ""}
                               onChange={(e) => {
-                                console.log(
-                                  "Address line1 changed:",
-                                  e.target.value
-                                );
+                                
                                 setUserData((prev) => ({
                                   ...prev,
                                   address: {
@@ -224,10 +218,7 @@ const MyProfile = () => {
                               placeholder="Alamat Line 2"
                               value={userData.address?.line2 || ""}
                               onChange={(e) => {
-                                console.log(
-                                  "Address line2 changed:",
-                                  e.target.value
-                                );
+                                
                                 setUserData((prev) => ({
                                   ...prev,
                                   address: {
@@ -270,7 +261,7 @@ const MyProfile = () => {
                         <button
                           className="border border-second px-8 py-2 rounded-full hover:bg-second hover:text-white transition-all"
                           onClick={() => {
-                            console.log("Edit mode enabled, saving tempData");
+                            
                             setTempData({ ...userData }); // simpan sebelum edit
                             setIsEdit(true);
                           }}

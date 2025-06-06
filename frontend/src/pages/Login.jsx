@@ -26,7 +26,7 @@ const Login = () => {
           email,
         });
 
-        console.log("REGISTER RESPONSE:", data);
+        
 
         if (data.success && data.token) {
           localStorage.setItem("token", data.token);
@@ -41,7 +41,7 @@ const Login = () => {
           email,
         });
 
-        console.log("LOGIN RESPONSE:", data);
+        
 
         if (data.success && data.token) {
           localStorage.setItem("token", data.token);

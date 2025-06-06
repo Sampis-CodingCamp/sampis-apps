@@ -88,7 +88,7 @@ const Sampoint = () => {
                         className={`flex items-center gap-2 rounded-md border-s-4 px-4 py-3 text-sm font-medium shadow-sm transition
             ${
               filterJenis === jenis
-                ? "border-blue-500 bg-blue-50 text-blue-700"
+                ? "border-orange-500 bg-blue-50 text-orange-400"
                 : "border-transparent text-gray-500 hover:border-gray-200 hover:bg-gray-100 hover:text-gray-700"
             }`}
                       >
@@ -166,7 +166,7 @@ const Sampoint = () => {
                               toast.error("Poin anda tidak cukup");
                               return;
                             }
-                            console.log("Selected item ID:", itm._id);
+                            
                             setSelectedItemId(itm._id);
                           }}
                         >

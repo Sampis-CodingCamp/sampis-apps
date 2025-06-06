@@ -17,7 +17,7 @@ const Header = () => {
 
   return (
      <div className="flex justify-between items-center">
-          <h1 className="text-gray-900 font-semibold text-lg">Panel Amdmin JMK</h1>
+          <h1 className="text-gray-900 font-semibold text-lg">Panel Admin JMK</h1>
           <div className="flex items-center gap-4 text-gray-500 text-sm select-none">
             <button
               aria-label="Notifications"

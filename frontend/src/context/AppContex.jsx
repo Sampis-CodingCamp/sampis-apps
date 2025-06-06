@@ -18,9 +18,9 @@ const AppContextProvider = (props) => {
 
   const getArtikelData = async () => {
     try {
-      console.log("Backend URL:", backendUrl);
+      
       const { data } = await axios.get(backendUrl + "/artikel");
-      console.log("Data dari API:", data);
+      
 
       if (data.status === "success") {
         setArtikel(data.data);
@@ -74,14 +74,14 @@ const AppContextProvider = (props) => {
         withCredentials: true,
       });
 
-      console.log("Respon dari /users/profile:", data);
+      
 
       // Ganti ini:
       // if (data.success === "success")
       // Jadi:
       if (data.status === "success") {
         setUserData(data.data);
-        console.log("User Data:", data.data);
+        
       } else {
         toast.error(data.message);
       }
@@ -115,7 +115,7 @@ const AppContextProvider = (props) => {
 
       if (data.status === "success") {
         setConvert(data.data); // Ambil dari 'data.data'
-        console.log("All convert data:", data.data);
+        
       } else {
         toast.error(data.message);
       }
@@ -161,7 +161,7 @@ const AppContextProvider = (props) => {
 
       if (data.status === "success") {
         setDashData(data.dashData);
-        console.log(dashData);
+        
       } else {
         toast.error(data.message);
       }
@@ -173,7 +173,7 @@ const AppContextProvider = (props) => {
   const getItem = async () => {
     try {
       const { data } = await axios.get(backendUrl + "/item");
-      console.log("Data dari API:", data);
+      
 
       if (data.status === "success") {
         setItem(data.data); // ✅ Perbaiki di sini
@@ -204,7 +204,7 @@ const AppContextProvider = (props) => {
 
     if (data.status === "success") {
       setPoin(data.data);
-      console.log("Poin data:", data.data);
+      
     } else {
       toast.error(data.message);
     }
@@ -266,9 +266,7 @@ const AppContextProvider = (props) => {
     getArtikelData();
   }, []);
 
-  useEffect(() => {
-    console.log("Token:", token);
-  }, [token]);
+  
 
   useEffect(() => {
     if (token) {
@@ -285,17 +283,14 @@ const AppContextProvider = (props) => {
   }, [token]);
 
 useEffect(() => {
-  if (token) {
-    loadProfileUserData().then(() => {
-      getAllPoin(); // dipanggil setelah userData dijamin ke-load
-    });
+  if (token && userData) {
+    getAllPoin();
   }
-}, [token]);
-
+}, [userData]);
 
 
   useEffect(() => {
-    console.log("userData updated:", userData);
+    
   }, [userData]);
 
   return (

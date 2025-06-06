@@ -87,13 +87,9 @@ const updateStatusSampah = async (request, h) => {
     const sampah = await Sampah.findByIdAndUpdate(id, { status }, { new: true });
     if (!sampah) throw Boom.notFound('Data sampah tidak ditemukan');
     // Jika status approved, tambahkan poin ke user
-    console.log("📦 Sampah data:", sampah);
-    console.log("👤 User ID:", sampah.user);
-    console.log("💰 Estimasi Poin:", sampah.estimasiPoin);
+    
     if (status === 'approved') {
       const updatedUser = await User.findByIdAndUpdate(sampah.user, { $inc: { poin: sampah.estimasiPoin } }, { new: true });
-console.log("✅ User updated:", updatedUser);
-console.log("🎯 New user points:", updatedUser?.poin);
 
     }
     return h.response({ status: 'success', data: sampah });

@@ -25,7 +25,6 @@ import AllItem from "./pages/AdminPage/AllItem";
 const App = () => {
   return (
     <div>
-      <ToastContainer />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/artikel" element={<Artikels />} />
@@ -48,6 +47,8 @@ const App = () => {
         <Route path="add-item" element={<AddItem/>}/>
         </Route>
       </Routes>
+      <ToastContainer />
+
     </div>
   );
 };

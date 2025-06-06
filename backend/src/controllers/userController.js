@@ -86,7 +86,7 @@ const updateProfile = async (request, h) => {
       console.log('No image file to upload or invalid file format');
     }
 
-    console.log('Final updateData:', updateData);
+
 
     const user = await User.findByIdAndUpdate(
       request.auth.user.id,

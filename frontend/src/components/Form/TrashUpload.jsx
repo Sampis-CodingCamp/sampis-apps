@@ -35,6 +35,7 @@ const TrashUpload = ({ trashImg, setTrashImg }) => {
           type="file"
           id="trash-img"
           className="sr-only"
+          required
         />
 
         {trashImg && (

@@ -40,6 +40,7 @@ const TrashForm = ({ formData, handleChange }) => {
           placeholder="masukkan jumlah sampah anda"
           value={formData.jumlah}
           onChange={handleChange}
+          min="1"
           className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-amber-300"
           required
         />

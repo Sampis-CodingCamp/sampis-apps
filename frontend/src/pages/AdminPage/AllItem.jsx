@@ -32,7 +32,6 @@ const AllItem = () => {
       toast.success("Artikel berhasil dihapus!");
       getItem();
     } catch (error) {
-      console.log("Data gagal dihapus", error);
       toast.error(error.message);
     }
   };

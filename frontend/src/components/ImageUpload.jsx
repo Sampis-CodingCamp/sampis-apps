@@ -93,7 +93,7 @@ const ImageUpload = () => {
 
         const output = await model.predict(input); // Tensor
         const data = await output.data(); // Float32Array
-        console.log("Output data:", data);
+        
 
         const labels = [
           "elektronik",
@@ -134,7 +134,7 @@ const ImageUpload = () => {
         setIsLoading(false);
       };
     } catch (error) {
-      console.error("Deteksi gagal:", error.message, error.stack);
+      
       alert("Terjadi kesalahan saat mendeteksi gambar: " + error.message);
       setIsLoading(false);
     }

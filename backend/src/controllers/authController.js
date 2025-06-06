@@ -52,7 +52,7 @@ const register = async (request, h) => {
       }
     }).code(201);
   } catch (error) {
-    console.error("Register Error:", error);
+    
     // Kirim error asli kalau Boom, atau buat Internal Error jika bukan
     if (Boom.isBoom(error)) {
       return error;
@@ -97,7 +97,7 @@ const login = async (request, h) => {
       }
     }).code(200);
   } catch (error) {
-    console.error("Login Error:", error);
+    
     return Boom.internal('Terjadi kesalahan server.');
   }
 };

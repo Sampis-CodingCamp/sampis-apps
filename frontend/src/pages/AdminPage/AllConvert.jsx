@@ -76,11 +76,12 @@ const AllConvert = () => {
       <div className="w-full">
         <div className="bg-white border border-gray-100 rounded text-sm max-h-[80vh] min-h-[60vh] overflow-y-scroll shadow-sm">
           {/* Header */}
-          <div className="hidden sm:grid grid-cols-[0.5fr_2fr_1fr_1fr_1.2fr_3fr_1.2fr_1.2fr_1fr] py-3 px-6 border-b border-gray-200 text-gray-600 font-semibold select-none">
+          <div className="hidden sm:grid grid-cols-[0.5fr_2fr_1fr_1fr_1.2fr_3fr_1.2fr_1.2fr_1fr_1fr] py-3 px-6 border-b bg-gray-100 text-gray-700 font-semibold select-none">
             <p>#</p>
             <p>User</p>
             <p>Jenis</p>
             <p>Jumlah</p>
+            <p>Poin</p>
             <p>Metode</p>
             <p>Lokasi</p>
             <p>Tanggal</p>
@@ -96,12 +97,13 @@ const AllConvert = () => {
               return (
                 <div
                   key={item._id}
-                  className="flex flex-wrap justify-between max-sm:gap-2 sm:grid sm:grid-cols-[0.5fr_2fr_1fr_1fr_1.2fr_3fr_1.2fr_1.2fr_1fr] items-center text-gray-600 py-3 border-b border-gray-100 px-6 hover:bg-gray-50 transition"
+                  className="flex flex-wrap justify-between max-sm:gap-2 sm:grid sm:grid-cols-[0.5fr_2fr_1fr_1fr_1.2fr_3fr_1.2fr_1.2fr_1fr_1fr] items-center text-gray-700 py-3 border-b border-gray-100 px-6 hover:bg-gray-50 transition gap-x-2"
                 >
                   <p className="max-sm:hidden">{index + 1}</p>
                   <p className="truncate">{item.user?.username || "Unknown"}</p>
                   <p className="capitalize max-sm:hidden">{item.jenis}</p>
                   <p className="max-sm:hidden text-center">{item.jumlah} Kg</p>
+                  <p className="max-sm:hidden ">{item.estimasiPoin}</p>
                   <p className="capitalize max-sm:hidden text-xs">
                     {item.metode}
                   </p>
