@@ -13,10 +13,10 @@ const init = async () => {
 
   const server = Hapi.server({
     port: config.port,
-    host: 'localhost',
+    host: '0.0.0.0',
     routes: {
       cors: {
-        origin: ['http://localhost:5173'],
+        origin: ['https://sampis.netlify.app'],
         headers: ['Accept', 'Content-Type', 'Authorization'],
         additionalHeaders: ['X-Requested-With'],
         credentials: true,
