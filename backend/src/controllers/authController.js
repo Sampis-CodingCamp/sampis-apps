@@ -1,7 +1,7 @@
 const User = require('../models/User');
 const Boom = require('@hapi/boom');
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const config = require('../config');
 
 const generateToken = (user) => {
