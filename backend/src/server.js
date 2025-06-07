@@ -16,7 +16,7 @@ const init = async () => {
     host: '0.0.0.0',
     routes: {
       cors: {
-        origin: ['https://sampis.netlify.app'],
+        origin: ['*'],
         headers: ['Accept', 'Content-Type', 'Authorization'],
         additionalHeaders: ['X-Requested-With'],
         credentials: true,
