@@ -26,7 +26,7 @@ const Maps = () => {
   const bantarGebang = { lat: -6.329383, lng: 106.9768 };
 
   return (
-    <section id="about" className="py-16  lg:py-32">
+    <section id="about" className="pt-8 pb-16 lg:pt-16 lg:pb-32">
       <div className="container">
         <div className="mb-20 text-center">
           <div className="mb-4 inline-block rounded-md bg-green-100 p-2">

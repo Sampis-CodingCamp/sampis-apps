@@ -5,6 +5,7 @@ import About from '../components/About'
 import Stat from '../components/Stat'
 import Visi from '../components/Visi'
 import Artikel from '../components/Artikel'
+import Story from "../components/Story";
 import Maps from '../components/Maps'
 import Footer from '../components/Footer'
 
@@ -13,14 +14,15 @@ const Home = () => {
     <div>
       <Header />
       <Media />
-      <About/>
-      <Stat/>
+      <About />
+      <Stat />
       <Visi />
-      <Artikel/>
+      <Artikel />
+      <Story />
       <Maps />
-      <Footer/>
+      <Footer />
     </div>
-  )
+  );
 }
 
 export default Home
