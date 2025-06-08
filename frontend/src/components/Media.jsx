@@ -9,13 +9,13 @@ const Media = () => {
           <div className="flex flex-wrap items-center justify-center text-center">
             <a
               href=""
-              className="mx-4 mb-4 max-w-[160px] py-4 opacity-100 grayscale-0 transition duration-500 hover:opacity-80 hover:grayscale-[50%] lg:mx-6 xl:mx-8"
+              className="mx-4 mb-4 max-w-[130px] py-4 opacity-100 grayscale-0 transition duration-500 hover:opacity-80 hover:grayscale-[50%] lg:mx-6 xl:mx-8"
             >
               <img src={assets.dbs_logo} alt="" />
             </a>
             <a
               href=""
-              className="mx-4 mb-4 max-w-[160px] py-4 opacity-100 grayscale-0 transition duration-500 hover:opacity-80 hover:grayscale-[50%] lg:mx-6 xl:mx-8"
+              className="mx-4 mb-4 max-w-[130px] py-4 opacity-100 grayscale-0 transition duration-500 hover:opacity-80 hover:grayscale-[50%] lg:mx-6 xl:mx-8"
             >
               <img src={assets.dicoding_logo} alt="" />
             </a>

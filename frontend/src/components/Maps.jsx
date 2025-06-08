@@ -26,15 +26,15 @@ const Maps = () => {
   const bantarGebang = { lat: -6.329383, lng: 106.9768 };
 
   return (
-    <section id="about" className="pt-8 pb-16 lg:pt-16 lg:pb-32">
+    <section id="about" className="py-16 lg:py-32">
       <div className="container">
         <div className="mb-20 text-center">
           <div className="mb-4 inline-block rounded-md bg-green-100 p-2">
             <p className="text-xs font-bold text-green-900">LOKASI</p>
           </div>
-          <p className="mb-2 text-5xl font-bold text-ink">Lokasi Sampis</p>
+          <p className="mb-2 text-5xl font-bold text-ink">Lokasi SAMPIS</p>
           <p className="text-lg font-extralight text-wolf">
-            Lokasi Sampis di Indonesia
+            Lokasi SAMPIS di Indonesia
           </p>
         </div>
         <div className="aspect-video h-[500px] w-full rounded-lg overflow-hidden shadow-md relative z-0">
@@ -48,7 +48,7 @@ const Maps = () => {
             <ResizeMap />
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
             <Marker position={bantarGebang}>
-              <Popup>Markas Sampis</Popup>
+              <Popup>Markas SAMPIS</Popup>
             </Marker>
           </MapContainer>
         </div>

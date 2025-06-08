@@ -17,21 +17,28 @@ const Header = () => {
         <div className="flex flex-col md:flex-row flex-wrap">
           <div className="md:w-1/2 flex flex-col items-start justify-center gap-10 py-10 m-auto md:py-[5vw] md:mb-[-30px]">
             <p className="text-3xl md:text-4xl lg:text-5xl  text-primary font-semibold leading-tight md:leading-tight lg:leading-tight">
-              Sampahmu Tanggung Jawabmu
+              Sampah Rapih, Bumi Happy!
             </p>
             <div className="flex flex-col md:flex-row items-center gap-3 text-primary font-light">
               <p>
-                Selamat datang di Sampis! Bergabunglah bersama{" "}
-                <br className="hidden sm:block" />
-                kami. Deteksi Sampahmu dengan menekan tombol!
+                Sampah numpuk bikin suntuk? Gabung bersama SAMPIS sekarang!
+                Tinggal klik tombol Deteksi, upload sampah, dan tukar jadi sampoint!
               </p>
             </div>
-            <button
-              className="rounded-lg hover:bg-[#BF9264] bg-orange-400 px-16 py-5 text-xl font-medium text-primary  hover:scale-105 transition-all duration-300 cursor-pointer"
-              onClick={() => navigate("/scanTrash")}
-            >
-              Deteksi <img className="w-3" alt="" />
-            </button>
+            <div className="flex gap-4">
+              <button
+                className="rounded-lg hover:bg-[#BF9264] bg-orange-400 px-10 py-5 text-xl font-medium text-primary hover:scale-105 transition-all duration-300 cursor-pointer"
+                onClick={() => navigate("/scanTrash")}
+              >
+                Deteksi <img className="w-3" alt="" />
+              </button>
+              <button
+                className="rounded-lg hover:bg-[#BF9264] border bg-border-400 px-10 py-5 text-xl font-medium text-primary hover:scale-105 transition-all duration-300 cursor-pointer"
+                onClick={() => navigate("/scanTrash")}
+              >
+                Tutorial <img className="w-3" alt="" />
+              </button>
+            </div>
           </div>
 
           <div className="md:w-1/2 relative"></div>

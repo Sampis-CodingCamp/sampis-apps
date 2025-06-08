@@ -11,14 +11,16 @@ const About = () => {
               <p className="text-xs font-bold text-green-900">TENTANG KAMI</p>
             </div>
             <p className="mb-4 text-5xl font-bold text-ink">
-              Siapa itu Sampis?
+              Siapa itu SAMPIS?
             </p>
             <p className="mb-4 text-lg font-extralight text-wolf">
-              Sampis adalah organisasi yang berkomitmen untuk melestarikan
-              lingkungan dan meningkatkan kesadaran tentang pentingnya
-              pelestarian alam. Melalui berbagai inisiatif dan program, kami
-              bertujuan untuk menciptakan perubahan positif dalam lingkungan dan
-              masyarakat
+              SAMPIS adalah komunitas yang fokus pada pelestarian lingkungan
+              dengan misi menciptakan lingkungan yang bersih dan tanpa sampah.
+              Dengan sistem manajemen sampah yang kami kembangkan, masyarakat
+              dapat dengan mudah memilah dan menukarkan sampah menjadi barang
+              bernilai. Melalui program Sampoint, sampah yang kamu kumpulkan
+              dapat ditukar dengan berbagai produk yang bermanfaat untuk
+              kebutuhan sehari-hari.
             </p>
           </div>
           <div className="mt-8 flex w-full self-center px-5 lg:w-1/2">

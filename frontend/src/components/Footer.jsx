@@ -9,7 +9,11 @@ const Footer = () => {
           <div className="md:flex md:justify-between">
             <div className="mb-6 md:mb-0">
               <a href="index.html" className="flex items-center">
-                <img src={assets.logo} className="mb-5 mr-3 h-[70px]" alt="Logo" />
+                <img
+                  src={assets.logo}
+                  className="mb-5 mr-3 h-[70px]"
+                  alt="Logo"
+                />
               </a>
             </div>
             <div className="grid grid-cols-2 gap-8 sm:grid-cols-2 sm:gap-6">
@@ -59,7 +63,7 @@ const Footer = () => {
             <span className="text-sm text-gray-400 sm:text-center">
               ©2025{" "}
               <a href="" className="hover:underline">
-                Sampis
+                SAMPIS
               </a>
             </span>
             <div className="mt-4 flex space-x-5 sm:mt-0 sm:justify-center">

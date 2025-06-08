@@ -18,14 +18,14 @@ const Headers = () => {
             </p>
             <div className="flex flex-col md:flex-row items-center gap-3 text-primary font-light">
               <p>
-                Selamat datang di Sampis! Bergabunglah bersama{" "}
+                Selamat datang di SAMPIS! Bergabunglah bersama{" "}
                 <br className="hidden sm:block" />
                 kami. Deteksi Sampahmu dengan menekan tombol!
               </p>
             </div>
             <button
               className="rounded-lg hover:bg-[#BF9264] bg-orange-400 px-16 py-5 text-xl font-medium text-primary  hover:scale-105 transition-all duration-300 cursor-pointer"
-            //   onClick={() => ("/scanTrash")}
+              //   onClick={() => ("/scanTrash")}
             >
               Deteksi <img className="w-3" alt="" />
             </button>
@@ -35,7 +35,7 @@ const Headers = () => {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export default Headers

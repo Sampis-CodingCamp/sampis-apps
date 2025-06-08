@@ -46,11 +46,17 @@ const DeliveryMap = ({ delivery, userLocation, address }) => {
     return (
       <div className="mt-4">
         <p className="font-medium mb-2">Lokasi tempat pengumpulan sampah</p>
-        <MapContainer center={targetLocation} zoom={15} scrollWheelZoom={true} dragging={true} style={{ height: "300px", width: "100%" }}>
+        <MapContainer
+          center={targetLocation}
+          zoom={15}
+          scrollWheelZoom={true}
+          dragging={true}
+          style={{ height: "300px", width: "100%" }}
+        >
           <ResizeMap />
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
           <Marker position={targetLocation}>
-            <Popup>TPST Sampis</Popup>
+            <Popup>TPST SAMPIS</Popup>
           </Marker>
         </MapContainer>
       </div>

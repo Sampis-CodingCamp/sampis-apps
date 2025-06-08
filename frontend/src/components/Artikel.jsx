@@ -17,9 +17,9 @@ const Artikel = () => {
           <div className="mb-4 inline-block rounded-md bg-green-100 p-2">
             <p className="text-xs font-bold text-green-900">ARTIKEL</p>
           </div>
-          <p className="mb-2 text-5xl font-bold text-ink">Artikel Sampis</p>
+          <p className="mb-2 text-5xl font-bold text-ink">Artikel SAMPIS</p>
           <p className="text-lg font-extralight text-wolf">
-            Artikel terbaru tentang Sampis dan lingkungan
+            Artikel terbaru tentang SAMPIS dan lingkungan
           </p>
         </div>
         <Swiper

@@ -21,7 +21,7 @@ const Visi = () => {
                   Manajemen Limbah
                 </h5>
                 <p className="mb-3 font-medium leading-relaxed text-gray-500">
-                  Memberikan informasi tentang cara penanganan dan daur ulang yang benar.
+                  Membantu masyarakat memanajemen sampah.
                 </p>
               </div>
               <div className="max-w-sm rounded-lg bg-orange-50 p-6">
@@ -36,10 +36,11 @@ const Visi = () => {
                   <path d="m.135 7.847 1.542 1.417c3.6 3.712 12.747 3.7 16.635.01L19.605 7.9A.98.98 0 0 1 20 7.652V6a2 2 0 0 0-2-2h-3V3a3 3 0 0 0-3-3H8a3 3 0 0 0-3 3v1H2a2 2 0 0 0-2 2v1.765c.047.024.092.051.135.082ZM10 10.25a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5ZM7 3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1H7V3Z" />
                 </svg>
                 <h5 className="mb-2 text-2xl font-semibold tracking-tight text-ink">
-                  Tanggung Jawab
+                  Peran aktif
                 </h5>
                 <p className="mb-3 font-medium leading-relaxed text-gray-500">
-                  Mendorong masyarakat untuk lebih aktif memilah dan mengelola sampah.
+                  Meningkatkan kesadaran dan partisipasi masyarakat dalam
+                  pengelolaan sampah.
                 </p>
               </div>
               <div className="max-w-sm rounded-lg bg-orange-50 p-6">
@@ -77,7 +78,8 @@ const Visi = () => {
                   Edukasi Sampah
                 </h5>
                 <p className="mb-3 font-medium leading-relaxed text-gray-500">
-                  Membantu masyarakat memanajement sampah
+                  Memberikan informasi tentang cara penanganan dan daur ulang
+                  yang benar.
                 </p>
               </div>
             </div>
@@ -86,11 +88,9 @@ const Visi = () => {
             <div className="mb-4 inline-block rounded-md bg-green-100 p-2">
               <p className="text-xs font-bold text-green-900">TUJUAN</p>
             </div>
-            <p className="mb-2 text-5xl font-bold text-ink">
-              4 Tujuan Sampis
-            </p>
+            <p className="mb-2 text-5xl font-bold text-ink">4 Tujuan SAMPIS</p>
             <p className="text-lg font-extralight text-gray-500">
-              Sampis adalah organisasi yang berkomitmen untuk melestarikan
+              SAMPIS adalah organisasi yang berkomitmen untuk melestarikan
               lingkungan dan meningkatkan kesadaran tentang pentingnya
               pelestarian alam. Melalui berbagai inisiatif dan program, kami
               bertujuan untuk menciptakan perubahan positif dalam lingkungan dan
