@@ -32,12 +32,6 @@ const Header = () => {
               >
                 Deteksi <img className="w-3" alt="" />
               </button>
-              <button
-                className="rounded-lg hover:bg-[#BF9264] border bg-border-400 px-10 py-5 text-xl font-medium text-primary hover:scale-105 transition-all duration-300 cursor-pointer"
-                onClick={() => navigate("/scanTrash")}
-              >
-                Tutorial <img className="w-3" alt="" />
-              </button>
             </div>
           </div>
 
