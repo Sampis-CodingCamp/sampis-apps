@@ -19,7 +19,6 @@ const MyProfile = () => {
   const [tempData, setTempData] = useState(null);
 
   // Log userData setiap kali berubah
-  
 
   const handleCancelEdit = () => {
     console.log("Cancel edit clicked");
@@ -34,13 +33,12 @@ const MyProfile = () => {
   const updateUserProfileData = async () => {
     if (!userData.username || !userData.phone) {
       toast.error("Username dan nomor telepon wajib diisi");
-      
+
       return;
     }
 
     try {
       setLoading(true);
-      
 
       const formData = new FormData();
       formData.append("username", userData.username);
@@ -50,7 +48,6 @@ const MyProfile = () => {
 
       if (image) {
         formData.append("foto", image);
-        
       }
 
       const { data } = await axios.put(
@@ -64,14 +61,11 @@ const MyProfile = () => {
         }
       );
 
-      
-
       if (data.success || data.status === "success") {
         toast.success(data.message);
         await loadProfileUserData();
         setIsEdit(false);
         setImage(null);
-        
       } else {
         toast.error(data.message);
         console.log("Update failed:", data.message);
@@ -81,7 +75,6 @@ const MyProfile = () => {
       toast.error(error.message || "Terjadi kesalahan");
     } finally {
       setLoading(false);
-      
     }
   };
 
@@ -126,7 +119,6 @@ const MyProfile = () => {
                       src={getProfileImageUrl()}
                       alt="Profile"
                       onError={(e) => {
-                        
                         e.target.src = assets.upload;
                       }}
                     />
@@ -143,7 +135,6 @@ const MyProfile = () => {
                             type="text"
                             value={userData.username || ""}
                             onChange={(e) => {
-                              
                               setUserData((prev) => ({
                                 ...prev,
                                 username: e.target.value,
@@ -160,14 +151,13 @@ const MyProfile = () => {
                       {/* Phone */}
                       <hr className="my-5 h-px border-0 bg-gray-300" />
                       <div className="mb-4">
-                        <p className="text-gray-500">Nomor telepon</p>
+                        <p className="text-gray-500">Nomor Telepon</p>
                         {isEdit ? (
                           <input
                             className="bg-gray-100 w-full p-2 border rounded"
                             type="text"
                             value={userData.phone || ""}
                             onChange={(e) => {
-                              
                               setUserData((prev) => ({
                                 ...prev,
                                 phone: e.target.value,
@@ -202,7 +192,6 @@ const MyProfile = () => {
                               placeholder="Alamat 1"
                               value={userData.address?.line1 || ""}
                               onChange={(e) => {
-                                
                                 setUserData((prev) => ({
                                   ...prev,
                                   address: {
@@ -218,7 +207,6 @@ const MyProfile = () => {
                               placeholder="Alamat 2"
                               value={userData.address?.line2 || ""}
                               onChange={(e) => {
-                                
                                 setUserData((prev) => ({
                                   ...prev,
                                   address: {
@@ -244,14 +232,14 @@ const MyProfile = () => {
                       {isEdit ? (
                         <>
                           <button
-                            className="border border-green-500 text-green-600 px-8 py-2 rounded-full hover:bg-green-500 hover:text-white transition-all"
+                            className="border border-green-500 text-green-600 px-8 py-2 rounded-full hover:bg-green-500 hover:text-white transition-all cursor-pointer"
                             onClick={updateUserProfileData}
                             disabled={loading}
                           >
                             {loading ? "Menyimpan..." : "Simpan Informasi"}
                           </button>
                           <button
-                            className="border border-red-500 text-red-500 px-8 py-2 rounded-full hover:bg-red-500 hover:text-white transition-all"
+                            className="border border-red-500 text-red-500 px-8 py-2 rounded-full hover:bg-red-500 hover:text-white transition-all cursor-pointer"
                             onClick={handleCancelEdit}
                           >
                             Batal
@@ -259,14 +247,13 @@ const MyProfile = () => {
                         </>
                       ) : (
                         <button
-                          className="border border-second px-8 py-2 rounded-full hover:bg-second hover:text-white transition-all"
+                          className="border border-orange text-orange px-8 py-2 rounded-full hover:bg-orange hover:text-white transition-all cursor-pointer"
                           onClick={() => {
-                            
                             setTempData({ ...userData }); // simpan sebelum edit
                             setIsEdit(true);
                           }}
                         >
-                          Edit
+                          Sunting
                         </button>
                       )}
                     </div>
@@ -296,7 +283,7 @@ const MyProfile = () => {
                         >
                           <path d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
                         </svg>
-                        Poin didapatkan dari berbagai
+                        Poin didapatkan dari berbagai 
                         <span
                           onClick={() => {
                             document

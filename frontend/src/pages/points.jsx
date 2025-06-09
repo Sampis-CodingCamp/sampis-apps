@@ -74,9 +74,9 @@ const Points = () => {
           {conversion
             .sort((a, b) => {
               const priority = {
-                approved: 2,
-                pending: 1,
-                cancel: 3,
+                Diterima: 2,
+                Dibatalkan: 1,
+                Menunggu: 3,
               };
               const getPriority = (status) => priority[status] || 4;
               return getPriority(a.status) - getPriority(b.status);
@@ -123,7 +123,7 @@ const Points = () => {
                             ? "bg-green-500 text-white border-green-500 hover:bg-green-600"
                             : item.status === "Dibatalkan"
                             ? "bg-red-500 text-white border-red-500 hover:bg-red-600"
-                            : item.status === "Menunggu Konfirmasi"
+                            : item.status === "Menunggu"
                             ? "bg-yellow-400 text-white border-yellow-400 hover:bg-yellow-500"
                             : "border border-gray-300 text-stone-600 hover:bg-stone-400 hover:text-white"
                         }

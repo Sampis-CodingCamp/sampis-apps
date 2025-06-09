@@ -62,11 +62,11 @@ const AllConvert = () => {
   };
 
   const handleApprove = (id) => {
-    updateStatus(id, "approved");
+    updateStatus(id, "Diterima");
   };
 
   const handleReject = (id) => {
-    updateStatus(id, "cancel");
+    updateStatus(id, "Dibatalkan");
   };
 
   return (
@@ -136,7 +136,7 @@ const AllConvert = () => {
 
                   {/* Aksi */}
                   <div className="flex flex-col items-center gap-1">
-                    {item.status === "pending" ? (
+                    {item.status === "Menunggu" ? (
                       <div className="flex gap-2">
                         <img
                           src={assets.cancel_icon}
@@ -156,9 +156,9 @@ const AllConvert = () => {
                     ) : (
                       <span
                         className={`font-semibold text-xs capitalize ${
-                          item.status === "approved"
+                          item.status === "Diterima"
                             ? "text-green-600"
-                            : item.status === "cancel"
+                            : item.status === "Dibatalkan"
                             ? "text-red-500"
                             : "text-gray-500"
                         }`}

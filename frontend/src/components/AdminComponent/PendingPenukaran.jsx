@@ -1,5 +1,5 @@
-import React, { useContext, useEffect } from 'react';
-import { AppContext } from '../../context/AppContex';
+import React, { useContext, useEffect } from "react";
+import { AppContext } from "../../context/AppContex";
 
 const PendingPenukaran = () => {
   const { poin, getAllPoin, updateStatusPoin } = useContext(AppContext);
@@ -9,17 +9,19 @@ const PendingPenukaran = () => {
   }, []);
 
   const handleApprove = (id) => {
-    updateStatusPoin(id, 'approved');
+    updateStatusPoin(id, "Diterima");
   };
 
   const handleReject = (id) => {
-    updateStatusPoin(id, 'cancel');
+    updateStatusPoin(id, "Dibatalkan");
   };
 
-  const statusOrder = { pending: 1, approved: 2, cancel: 3 };
+  const statusOrder = { Menunggu: 1, Diterima: 2, Dibatalkan: 3 };
 
   const sortedData = poin
-    .filter((item) => ['pending', 'approved', 'cancel'].includes(item.status))
+    .filter((item) =>
+      ["Menunggu", "Diterima", "Dibatalkan"].includes(item.status)
+    )
     .sort((a, b) => {
       const statusCompare = statusOrder[a.status] - statusOrder[b.status];
       if (statusCompare !== 0) return statusCompare;
@@ -31,7 +33,6 @@ const PendingPenukaran = () => {
       <section className="bg-[#f9f9fc] rounded-lg p-4 text-gray-700 text-xs">
         <div className="flex justify-between items-center mb-3">
           <h2 className="font-semibold text-sm">Penukaran Point</h2>
-          
         </div>
 
         <ul className="flex flex-col gap-3">
@@ -46,15 +47,21 @@ const PendingPenukaran = () => {
                 src={item.foto}
               />
               <div className="flex-1">
-                <div className="text-sm font-bold text-gray-900 truncate">{item.namaItem}</div>
+                <div className="text-sm font-bold text-gray-900 truncate">
+                  {item.namaItem}
+                </div>
                 <div className="text-gray-700 text-xs mt-0.5 truncate">
                   {item.namaPenerima}
                 </div>
-                <div className="text-gray-600 text-xs truncate">+62 {item.telp}</div>
-                <div className="text-gray-600 text-xs truncate">{item.alamat}</div>
+                <div className="text-gray-600 text-xs truncate">
+                  +62 {item.telp}
+                </div>
+                <div className="text-gray-600 text-xs truncate">
+                  {item.alamat}
+                </div>
 
                 <div className="mt-2">
-                  {item.status === 'pending' ? (
+                  {item.status === "Menunggu" ? (
                     <div className="flex gap-2">
                       <button
                         className="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded text-xs"
@@ -72,11 +79,11 @@ const PendingPenukaran = () => {
                   ) : (
                     <span
                       className={`font-semibold text-xs capitalize ${
-                        item.status === 'approved'
-                          ? 'text-green-600'
-                          : item.status === 'cancel'
-                          ? 'text-red-500'
-                          : 'text-gray-500'
+                        item.status === "Diterima"
+                          ? "text-green-600"
+                          : item.status === "Dibatalkan"
+                          ? "text-red-500"
+                          : "text-gray-500"
                       }`}
                     >
                       {item.status}
@@ -88,10 +95,10 @@ const PendingPenukaran = () => {
               <div className="text-right">
                 <div className="font-semibold">{item.jumlah} poin</div>
                 <div className="text-gray-500">
-                  {new Date(item.tanggal).toLocaleDateString('id-ID', {
-                    day: '2-digit',
-                    month: 'short',
-                    year: 'numeric',
+                  {new Date(item.tanggal).toLocaleDateString("id-ID", {
+                    day: "2-digit",
+                    month: "short",
+                    year: "numeric",
                   })}
                 </div>
               </div>

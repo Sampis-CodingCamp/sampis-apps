@@ -54,13 +54,13 @@ const Penukaran = () => {
 
   const getStatusInfo = (status) => {
     switch (status) {
-      case "approved":
+      case "Diterima":
         return {
           text: "Disetujui",
           color: "bg-green-100 text-green-600",
           icon: <CheckCircle className="w-5 h-5" />,
         };
-      case "cancel":
+      case "Dibatalkan":
         return {
           text: "Dibatalkan",
           color: "bg-red-100 text-red-600",
@@ -97,9 +97,9 @@ const Penukaran = () => {
           {penukaran
             .sort((a, b) => {
               const priority = {
-                approved: 2,
-                pending: 1,
-                cancel: 3,
+                Diterima: 2,
+                Menunggu: 1,
+                Dibatalkan: 3,
               };
               const getPriority = (status) => priority[status] || 4;
               return getPriority(a.status) - getPriority(b.status);
@@ -144,7 +144,7 @@ const Penukaran = () => {
                         <p>{formatTanggal(item.tanggal)}</p>
                       </div>
 
-                      {item.status === "approved" && (
+                      {item.status === "Diterima" && (
                         <p className="mt-3 text-sm text-blue-800 bg-blue-50 px-3 py-2 rounded">
                           📦 Informasi pengiriman akan dikirimkan melalui email
                           Anda.
