@@ -98,10 +98,8 @@ const Navbar = () => {
                       to="/"
                       className={({ isActive }) =>
                         `group mx-4 flex rounded-md p-3 text-sm lg:mx-8 lg:text-base ${
-                          isActive
-                            ? "text-ginger lg:text-ginger"
-                            : "text-ink lg:text-white"
-                        } hover:bg-gray-200 lg:hover:bg-transparent lg:hover:text-ginger`
+                          isActive ? "text-orange" : "text-ink lg:text-white"
+                        } hover:bg-gray-200 lg:hover:bg-transparent lg:hover:text-orange`
                       }
                     >
                       <svg
@@ -119,7 +117,7 @@ const Navbar = () => {
                           d="M3 8v10a1 1 0 0 0 1 1h4v-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5h4a1 1 0 0 0 1-1V8M1 10l9-9 9 9"
                         />
                       </svg>
-                      <p className="ml-3 font-semibold lg:ml-0">Beranda</p>
+                      <p className="ml-3 md:font-medium lg:ml-0">Beranda</p>
                     </NavLink>
                   </li>
 
@@ -128,10 +126,8 @@ const Navbar = () => {
                       to="/artikel"
                       className={({ isActive }) =>
                         `group mx-4 flex rounded-md p-3 text-sm lg:mx-8 lg:text-base ${
-                          isActive
-                            ? "text-ginger lg:text-ginger"
-                            : "text-ink lg:text-white"
-                        } hover:bg-gray-200 lg:hover:bg-transparent lg:hover:text-ginger`
+                          isActive ? "text-orange" : "text-ink lg:text-white"
+                        } hover:bg-gray-200 lg:hover:bg-transparent lg:hover:text-orange`
                       }
                     >
                       <svg
@@ -147,7 +143,7 @@ const Navbar = () => {
                         />
                         <path d="M16.5 6.5h-1v8.75a1.25 1.25 0 1 0 2.5 0V8a1.5 1.5 0 0 0-1.5-1.5Z" />
                       </svg>
-                      <p className="ml-3 font-semibold lg:ml-0">Artikel</p>
+                      <p className="ml-3 md:font-medium lg:ml-0">Artikel</p>
                     </NavLink>
                   </li>
 
@@ -156,10 +152,8 @@ const Navbar = () => {
                       to="/scanTrash"
                       className={({ isActive }) =>
                         `group mx-4 flex rounded-md p-3 text-sm lg:mx-8 lg:text-base ${
-                          isActive
-                            ? "text-ginger lg:text-ginger"
-                            : "text-ink lg:text-white"
-                        } hover:bg-gray-200 lg:hover:bg-transparent lg:hover:text-ginger`
+                          isActive ? "text-orange" : "text-ink lg:text-white"
+                        } hover:bg-gray-200 lg:hover:bg-transparent lg:hover:text-orange`
                       }
                     >
                       <svg
@@ -188,7 +182,7 @@ const Navbar = () => {
                           d="M13 5.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0ZM7.565 7.423 4.5 14h11.518l-2.516-3.71L11 13 7.565 7.423Z"
                         />
                       </svg>
-                      <p className="ml-3 font-semibold lg:ml-0">Deteksi</p>
+                      <p className="ml-3 md:font-medium lg:ml-0">Deteksi</p>
                     </NavLink>
                   </li>
                 </ul>
@@ -204,7 +198,7 @@ const Navbar = () => {
                     onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
                     className="flex items-center"
                   >
-                    <div className="h-[50px] w-[50px] overflow-hidden rounded-full">
+                    <div className="h-[50px] w-[50px] overflow-hidden rounded-full cursor-pointer">
                       <img
                         className="w-full h-auto"
                         src={userData?.foto || assets.profilee}
@@ -219,7 +213,7 @@ const Navbar = () => {
                     }`}
                   >
                     <div className="mx-3 px-4 py-3">
-                      <span className="block text-sm text-ink">
+                      <span className="block text-base text-ink">
                         {userData.username}
                       </span>
                       <span className="block truncate font-bold text-xl text-ink">
@@ -282,7 +276,7 @@ const Navbar = () => {
                       <li>
                         <p
                           onClick={logout}
-                          className="mx-4 flex rounded-md p-3 text-sm text-ink hover:bg-gray-200 cursor-pointer"
+                          className="mx-4 flex rounded-md p-3 text-sm text-red-500 hover:bg-gray-200 cursor-pointer"
                         >
                           <svg
                             className="h-4"
@@ -299,7 +293,7 @@ const Navbar = () => {
                               d="M4 8h11m0 0-4-4m4 4-4 4m-5 3H3a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h3"
                             />
                           </svg>
-                          <span className="ml-3">Keluar</span>
+                          <span className="ml-3 ">Keluar</span>
                         </p>
                       </li>
                     </ul>

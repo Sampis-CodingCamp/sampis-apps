@@ -35,7 +35,7 @@ const Artikel = () => {
           {artikel.map((item, index) => (
             <div className="swiper eventsSwiper">
               <SwiperSlide key={index}>
-                <div className="swiper-wrapper">
+                <div className="swiper-wrapper cursor-pointer">
                   <div className="zoom swiper-slide rounded-md border border-solid border-slate-200 bg-white transition duration-300 hover:shadow-sm">
                     <a
                       onClick={() => navigate(`/artikel/${item._id}`)}

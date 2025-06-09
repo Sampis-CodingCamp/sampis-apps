@@ -26,8 +26,6 @@ const Login = () => {
           email,
         });
 
-        
-
         if (data.success && data.token) {
           localStorage.setItem("token", data.token);
           setToken(data.token);
@@ -41,8 +39,6 @@ const Login = () => {
           password,
           email,
         });
-
-        
 
         if (data.success && data.token) {
           localStorage.setItem("token", data.token);
@@ -102,17 +98,17 @@ const Login = () => {
           onSubmit={onSubmitHandler}
           className="bg-white/10 backdrop-blur-md border border-white/30 rounded-2xl p-10 w-full max-w-md text-white shadow-2xl mt-20 lg:mt-10"
         >
-          <p className="text-2xl font-semibold mb-2">
-            {state === "Sign Up" ? "Buat akun" : "Masuk"}
+          <p className="text-2xl font-semibold mb-2 cursor-pointer">
+            {state === "Sign Up" ? "Buat Akun" : "Masuk"}
           </p>
-          <p className="text-sm text-white/80 mb-6">
-            Akses fitur ini dengan{" "}
-            {state === "Sign Up" ? "Buat akun" : "Masuk"} sekarang juga.
+          <p className="text-sm text-white/80 mb-6 cursor-pointer">
+            Akses fitur secara lengkap dengan{" "}
+            {state === "Sign Up" ? "buat Akun" : "Masuk"} sekarang juga.
           </p>
 
           {state === "Sign Up" && (
             <div className="mb-4">
-              <p className="mb-1">Full Name</p>
+              <p className="mb-1">Nama Lengkap</p>
               <input
                 className="w-full p-2 rounded bg-white/80 text-black focus:outline-none focus:ring-2 focus:ring-blue-400"
                 type="text"
@@ -133,7 +129,7 @@ const Login = () => {
           </div>
 
           <div className="mb-6">
-            <p className="mb-1">Password</p>
+            <p className="mb-1">Kata Sandi</p>
             <input
               className="w-full p-2 rounded bg-white/80 text-black focus:outline-none focus:ring-2 focus:ring-blue-400"
               type="password"
@@ -144,9 +140,9 @@ const Login = () => {
 
           <button
             type="submit"
-            className="w-full py-2 hover:bg-[#BF9264] bg-orange-400 text-white font-semibold rounded transition duration-300 mb-4"
+            className="w-full py-2 hover:bg-[#BF9264] bg-orange-400 text-white font-semibold rounded transition duration-300 mb-4 cursor-pointer"
           >
-            {state === "Sign Up" ? "Buat akun" : "Masuk"}
+            {state === "Sign Up" ? "Buat Akun" : "Masuk"}
           </button>
 
           {state === "Sign Up" ? (

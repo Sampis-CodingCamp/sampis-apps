@@ -199,7 +199,7 @@ const MyProfile = () => {
                             <input
                               className="bg-gray-50 mb-2 w-full p-2 border rounded"
                               type="text"
-                              placeholder="Alamat Line 1"
+                              placeholder="Alamat 1"
                               value={userData.address?.line1 || ""}
                               onChange={(e) => {
                                 
@@ -215,7 +215,7 @@ const MyProfile = () => {
                             <input
                               className="bg-gray-50 w-full p-2 border rounded"
                               type="text"
-                              placeholder="Alamat Line 2"
+                              placeholder="Alamat 2"
                               value={userData.address?.line2 || ""}
                               onChange={(e) => {
                                 
