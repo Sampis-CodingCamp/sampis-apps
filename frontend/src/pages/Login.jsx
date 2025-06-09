@@ -32,6 +32,7 @@ const Login = () => {
           localStorage.setItem("token", data.token);
           setToken(data.token);
           toast.success("Registrasi berhasil!");
+          navigate("/");
         } else {
           toast.error(data.message || "Registrasi gagal");
         }

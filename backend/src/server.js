@@ -4,7 +4,6 @@ const plugins = require('./plugins');
 const config = require('./config');
 const connectDB = require('./config/database');
 const connectCloudinary = require('./config/cloudinary')
-const cors = require('hapi-cors')
 
 const init = async () => {
   // Connect to MongoDB
@@ -13,7 +12,7 @@ const init = async () => {
 
   const server = Hapi.server({
     port: config.port,
-    host: '0.0.0.0',
+    host: 'localhost',
     routes: {
       cors: {
         origin: ['*'],
