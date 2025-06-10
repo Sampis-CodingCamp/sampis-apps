@@ -1,17 +1,21 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const penukaranPoinSchema = new mongoose.Schema({
-  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
   foto: { type: String, required: true },
-  namaItem: {type: String, require: true},
-  
-  namaPenerima: {type: String, require: true},
+  namaItem: { type: String, require: true },
+
+  namaPenerima: { type: String, require: true },
   jumlah: { type: Number, required: true },
-  telp: {type:Number, required: true},
-  alamat: {type:String, require:true},
-  status: { type: String, enum: ['pending', 'approved', 'cancel'], default: 'pending' },
+  telp: { type: Number, required: true },
+  alamat: { type: String, require: true },
+  status: {
+    type: String,
+    enum: ["Menunggu", "Diterima", "Dibatalkan"],
+    default: "Menunggu",
+  },
   tanggal: { type: Date, default: Date.now },
 });
 
-const PenukaranPoin = mongoose.model('PenukaranPoin', penukaranPoinSchema);
-module.exports = PenukaranPoin; 
+const PenukaranPoin = mongoose.model("PenukaranPoin", penukaranPoinSchema);
+module.exports = PenukaranPoin;

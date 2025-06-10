@@ -1,17 +1,17 @@
-const Sampah = require('../models/Sampah');
-const User = require('../models/User');
-const Boom = require('@hapi/boom');
-const streamifier = require('streamifier');
-const { v2: cloudinary } = require('cloudinary');
+const Sampah = require("../models/Sampah");
+const User = require("../models/User");
+const Boom = require("@hapi/boom");
+const streamifier = require("streamifier");
+const { v2: cloudinary } = require("cloudinary");
 
 const createSampah = async (request, h) => {
   try {
     const { jenis, jumlah, estimasiPoin, metode, lokasi } = request.payload;
-    const tanggal = new Date(); 
+    const tanggal = new Date();
     const fotoFile = request.payload.foto;
 
     if (!fotoFile || !fotoFile._data) {
-      throw Boom.badRequest('Foto tidak ditemukan');
+      throw Boom.badRequest("Foto tidak ditemukan");
     }
 
     // Bungkus upload_stream dalam Promise
@@ -19,11 +19,11 @@ const createSampah = async (request, h) => {
       return new Promise((resolve, reject) => {
         const stream = cloudinary.uploader.upload_stream(
           {
-            folder: 'sampah',
-            resource_type: 'image',
+            folder: "sampah",
+            resource_type: "image",
           },
           (error, result) => {
-            if (error) return reject(Boom.badRequest('Gagal upload gambar'));
+            if (error) return reject(Boom.badRequest("Gagal upload gambar"));
             resolve(result);
           }
         );
@@ -47,25 +47,24 @@ const createSampah = async (request, h) => {
 
     await newSampah.save();
 
-    return h.response({
-      status: 'success',
-      message: 'Sampah berhasil dikirim',
-      data: newSampah,
-    }).code(201);
-
+    return h
+      .response({
+        status: "success",
+        message: "Sampah berhasil dikirim",
+        data: newSampah,
+      })
+      .code(201);
   } catch (err) {
     console.error(err);
     if (Boom.isBoom(err)) throw err;
-    throw Boom.badImplementation('Gagal membuat data sampah');
+    throw Boom.badImplementation("Gagal membuat data sampah");
   }
 };
-
-
 
 const listUserSampah = async (request, h) => {
   try {
     const data = await Sampah.find({ user: request.auth.user.id });
-    return h.response({ status: 'success', data });
+    return h.response({ status: "success", data });
   } catch (err) {
     throw Boom.badImplementation(err);
   }
@@ -73,8 +72,8 @@ const listUserSampah = async (request, h) => {
 
 const listAllSampah = async (request, h) => {
   try {
-    const data = await Sampah.find().populate('user', 'username email');
-    return h.response({ status: 'success', data });
+    const data = await Sampah.find().populate("user", "username email");
+    return h.response({ status: "success", data });
   } catch (err) {
     throw Boom.badImplementation(err);
   }
@@ -84,18 +83,30 @@ const updateStatusSampah = async (request, h) => {
   try {
     const { id } = request.params;
     const { status } = request.payload;
-    const sampah = await Sampah.findByIdAndUpdate(id, { status }, { new: true });
-    if (!sampah) throw Boom.notFound('Data sampah tidak ditemukan');
-    // Jika status approved, tambahkan poin ke user
-    
-    if (status === 'approved') {
-      const updatedUser = await User.findByIdAndUpdate(sampah.user, { $inc: { poin: sampah.estimasiPoin } }, { new: true });
+    const sampah = await Sampah.findByIdAndUpdate(
+      id,
+      { status },
+      { new: true }
+    );
+    if (!sampah) throw Boom.notFound("Data sampah tidak ditemukan");
+    // Jika status Diterima, tambahkan poin ke user
 
+    if (status === "Diterima") {
+      const updatedUser = await User.findByIdAndUpdate(
+        sampah.user,
+        { $inc: { poin: sampah.estimasiPoin } },
+        { new: true }
+      );
     }
-    return h.response({ status: 'success', data: sampah });
+    return h.response({ status: "success", data: sampah });
   } catch (err) {
     throw Boom.badImplementation(err);
   }
 };
 
-module.exports = { createSampah, listUserSampah, listAllSampah, updateStatusSampah }; 
+module.exports = {
+  createSampah,
+  listUserSampah,
+  listAllSampah,
+  updateStatusSampah,
+};
