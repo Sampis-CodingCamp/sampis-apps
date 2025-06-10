@@ -5,9 +5,13 @@ import Navbar from "../components/Navbar";
 import { AppContext } from "../context/AppContex";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+
 
 const Login = () => {
   const { backendUrl, token, setToken } = useContext(AppContext);
+  const [showPassword, setShowPassword] = useState(false);
+
   const navigate = useNavigate();
 
   const [state, setState] = useState("Sign Up");
@@ -128,15 +132,41 @@ const Login = () => {
             />
           </div>
 
-          <div className="mb-6">
-            <p className="mb-1">Kata Sandi</p>
-            <input
-              className="w-full p-2 rounded bg-white/80 text-black focus:outline-none focus:ring-2 focus:ring-blue-400"
-              type="password"
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
-            />
-          </div>
+  <div className="mb-6">
+  <p className="mb-1">Kata Sandi</p>
+
+  {/* Mobile View */}
+  <div className="relative lg:hidden">
+    <input
+      type={showPassword ? "text" : "password"}
+      className="w-full p-2 pr-10 rounded bg-white/80 text-black focus:outline-none focus:ring-2 focus:ring-blue-400"
+      value={password}
+      onChange={(e) => setPassword(e.target.value)}
+    />
+    <span
+      onClick={() => setShowPassword((prev) => !prev)}
+      className="absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer text-black/70"
+    >
+      {showPassword ? (
+        <AiOutlineEyeInvisible size={20} />
+      ) : (
+        <AiOutlineEye size={20} />
+      )}
+    </span>
+  </div>
+
+  {/* Desktop View */}
+  <div className="hidden lg:block">
+    <input
+      type="password"
+      className="w-full p-2 rounded bg-white/80 text-black focus:outline-none focus:ring-2 focus:ring-blue-400"
+      value={password}
+      onChange={(e) => setPassword(e.target.value)}
+    />
+  </div>
+</div>
+
+
 
           <button
             type="submit"
