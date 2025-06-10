@@ -6,7 +6,11 @@ const FAQ = () => {
     <section id="faq" className="py-16 lg:py-32">
       <div className="container">
         <div className="flex flex-wrap">
-          <div className="hidden w-full px-4 lg:flex lg:w-1/2">
+          <div
+            className="hidden w-full px-4 lg:flex lg:w-1/2"
+            data-aos="fade-right"
+            data-aos-duration="2000"
+          >
             <img
               src={assets.artikel_3_img}
               alt=""
@@ -14,7 +18,11 @@ const FAQ = () => {
             />
           </div>
           <div className="w-full px-4 lg:w-1/2">
-            <div className="mb-10 self-center px-4 text-center lg:text-start">
+            <div
+              className="mb-10 self-center px-4 text-center lg:text-start"
+              data-aos="fade-left"
+              data-aos-duration="3000"
+            >
               <div className="mb-4 inline-block rounded-md bg-green-100 p-2">
                 <p className="text-xs font-bold text-green-900">PERTANYAAN</p>
               </div>
@@ -28,7 +36,12 @@ const FAQ = () => {
             </div>
             <div className="px-4">
               <div className="mt-8 grid max-w-xl divide-y divide-neutral-200">
-                <div className="py-5">
+                <div
+                  className="py-5"
+                  data-aos="fade-down"
+                  data-aos-duration="2000"
+                  data-aos-delay="100"
+                >
                   <details className="group">
                     <summary className="flex cursor-pointer list-none items-center justify-between font-semibold text-ink">
                       <span>Apa keuntungan mengikuti SAMPIS?</span>
@@ -54,7 +67,12 @@ const FAQ = () => {
                     </p>
                   </details>
                 </div>
-                <div className="py-5">
+                <div
+                  className="py-5"
+                  data-aos="fade-up"
+                  data-aos-duration="800"
+                  data-aos-delay="100"
+                >
                   <details className="group">
                     <summary className="flex cursor-pointer list-none items-center justify-between font-semibold text-ink">
                       <span>

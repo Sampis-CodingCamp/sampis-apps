@@ -151,6 +151,7 @@ const Login = () => {
               <span
                 onClick={() => setState("Login")}
                 className="underline cursor-pointer text-green-apple"
+                autoComplete="current-password"
               >
                 Masuk
               </span>

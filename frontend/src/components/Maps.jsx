@@ -28,7 +28,7 @@ const Maps = () => {
   return (
     <section id="about" className="py-16 lg:py-32">
       <div className="container">
-        <div className="mb-20 text-center">
+        <div className="mb-20 text-center" data-aos="fade-up">
           <div className="mb-4 inline-block rounded-md bg-green-100 p-2">
             <p className="text-xs font-bold text-green-900">LOKASI</p>
           </div>
@@ -37,7 +37,7 @@ const Maps = () => {
             Lokasi SAMPIS di Indonesia
           </p>
         </div>
-        <div className="aspect-video h-[500px] w-full rounded-lg overflow-hidden shadow-md relative z-0">
+        <div className="aspect-video h-[500px] w-full rounded-lg overflow-hidden shadow-md relative z-0" data-aos="zoom-in" data-aos-delay="200">
           <MapContainer
             center={bantarGebang}
             zoom={15}

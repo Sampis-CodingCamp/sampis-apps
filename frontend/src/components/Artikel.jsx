@@ -13,8 +13,8 @@ const Artikel = () => {
   return (
     <section id="artikel" className="bg-gray-50 py-16 lg:py-32">
       <div className="container">
-        <div className="mb-20 text-center">
-          <div className="mb-4 inline-block rounded-md bg-green-100 p-2">
+        <div className="mb-20 text-center" data-aos = 'fade-right'>
+          <div className="mb-4 inline-block rounded-md bg-green-100 p-2" >
             <p className="text-xs font-bold text-green-900">ARTIKEL</p>
           </div>
           <p className="mb-2 text-5xl font-bold text-ink">Artikel SAMPIS</p>
@@ -34,7 +34,8 @@ const Artikel = () => {
         >
           {artikel.map((item, index) => (
             <div className="swiper eventsSwiper">
-              <SwiperSlide key={index}>
+              <SwiperSlide key={index}
+  >
                 <div className="swiper-wrapper cursor-pointer">
                   <div className="zoom swiper-slide rounded-md border border-solid border-slate-200 bg-white transition duration-300 hover:shadow-sm">
                     <a

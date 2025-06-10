@@ -7,7 +7,7 @@ const Visi = () => {
         <div className="flex flex-col-reverse flex-wrap lg:flex-row">
           <div className="flex w-full justify-center self-center px-5 lg:w-1/2">
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-              <div className="max-w-sm rounded-lg bg-orange-50 p-6">
+              <div className="max-w-sm rounded-lg bg-orange-50 p-6" data-aos="zoom-in">
                 <svg
                   className="mb-3 h-7 w-7 text-orange"
                   aria-hidden="true"
@@ -24,7 +24,8 @@ const Visi = () => {
                   Membantu masyarakat memanajemen sampah.
                 </p>
               </div>
-              <div className="max-w-sm rounded-lg bg-orange-50 p-6">
+              <div className="max-w-sm rounded-lg bg-orange-50 p-6" data-aos="zoom-in"
+                data-aos-delay="100">
                 <svg
                   className="mb-3 h-7 w-7 text-orange"
                   aria-hidden="true"
@@ -43,7 +44,8 @@ const Visi = () => {
                   pengelolaan sampah.
                 </p>
               </div>
-              <div className="max-w-sm rounded-lg bg-orange-50 p-6">
+              <div className="max-w-sm rounded-lg bg-orange-50 p-6" data-aos="zoom-in"
+                data-aos-delay="200">
                 <svg
                   className="mb-3 h-7 w-7 text-orange"
                   aria-hidden="true"
@@ -64,7 +66,8 @@ const Visi = () => {
                   Mendukung tercapainya SDGs poin 11 , 12, dan 13.
                 </p>
               </div>
-              <div className="max-w-sm rounded-lg bg-orange-50 p-6">
+              <div className="max-w-sm rounded-lg bg-orange-50 p-6"  data-aos="zoom-in"
+                data-aos-delay="300">
                 <svg
                   className="mb-3 h-7 w-7 text-orange"
                   aria-hidden="true"
@@ -84,7 +87,7 @@ const Visi = () => {
               </div>
             </div>
           </div>
-          <div className="mb-10 w-full self-center px-4 text-center lg:w-1/2 lg:text-start">
+          <div className="mb-10 w-full self-center px-4 text-center lg:w-1/2 lg:text-start" data-aos="fade-right">
             <div className="mb-4 inline-block rounded-md bg-green-100 p-2">
               <p className="text-xs font-bold text-green-900">TUJUAN</p>
             </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Artikels from "./pages/Artikel";
@@ -20,8 +20,14 @@ import Sampoint from "./pages/Sampoint";
 import Penukaran from "./pages/Penukaran";
 import AddItem from "./pages/AdminPage/AddItem";
 import AllItem from "./pages/AdminPage/AllItem";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const App = () => {
+
+  useEffect(() => {
+  AOS.init({ duration: 1000 });
+}, []);
   return (
     <div>
       <Routes>

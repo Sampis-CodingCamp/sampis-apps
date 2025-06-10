@@ -18,8 +18,8 @@ const Story = () => {
           <div className="mb-4 inline-block rounded-md bg-green-100 p-2">
             <p className="text-xs font-bold text-green-900">CERITA</p>
           </div>
-          <p className="mb-2 text-5xl font-bold text-ink">Apa Kata Mereka?</p>
-          <p className="text-lg font-extralight text-wolf">
+          <p className="mb-2 text-3xl md:text-4xl lg:text-5xl font-bold text-ink">Apa Kata Mereka?</p>
+          <p className="text-base md:text-lg font-extralight text-wolf">
             Apa yang mereka katakan tentang SAMPIS?
           </p>
         </div>
@@ -43,7 +43,7 @@ const Story = () => {
                 <div className="swiper-slide" style={{ paddingBottom: "0px" }}>
                   <div className="mx-auto max-w-screen-md text-center">
                     <div>
-                      <blockquote className="px-2 text-2xl font-medium italic text-gray-600 md:px-0">
+                      <blockquote className="px-2 text-base md:text-lg lg:text-2xl font-medium italic text-gray-600 md:px-0">
                         "Dengan SAMPIS, saya jadi lebih mudah memilah sampah di
                         rumah. Program Sampoint-nya bikin saya semangat karena
                         bisa tukar sampah dengan kebutuhan sehari-hari.
@@ -76,7 +76,7 @@ const Story = () => {
                 <div className="swiper-slide" style={{ paddingBottom: "0px" }}>
                   <div className="mx-auto max-w-screen-md text-center">
                     <div>
-                      <blockquote className="px-2 text-2xl font-medium italic text-gray-600 md:px-0">
+                      <blockquote className="px-2 text-base md:text-lg lg:text-2xl font-medium italic text-gray-600 md:px-0">
                         "Awalnya saya kenalin SAMPIS ke istri, dan ternyata dia
                         semangat banget! Sekarang, sampah di rumah lebih tertata
                         karena dia rutin upload dan tukar sampah jadi Sampoint.
