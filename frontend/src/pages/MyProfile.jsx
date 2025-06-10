@@ -87,6 +87,15 @@ const MyProfile = () => {
     return userData?.foto || assets.profilee;
   };
 
+  useEffect(() => {
+  const interval = setInterval(() => {
+    loadProfileUserData();
+  }, 20000); 
+
+  return () => clearInterval(interval); 
+}, []);
+
+
   return (
     userData && (
       <div>

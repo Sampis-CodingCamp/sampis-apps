@@ -48,9 +48,18 @@ const Penukaran = () => {
     }
   };
 
-  useEffect(() => {
-    if (token) getPenukaran();
-  }, [token]);
+useEffect(() => {
+  if (token) {
+    getPenukaran(); // Ambil data awal
+
+    const intervalId = setInterval(() => {
+      getPenukaran(); // Ambil data setiap 10 detik
+    }, 10000); // 10000 ms = 10 detik
+
+    return () => clearInterval(intervalId); // Bersihkan interval saat komponen unmount
+  }
+}, [token]);
+
 
   const getStatusInfo = (status) => {
     switch (status) {

@@ -17,6 +17,8 @@ const SellTrash = () => {
   const [trashImg, setTrashImg] = useState("");
   const [userLocation, setUserLocation] = useState(null);
   const [address, setAddress] = useState("");
+  const [loading, setLoading] = useState(false);
+
 
   const navigate = useNavigate();
 
@@ -84,6 +86,7 @@ const SellTrash = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     try {
       const form = new FormData();
@@ -134,6 +137,9 @@ const SellTrash = () => {
       toast.error("Gagal mengirim data");
       console.error(error);
     }
+     finally {
+    setLoading(false); // SELESAI LOADING
+  }
   };
 
   return (
@@ -199,11 +205,15 @@ const SellTrash = () => {
               />
 
               <button
-                type="submit"
-                className="hover:bg-[#BF9264] bg-orange-400 text-white px-6 py-2 rounded-lg  transition duration-200 cursor-pointer"
-              >
-                Kirim
-              </button>
+  type="submit"
+  disabled={loading}
+  className={`px-6 py-2 rounded-lg text-white transition duration-200 ${
+    loading ? "bg-gray-400 cursor-not-allowed" : "bg-orange-400 hover:bg-[#BF9264]"
+  }`}
+>
+  {loading ? "Mengirim..." : "Kirim"}
+</button>
+
             </form>
           </div>
         </div>

@@ -59,8 +59,17 @@ const Points = () => {
   };
 
   useEffect(() => {
-    if (token) getUserConversion();
-  }, [token]);
+  if (!token) return;
+
+  getUserConversion(); // initial fetch
+
+  const interval = setInterval(() => {
+    getUserConversion();
+  }, 10000); // setiap 10 detik, bisa ubah jadi 15000 (15 detik) biar lebih ringan
+
+  return () => clearInterval(interval); // bersihkan interval saat unmount
+}, [token]);
+
 
   return (
     <div className="min-h-screen" id="/point">
