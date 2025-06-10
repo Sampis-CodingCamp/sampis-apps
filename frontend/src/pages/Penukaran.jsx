@@ -155,8 +155,8 @@ const Penukaran = () => {
 
                         {item.status === "Diterima" && (
                           <p className="mt-3 text-sm text-blue-800 bg-blue-50 px-3 py-2 rounded">
-                            📦 Informasi pengiriman akan dikirimkan melalui
-                            email Anda.
+                            📦 Informasi terkait pengiriman akan dikirimkan melalui
+                             whatsapp anda.
                           </p>
                         )}
                       </div>

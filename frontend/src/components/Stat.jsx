@@ -12,7 +12,7 @@ const Stat = () => {
           </div>
 
           <div>
-            <p className="text-5xl font-bold text-ink">45 T</p>
+            <p className="text-5xl font-bold text-ink">45 Ton</p>
 
             <p className="text-base text-text-ink">Sampah Terkumpul</p>
           </div>

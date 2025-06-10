@@ -9,11 +9,18 @@ import { useNavigate } from "react-router-dom";
 
 const Sampoint = () => {
   const { userData, item } = useContext(AppContext);
-  const [showFull, setShowFull] = useState(null);
+  const [showFull, setShowFull] = useState({}); // Use an object to track visibility for each item
   const [filterJenis, setFilterJenis] = useState(null);
-  const [selectedItemId, setSelectedItemId] = useState(null)
+  const [selectedItemId, setSelectedItemId] = useState(null);
 
   const navigate = useNavigate();
+
+  const toggleShowFull = (itemId) => {
+    setShowFull((prevState) => ({
+      ...prevState,
+      [itemId]: !prevState[itemId],
+    }));
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -102,80 +109,82 @@ const Sampoint = () => {
           </div>
 
           {/* Item Grid */}
-          <div className="mx-auto grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4" id="item">
+          <div
+            className="mx-auto grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+            id="item"
+          >
             {item?.length > 0 ? (
               item
                 .slice()
                 .reverse()
                 .filter((itm) => !filterJenis || itm.jenis === filterJenis)
-                .map((itm, index) => (
-                  <div
-                    key={index}
-                    className="group relative flex flex-col overflow-hidden rounded shadow-sm bg-white border border-gray-200 h-[380px]"
-                  >
-                    <img
-                      src={itm.foto}
-                      alt={itm.nama}
-                      className="h-48 w-full object-cover transition duration-500 group-hover:scale-105"
-                    />
+                .map((itm) => {
+                  const isLongDescription = itm.deskripsi.length > 100;
+                  const isExpanded = showFull[itm._id];
 
-                    <div className="flex flex-col justify-between flex-1 p-4">
-                      <div>
-                        <div className="flex justify-between items-center text-sm font-semibold text-ginger">
-                          <p>{itm.poin} Poin</p>
-                          <p className="text-gray-500 font-normal">
-                            Stok: {itm.stok}
+                  return (
+                    <div
+                      key={itm._id}
+                      className="group relative flex flex-col overflow-hidden rounded shadow-sm bg-white border border-gray-200" // Removed h-[380px]
+                    >
+                      <img
+                        src={itm.foto}
+                        alt={itm.nama}
+                        className="h-48 w-full object-cover transition duration-500 group-hover:scale-105"
+                      />
+
+                      <div className="flex flex-col justify-between flex-1 p-4">
+                        <div>
+                          <div className="flex justify-between items-center text-sm font-semibold text-ginger">
+                            <p>{itm.poin} Poin</p>
+                            <p className="text-gray-500 font-normal">
+                              Stok: {itm.stok}
+                            </p>
+                          </div>
+
+                          <h3 className="mt-1 text-lg font-medium text-gray-900">
+                            {itm.nama}
+                          </h3>
+
+                          <p className="mt-1 text-sm text-gray-700">
+                            {isExpanded
+                              ? itm.deskripsi
+                              : isLongDescription
+                              ? itm.deskripsi.slice(0, 100) + "..."
+                              : itm.deskripsi}
                           </p>
+
+                          {isLongDescription && (
+                            <button
+                              type="button"
+                              onClick={() => toggleShowFull(itm._id)}
+                              className="mt-1 text-xs text-blue-600 underline"
+                            >
+                              {isExpanded ? "Sembunyikan" : "Lihat Selengkapnya"}
+                            </button>
+                          )}
                         </div>
 
-                        <h3 className="mt-1 text-lg font-medium text-gray-900">
-                          {itm.nama}
-                        </h3>
-
-                        <p className="mt-1 text-sm text-gray-700">
-                          {showFull === index ? (
-                            itm.deskripsi
-                          ) : (
-                            <span className="line-clamp-1">
-                              {itm.deskripsi}
-                            </span>
-                          )}
-                        </p>
-
-                        {itm.deskripsi.length > 100 && (
+                        <div className="mt-4">
                           <button
                             type="button"
-                            onClick={() =>
-                              setShowFull(showFull === index ? null : index)
-                            }
-                            className="mt-1 text-xs text-blue-600 underline"
-                          >
-                            {showFull === index
-                              ? "Sembunyikan"
-                              : "Lihat Selengkapnya"}
-                          </button>
-                        )}
-                      </div>
+                            className="block w-full rounded-sm bg-gray-900 px-4 py-2 text-sm font-medium text-white transition hover:scale-105 cursor-pointer"
+                            onClick={() => {
+                              if (userData?.poin < itm.poin) {
+                                toast.error("Poin anda tidak cukup");
+                                return;
+                              }
 
-                      <div className="mt-4">
-                        <button
-                          type="button"
-                          className="block w-full rounded-sm bg-gray-900 px-4 py-2 text-sm font-medium text-white transition hover:scale-105 cursor-pointer"
-                          onClick={() => {
-                            if (userData?.poin < itm.poin) {
-                              toast.error("Poin Anda tidak cukup");
-                              return;
-                            }
-                            
-                            setSelectedItemId(itm._id);
-                          }}
-                        >
-                          Tukar Sekarang
-                        </button>
+                              setSelectedItemId(itm._id);
+                            }}
+                          >
+                            Tukar Sekarang
+                          </button>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))
+                  );
+                })
             ) : (
               <p className="text-center text-gray-500 col-span-full">
                 Loading item atau belum ada data.

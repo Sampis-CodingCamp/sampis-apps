@@ -198,6 +198,7 @@ const MyProfile = () => {
                             <input
                               className="bg-gray-50 mb-2 w-full p-2 border rounded"
                               type="text"
+                              maxLength={50}
                               placeholder="Alamat 1"
                               value={userData.address?.line1 || ""}
                               onChange={(e) => {
@@ -214,6 +215,7 @@ const MyProfile = () => {
                               className="bg-gray-50 w-full p-2 border rounded"
                               type="text"
                               placeholder="Alamat 2"
+                              maxLength={50}
                               value={userData.address?.line2 || ""}
                               onChange={(e) => {
                                 setUserData((prev) => ({
