@@ -72,7 +72,7 @@ const Points = () => {
 
 
   return (
-    <div className="min-h-screen" id="/point">
+    <div id="/point">
       <div className="container mt-10">
         <h2 className="text-lg font-semibold text-zinc-700 border-b pb-2">
           Sampah Saya

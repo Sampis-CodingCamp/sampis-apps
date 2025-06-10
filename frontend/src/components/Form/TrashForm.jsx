@@ -37,7 +37,7 @@ const TrashForm = ({ formData, handleChange }) => {
         <input
           type="number"
           name="jumlah"
-          placeholder="masukkan jumlah sampah anda"
+          placeholder="Masukkan jumlah sampah Anda"
           value={formData.jumlah}
           onChange={handleChange}
           min="1"

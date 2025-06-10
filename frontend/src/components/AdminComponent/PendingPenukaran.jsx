@@ -64,13 +64,13 @@ const PendingPenukaran = () => {
                   {item.status === "Menunggu" ? (
                     <div className="flex gap-2">
                       <button
-                        className="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded text-xs"
+                        className="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded text-xs cursor-pointer"
                         onClick={() => handleReject(item._id)}
                       >
                         Tolak
                       </button>
                       <button
-                        className="bg-green-500 hover:bg-green-600 text-white px-2 py-1 rounded text-xs"
+                        className="bg-green-500 hover:bg-green-600 text-white px-2 py-1 rounded text-xs cursor-pointer"
                         onClick={() => handleApprove(item._id)}
                       >
                         Setujui

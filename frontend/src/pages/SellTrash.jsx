@@ -19,7 +19,6 @@ const SellTrash = () => {
   const [address, setAddress] = useState("");
   const [loading, setLoading] = useState(false);
 
-
   const navigate = useNavigate();
 
   const { backendUrl, token } = useContext(AppContext);
@@ -136,10 +135,9 @@ const SellTrash = () => {
     } catch (error) {
       toast.error("Gagal mengirim data");
       console.error(error);
+    } finally {
+      setLoading(false); // SELESAI LOADING
     }
-     finally {
-    setLoading(false); // SELESAI LOADING
-  }
   };
 
   return (
@@ -205,15 +203,16 @@ const SellTrash = () => {
               />
 
               <button
-  type="submit"
-  disabled={loading}
-  className={`px-6 py-2 rounded-lg text-white transition duration-200 ${
-    loading ? "bg-gray-400 cursor-not-allowed" : "bg-orange-400 hover:bg-[#BF9264]"
-  }`}
->
-  {loading ? "Mengirim..." : "Kirim"}
-</button>
-
+                type="submit"
+                disabled={loading}
+                className={`px-6 py-2 rounded-lg text-white transition duration-200 ${
+                  loading
+                    ? "bg-gray-400 cursor-not-allowed"
+                    : "bg-orange-400 hover:bg-[#BF9264] cursor-pointer"
+                }`}
+              >
+                {loading ? "Mengirim..." : "Kirim"}
+              </button>
             </form>
           </div>
         </div>

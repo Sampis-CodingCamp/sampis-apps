@@ -157,7 +157,7 @@ const PopUpForm = ({ itemId, onClose }) => {
             </button>
             <button
               type="submit"
-              className="w-1/2 bg-emerald-700 text-white py-2 rounded-xl hover:bg-emerald-800 transition"
+              className="w-1/2 bg-emerald-700 text-white py-2 rounded-xl hover:bg-emerald-800 transition cursor-pointer"
             >
               Kirim
             </button>
