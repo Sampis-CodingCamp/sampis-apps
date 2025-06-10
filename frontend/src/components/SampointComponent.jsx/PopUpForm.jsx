@@ -63,7 +63,7 @@ const PopUpForm = ({ itemId, onClose }) => {
         withCredentials: true,
       });
 
-      toast.success('Pemesanan berhasil dikirim!');
+      toast.success("Penukaran Sampoint sedang diproses!");
       onClose();
     } catch (err) {
       console.error(err);

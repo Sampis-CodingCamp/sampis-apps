@@ -1,5 +1,6 @@
 import React from "react";
 import { assets } from "../assets/assets";
+import { NavLink } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -23,36 +24,34 @@ const Footer = () => {
                 </h2>
                 <ul className="font-medium text-gray-400">
                   <li className="mb-4">
-                    <a href="index.html" className="hover:underline">
+                    <NavLink
+                      to="/"
+                      className={({ isActive }) =>
+                        ` ${isActive ? "text-orange" : ""} hover:text-orange`
+                      }
+                    >
                       Beranda
-                    </a>
+                    </NavLink>
                   </li>
                   <li className="mb-4">
-                    <a href="berita.html" className="hover:underline">
-                      Berita
-                    </a>
+                    <NavLink
+                      to="/artikel"
+                      className={({ isActive }) =>
+                        ` ${isActive ? "text-orange" : ""} hover:text-orange`
+                      }
+                    >
+                      Artikel
+                    </NavLink>
                   </li>
                   <li className="mb-4">
-                    <a href="#" className="hover:underline">
+                    <NavLink
+                      to="/scanTrash"
+                      className={({ isActive }) =>
+                        ` ${isActive ? "text-orange" : ""} hover:text-orange`
+                      }
+                    >
                       Deteksi
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <h2 className="mb-6 text-sm font-semibold uppercase text-white">
-                  Hukum
-                </h2>
-                <ul className="font-medium text-gray-400">
-                  <li className="mb-4">
-                    <a href="#" className="hover:underline">
-                      Kebijakan Privasi
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" className="hover:underline">
-                      Syarat dan Ketentuan
-                    </a>
+                    </NavLink>
                   </li>
                 </ul>
               </div>

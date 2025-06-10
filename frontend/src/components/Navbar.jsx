@@ -120,7 +120,6 @@ const Navbar = () => {
                       <p className="ml-3 md:font-medium lg:ml-0">Beranda</p>
                     </NavLink>
                   </li>
-
                   <li>
                     <NavLink
                       to="/artikel"
@@ -304,7 +303,7 @@ const Navbar = () => {
                   onClick={() => navigate("/login")}
                   className="rounded-md hover:bg-green-700 bg-green-900 px-5 py-2.5 text-sm font-medium text-primary hover:scale-105 transition-all duration-300 cursor-pointer"
                 >
-                  Register
+                  Daftar
                 </button>
               )}
             </div>

@@ -97,7 +97,7 @@ const FAQ = () => {
                     <p className="group-open:animate-fadeIn mt-3 text-neutral-600">
                       Penggunaan sistem penukaran sampah yang berbasis pada
                       teknologi, di mana pengguna dapat menukar sampah yang
-                      telah disetujui dengan sampoint yang bisa ditukarkan.
+                      telah disetujui dengan Sampoint yang bisa ditukarkan.
                     </p>
                   </details>
                 </div>
