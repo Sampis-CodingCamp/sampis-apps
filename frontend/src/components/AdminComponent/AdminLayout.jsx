@@ -24,7 +24,7 @@ const AdminLayout = () => {
             onClick={logout}
             className="flex bg-red-500 itext-sm px-10 py-2 rounded-full hover:bg-red-400 cursor-pointer"
           >
-            <span className="font-medium text-white">Logout</span>
+            <span className="font-medium text-white">Keluar</span>
           </button>
         </div>
         <div>

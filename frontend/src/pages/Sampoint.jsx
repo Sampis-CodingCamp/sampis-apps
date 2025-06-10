@@ -160,7 +160,7 @@ const Sampoint = () => {
                       <div className="mt-4">
                         <button
                           type="button"
-                          className="block w-full rounded-sm bg-gray-900 px-4 py-2 text-sm font-medium text-white transition hover:scale-105"
+                          className="block w-full rounded-sm bg-gray-900 px-4 py-2 text-sm font-medium text-white transition hover:scale-105 cursor-pointer"
                           onClick={() => {
                             if (userData?.poin < itm.poin) {
                               toast.error("Poin anda tidak cukup");

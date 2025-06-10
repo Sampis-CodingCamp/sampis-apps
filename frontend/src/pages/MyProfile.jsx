@@ -253,7 +253,7 @@ const MyProfile = () => {
                             setIsEdit(true);
                           }}
                         >
-                          Sunting
+                          Edit
                         </button>
                       )}
                     </div>

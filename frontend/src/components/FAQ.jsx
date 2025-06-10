@@ -8,7 +8,7 @@ const FAQ = () => {
         <div className="flex flex-wrap">
           <div className="hidden w-full px-4 lg:flex lg:w-1/2">
             <img
-              src={assets.about_img}
+              src={assets.artikel_3_img}
               alt=""
               className="h-96 w-[612px] rounded-md"
             />

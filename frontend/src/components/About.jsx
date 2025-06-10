@@ -27,17 +27,17 @@ const About = () => {
             <div className="grid grid-cols-3 gap-4 rounded-md">
               <img
                 className="h-full rounded-md"
-                src={assets.about_img}
+                src={assets.foto1}
                 alt=""
               />
               <img
                 className="-mt-8 h-full rounded-md"
-                src="https://images.unsplash.com/photo-1603139793104-5e880b142e4c?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                src={assets.foto2}
                 alt=""
               />
               <img
                 className="h-full rounded-md"
-                src="https://images.unsplash.com/photo-1548430065-53c58a6582dd?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                src={assets.foto3}
                 alt=""
               />
             </div>

@@ -95,27 +95,69 @@ const ArtikelList = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {artikel.map((item, index) => (
             <div
-              onClick={() => navigate(`/artikel-admin/${item._id}`)}
               key={index}
-              className="group block rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 cursor-pointer"
+              onClick={() => navigate(`/artikel/${item._id}`)}
+              className="cursor-pointer group flex flex-col justify-between rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300"
             >
-              <div className="overflow-hidden">
-                <img
-                  src={item.foto}
-                  alt={item.judul}
-                  className="w-full h-48 object-cover transform group-hover:scale-105 transition-transform duration-300 ease-in-out"
-                />
+              <div className="pb-6">
+                <div className="relative overflow-hidden bg-cover bg-no-repeat">
+                  <img
+                    className="h-auto w-full rounded-t-sm align-middle transition duration-300 ease-linear sm:h-56"
+                    src={item.foto}
+                    alt={item.title}
+                  />
+                </div>
               </div>
-              <div className="p-4 bg-white">
-                <p className="mb-1 text-sm font-medium text-wolf flex justify-between">
-                  <span className="text-orange">{item.sumber}</span>
-                  <span className="text-gray-500">
-                    {formatTanggal(item.tanggal)}
-                  </span>
-                </p>
-                <p className="text-lg font-bold text-ink line-clamp-2">
-                  {item.judul}
-                </p>
+              <div className="px-6">
+                <div className="flex-1">
+                  <div className="flex">
+                    <div className="flex w-1/2 justify-start space-x-2">
+                      <div className="flex items-center">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          className="h-4 w-4 flex-shrink-0"
+                        >
+                          <path
+                            fill="currentColor"
+                            d="M12 12q-1.65 0-2.825-1.175T8 8t1.175-2.825T12 4t2.825 1.175T16 8t-1.175 2.825T12 12m-8 8v-2.8q0-.85.438-1.562T5.6 14.55q1.55-.775 3.15-1.162T12 13t3.25.388t3.15 1.162q.725.375 1.163 1.088T20 17.2V20z"
+                          />
+                        </svg>
+                        <span className="ml-2 text-sm text-orange">
+                          {item.sumber}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="flex w-1/2 justify-start space-x-2">
+                      <div className="flex items-center">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                          className="h-4 w-4 text-ginger"
+                        >
+                          <path d="M12.75 12.75a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM7.5 15.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5ZM8.25 17.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM9.75 15.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5ZM10.5 17.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12 15.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5ZM12.75 17.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM14.25 15.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5ZM15 17.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM16.5 15.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5ZM15 12.75a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM16.5 13.5a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" />
+                          <path
+                            fillRule="evenodd"
+                            d="M6.75 2.25A.75.75 0 0 1 7.5 3v1.5h9V3A.75.75 0 0 1 18 3v1.5h.75a3 3 0 0 1 3 3v11.25a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3V7.5a3 3 0 0 1 3-3H6V3a.75.75 0 0 1 .75-.75Zm13.5 9a1.5 1.5 0 0 0-1.5-1.5H5.25a1.5 1.5 0 0 0-1.5 1.5v7.5a1.5 1.5 0 0 0 1.5 1.5h13.5a1.5 1.5 0 0 0 1.5-1.5v-7.5Z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                        <time
+                          dateTime={item.date}
+                          className="ml-2 text-sm text-wolf"
+                        >
+                          {formatTanggal(item.tanggal)}
+                        </time>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="flex-1 px-6 py-6">
+                <p className="mb-3 text-lg font-medium">{item.judul}</p>
               </div>
               <div className="p-4 flex justify-end gap-2 bg-gray-50 border-t border-dashed border-gray-200">
                 <button

@@ -57,14 +57,14 @@ const Artikel = () => {
                               <div className="flex items-center">
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"
+                                  width="24"
+                                  height="24"
                                   viewBox="0 0 24 24"
-                                  fill="currentColor"
-                                  className="h-4 w-4 flex-shrink-0 text-ginger"
+                                  className="h-4 w-4 flex-shrink-0"
                                 >
                                   <path
-                                    fillRule="evenodd"
-                                    d="m11.54 22.351.07.04.028.016a.76.76 0 0 0 .723 0l.028-.015.071-.041a16.975 16.975 0 0 0 1.144-.742 19.58 19.58 0 0 0 2.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 0 0-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 0 0 2.682 2.282 16.975 16.975 0 0 0 1.145.742ZM12 13.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
-                                    clipRule="evenodd"
+                                    fill="currentColor"
+                                    d="M12 12q-1.65 0-2.825-1.175T8 8t1.175-2.825T12 4t2.825 1.175T16 8t-1.175 2.825T12 12m-8 8v-2.8q0-.85.438-1.562T5.6 14.55q1.55-.775 3.15-1.162T12 13t3.25.388t3.15 1.162q.725.375 1.163 1.088T20 17.2V20z"
                                   />
                                 </svg>
                                 <span className="ml-2 text-sm text-orange">

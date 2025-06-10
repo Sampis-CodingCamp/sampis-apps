@@ -25,6 +25,9 @@ import artikel_3_img from "./artikel3.png";
 import foto_bila from "./foto_bila.jpg";
 import foto_ferry from "./foto_ferry.jpg";
 
+import foto1 from "./foto1.jpg";
+import foto2 from "./foto2.jpg";
+import foto3 from "./foto3.jpg";
 
 export const assets = {
   about_img,
@@ -42,7 +45,11 @@ export const assets = {
   tick_icon,
   profilee,
   foto_bila,
-  foto_ferry
+  foto_ferry,
+  foto1,
+  foto2,
+  foto3,
+  artikel_3_img
 };
 
 export const items = [

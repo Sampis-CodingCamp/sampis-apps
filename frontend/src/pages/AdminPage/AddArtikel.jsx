@@ -134,7 +134,7 @@ const AddArtikel = () => {
               type="submit"
               className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-3 rounded-full font-medium transition cursor-pointer"
             >
-              Buat artikel
+              Tambah Artikel
             </button>
           </div>
         </form>
