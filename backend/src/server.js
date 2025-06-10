@@ -10,8 +10,12 @@ const init = async () => {
   await connectDB();
   connectCloudinary()
 
+  const port = process.env.PORT || process.env.npm_package_config_port || 5000;
+  console.log("PORT dari ENV fallback:", port);
+
   const server = Hapi.server({
-    port: config.port,
+    // port: config.port,
+    port,
     host: '0.0.0.0',
     routes: {
       cors: {
